@@ -33,9 +33,9 @@
     "deploy:server": "node build/deploy.cjs",
     "deploy": "npm run deploy:gh-pages && npm run deploy:server",
     "buildAndDeploy": "npm run build && npm run deploy",
-    "docs:dev": "vitepress dev docs --port 9006",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs --port 9006",
+    "docs:dev": "vitepress dev ./ --port 9006",
+    "docs:build": "vitepress build ./",
+    "docs:preview": "vitepress preview ./ --port 9006",
     "lib:dev": "cross-env BABEL_ENV=build NODE_ENV=development node build/dev.js",
     "lib:build": "cross-env BABEL_ENV=build NODE_ENV=production node build/build.js",
     "release": "bash bash/release.sh"

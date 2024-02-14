@@ -17,8 +17,8 @@ coverage
 #dev
 demo.js
 /dist
-/docs/.vitepress/cache
-/docs/.vitepress/dist
+/.vitepress/cache
+/.vitepress/dist
 
 /.env*
 !/.env.example

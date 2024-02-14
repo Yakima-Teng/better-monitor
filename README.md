@@ -1,6 +1,6 @@
 # better-monitor
 
-<div align="center" style="text-align:center;">
+<div align="center" style="display: flex;align-items: center;justify-content: center;gap:8px;">
   <img style="width:200px;" src="https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/logo.svg">
 </div>
 
@@ -62,7 +62,7 @@ Include the SDK through HTML Script element and config directly on the script el
 
 ```html
 <!-- data-project-id is where you fill in your project ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.3/dist/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.4/dist/better-monitor.min.js"></script>
 ```
 
 ## APIs
@@ -140,4 +140,4 @@ These apis are rarely used, please refer to the source code.
 
 ## License
 
-[MIT](./LICENSE).
+MIT.

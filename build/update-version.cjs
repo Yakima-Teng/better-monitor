@@ -13,7 +13,7 @@ if (VERSION) {
 }
 
 if (COMMENT) {
-  const pathChangeLog = path.join(__dirname, '../docs/changelog.md')
+  const pathChangeLog = path.join(__dirname, '../CHANGELOG.md')
   const objDate = new Date()
   const year = objDate.getFullYear()
   const month = objDate.getMonth() + 1
