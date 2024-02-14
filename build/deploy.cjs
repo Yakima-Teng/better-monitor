@@ -78,7 +78,7 @@ async function restart() {
     privateKeyPath: path.join(home.resolve('~'), '.ssh/id_rsa')
   })
 
-  await execCommand(`rm -rf ${subProjectRoot}`)
+  // await execCommand(`rm -rf ${subProjectRoot}`)
 
   await putDirectory(join('/dist'), subProjectRoot)
 

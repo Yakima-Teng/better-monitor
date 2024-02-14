@@ -6,12 +6,12 @@ const homepage = 'https://www.verybugs.com'
 export default defineConfig({
   title: "SDK使用说明",
   description: "SDK使用说明",
-  base: '/lib',
+  base: '/better-monitor',
   head: [
     [
       'script',
       {
-        src: `${homepage}/lib/better-monitor.min.js`,
+        src: '/better-monitor/better-monitor.min.js',
         'data-project-id': '1',
       }
     ],
