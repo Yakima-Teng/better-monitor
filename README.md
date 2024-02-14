@@ -1,8 +1,20 @@
 # better-monitor
 
-<div style="text-align:center;">
-  <img style="width:200px;" src="./attachment/logo.svg">
+<div align="center" style="text-align:center;">
+  <img style="width:200px;" src="attachments/logo.svg">
 </div>
+
+<p align="center" style="display: flex;align-items: center;justify-content: center;gap:8px;">
+  <a href="https://npmcharts.com/compare/better-monitor?minimal=true">
+    <img src="https://img.shields.io/npm/dm/better-monitor.svg" alt="Downloads">
+  </a>
+  <a href="https://www.npmjs.com/package/better-monitor">
+    <img src="https://img.shields.io/npm/v/better-monitor.svg" alt="Version">
+  </a>
+  <a href="https://www.npmjs.com/package/better-monitor">
+    <img src="https://img.shields.io/npm/l/better-monitor.svg" alt="License">
+  </a>
+</p>
 
 > JS SDK used to report data to server for better log monitoring.
 

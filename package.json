@@ -1,5 +1,5 @@
 {
-  "name": "better-monnitor",
+  "name": "better-monitor",
   "version": "0.0.1",
   "description": "JS SDK used to report data to server for better log monitoring",
   "types": "dist/better-monitor.d.ts",
@@ -8,9 +8,14 @@
   "unpkg": "dist/better-monitor.js",
   "jsdelivr": "dist/better-monitor.min.js",
   "files": [
-    "dist",
+    "dist/better-monitor.common.js",
+    "dist/better-monitor.d.ts",
+    "dist/better-monitor.esm.js",
+    "dist/better-monitor.js",
+    "dist/better-monitor.min.js",
     "attachments",
     "README.md",
+    "LICENSE",
     "package.json",
     "package-lock.json"
   ],
