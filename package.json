@@ -23,7 +23,7 @@
     "ready": "npm install",
     "predev": "rimraf dist",
     "dev": "npm-run-all --parallel docs:dev lib:dev",
-    "prebuild": "rimraf dist && npm run test && npm run lint",
+    "prebuild": "rimraf dist && npm run test && npm run lint && node build/update-version.cjs",
     "build": "npm-run-all --parallel docs:build lib:build",
     "postbuild": "node build/copy-docs.cjs",
     "test": "cross-env BABEL_ENV=test jest",

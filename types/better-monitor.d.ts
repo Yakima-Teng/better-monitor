@@ -112,10 +112,10 @@ declare namespace BetterMonitor {
 
   type TGetStore = () => IStore
 
-  type TInitSetting = (settings: Partial<IStore>) => void
+  type TInit = (settings: Partial<IStore>) => void
 
   interface IBetterMonitor {
-    initSetting: BetterMonitor.TInitSetting
+    init: BetterMonitor.TInit
     addBug: BetterMonitor.TAddBug
     addView: BetterMonitor.TAddView
     printLog: BetterMonitor.TPrintLog

@@ -9,7 +9,7 @@ import initActionPlugin from '@/plugin/action/initActionPlugin'
 import initErrorPlugin from '@/plugin/error/initErrorPlugin'
 import initViewPlugin from '@/plugin/view/initViewPlugin'
 
-const initSetting: BetterMonitor.TInitSetting = (settings) => {
+const init: BetterMonitor.TInit = (settings) => {
   updateStore(settings)
 
   initViewPlugin()
@@ -37,7 +37,7 @@ const tryInitSettingAutomatically = () => {
     const dataError = targetElem.getAttribute('data-error')
     const dataAction = targetElem.getAttribute('data-action')
     if (dataProjectId) {
-      initSetting({
+      init({
         projectId: dataProjectId,
         view: ![0, '0'].includes(dataView || ''),
         log: ![0, '0'].includes(dataLog || ''),
@@ -51,7 +51,7 @@ const tryInitSettingAutomatically = () => {
 tryInitSettingAutomatically()
 
 const returnObj: BetterMonitor.IBetterMonitor = {
-  initSetting,
+  init,
   addBug,
   addView,
   printLog,
