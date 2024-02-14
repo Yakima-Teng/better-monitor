@@ -21,4 +21,4 @@ todo.
 
 ## License
 
-Not free for commercial use.
+MIT.

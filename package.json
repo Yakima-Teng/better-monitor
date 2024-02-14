@@ -2,8 +2,18 @@
   "name": "better-monnitor",
   "version": "0.0.0",
   "description": "JS SDK used to report data to server for better log monitoring",
-  "main": "dist/better-monitor.min.js",
   "types": "dist/better-monitor.d.ts",
+  "main": "dist/better-monitor.common.js",
+  "module": "dist/better-monitor.esm.js",
+  "unpkg": "dist/better-monitor.js",
+  "jsdelivr": "dist/better-monitor.min.js",
+  "files": [
+    "dist",
+    "attachments",
+    "README.md",
+    "package.json",
+    "package-lock.json"
+  ],
   "scripts": {
     "ready": "npm install",
     "predev": "rimraf dist",
@@ -20,7 +30,8 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --port 9006",
     "lib:dev": "cross-env BABEL_ENV=build NODE_ENV=development node build/dev.js",
-    "lib:build": "cross-env BABEL_ENV=build NODE_ENV=production node build/build.js"
+    "lib:build": "cross-env BABEL_ENV=build NODE_ENV=production node build/build.js",
+    "release": "bash bash/release.sh"
   },
   "pre-commit": [
     "lint"
@@ -43,6 +54,7 @@
     "better monitor"
   ],
   "author": "yakima.public@gmail.com",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
