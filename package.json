@@ -1,0 +1,102 @@
+{
+  "name": "better-monnitor",
+  "version": "0.0.0",
+  "description": "JS SDK used to report data to server for better log monitoring",
+  "main": "dist/better-monitor.min.js",
+  "types": "dist/better-monitor.d.ts",
+  "scripts": {
+    "ready": "npm install",
+    "predev": "rimraf dist",
+    "dev": "npm-run-all --parallel docs:dev lib:dev",
+    "prebuild": "rimraf dist && npm run test && npm run lint",
+    "build": "npm-run-all --parallel docs:build lib:build",
+    "postbuild": "node build/copy-docs.cjs",
+    "test": "cross-env BABEL_ENV=test jest",
+    "lint": "eslint src/**/* test/**/* build/**/*",
+    "lint:fix": "eslint --fix src/**/* test/**/* build/**/*",
+    "deploy": "node build/deploy.cjs",
+    "buildAndDeploy": "npm run build && npm run deploy",
+    "docs:dev": "vitepress dev docs --port 9006",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs --port 9006",
+    "lib:dev": "cross-env BABEL_ENV=build NODE_ENV=development node build/dev.js",
+    "lib:build": "cross-env BABEL_ENV=build NODE_ENV=production node build/build.js"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "jest": {
+    "roots": [
+      "test"
+    ],
+    "testRegex": "test/(.*?/)?.*test.ts$",
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    }
+  },
+  "keywords": [
+    "bug report",
+    "js bug",
+    "monitor",
+    "frontend monitor",
+    "better monitor"
+  ],
+  "author": "yakima.public@gmail.com",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/node": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-typescript": "^7.22.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@types/lodash": "^4.14.195",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "browser-sync": "^2.29.3",
+    "cross-env": "5.2.1",
+    "dayjs": "1.11.9",
+    "dotenv": "16.4.3",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.3",
+    "glob": "^10.3.3",
+    "gulp": "^4.0.2",
+    "gulp-ejs": "^5.1.0",
+    "home": "2.0.0",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "29.6.2",
+    "node-ssh": "^13.1.0",
+    "npm-run-all": "4.1.5",
+    "pre-commit": "^1.2.2",
+    "rimraf": "5.0.5",
+    "rollup": "^3.26.2",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-license": "^3.0.1",
+    "typescript": "^5.1.6",
+    "vitepress": "^1.0.0-beta.5",
+    "yaml": "2.3.1"
+  },
+  "volta": {
+    "node": "16.14.2",
+    "npm": "8.5.0"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "axios": "^1.4.0",
+    "D": "^1.0.0",
+    "fs-extra": "^11.1.1",
+    "lodash": "^4.17.21"
+  }
+}

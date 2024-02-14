@@ -1,0 +1,86 @@
+{
+  "root": true,
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "jest",
+    "@typescript-eslint",
+    "import"
+  ],
+  "env": {
+    "jest/globals": true
+  },
+  "globals": {
+    "window": true
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ""]
+      },
+      "typescript": {
+        // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "alwaysTryTypes": true,
+        // use an array
+        "project": [
+          "./tsconfig.json"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "semi": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "no-param-reassign": [
+      0
+    ],
+    "func-names": [
+      0
+    ],
+    "brace-style": [
+      0
+    ],
+    "import/prefer-default-export": [0],
+    "import/no-extraneous-dependencies": [
+      0
+    ],
+    "import/no-unresolved": [
+      2
+    ],
+    "import/extensions": [
+      2,
+      "never"
+    ],
+    "no-restricted-globals": [
+      2,
+      "never"
+    ],
+    "no-plusplus": [
+      2,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "max-len": [
+      2,
+      {
+        "code": 150,
+        "ignoreComments": true
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": [0],
+    "@typescript-eslint/ban-ts-comment": [0],
+    "no-shadow": [0],
+    "@typescript-eslint/no-shadow": [2],
+    "arrow-body-style": [0]
+  }
+}
