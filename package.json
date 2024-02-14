@@ -1,6 +1,6 @@
 {
   "name": "better-monnitor",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "JS SDK used to report data to server for better log monitoring",
   "types": "dist/better-monitor.d.ts",
   "main": "dist/better-monitor.common.js",
