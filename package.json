@@ -1,7 +1,7 @@
 {
   "name": "better-monitor",
   "version": "0.0.2",
-  "description": "JS SDK used to report data to server for better log monitoring",
+  "description": "JS SDK used to report data to server for better website monitoring",
   "types": "dist/better-monitor.d.ts",
   "main": "dist/better-monitor.common.js",
   "module": "dist/better-monitor.esm.js",
@@ -58,7 +58,8 @@
     "js bug",
     "monitor",
     "frontend monitor",
-    "better monitor"
+    "better monitor",
+    "website monitoring"
   ],
   "author": "yakima.public@gmail.com",
   "license": "MIT",

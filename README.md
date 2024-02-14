@@ -16,15 +16,43 @@
   </a>
 </p>
 
-> JS SDK used to report data to server for better log monitoring.
+> JS SDK used to report data to server for better website monitoring.
+
+## Install
+
+### Install via NPM (RECOMMENDED)
+
+```bash
+npm install -S better-monitor
+```
+
+### Install via HTML Script
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.2/dist/better-monitor.min.js"></script>
+```
 
 ## Usage
 
-todo.
+First, you need to register and login the [admin panel](https://www.verybugs.com/admin/) to get your project id.
 
-## Document
+<div align="center" style="text-align:center;">
+  <img style="width:200px;" src="https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/get-project-id.png">
+</div>
 
-[Online document](https://yakima-teng.github.io/better-monitor/).
+Then you can initialize BetterMonitor configuration like below:
+
+```javascript
+import BetterMonitor from 'better-monitor'
+
+BetterMonitor.init({
+  projectId: 1,
+})
+```
+
+That's all.
+
+However, if you want to config more details, please refer to our [document on github](https://yakima-teng.github.io/better-monitor/) or [document on verybugs.com](https://www.verybugs.com/better-monitor/).
 
 ## Features
 
