@@ -29,21 +29,19 @@ npm install -S better-monitor
 ### Install via HTML Script
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.2/dist/better-monitor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.3/dist/better-monitor.min.js"></script>
 ```
 
 ## Usage
 
 First, you need to register and login the [admin panel](https://www.verybugs.com/admin/) to get your project id.
 
-<div align="center" style="text-align:center;">
-  <img style="width:200px;" src="https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/get-project-id.png">
-</div>
+![](./attachments/get-project-id.png)
 
 Then you can initialize BetterMonitor configuration like below:
 
 ```javascript
-import BetterMonitor from 'better-monitor'
+import BetterMonitor from 'better-monitor' // This line is unnecessary if you use HTML Script tag to include the SDK
 
 BetterMonitor.init({
   projectId: 1,

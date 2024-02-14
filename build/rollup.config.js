@@ -11,7 +11,7 @@ const license = require('rollup-plugin-license')
 const pkg = require('../package.json')
 /* eslint-enable @typescript-eslint/no-var-requires */
 
-const { version } = pkg
+const version = process.env.VERSION || pkg.version
 
 module.exports = (config) => {
   const {

@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 set -e
 
-npm run build
-
 echo "Enter release version: "
 read VERSION
 
 echo "Enter commit comment: "
 read COMMENT
 
+VERSION=$VERSION COMMENT=$COMMENT npm run build
+
 read -p "Releasing $VERSION - are you sure? (y/n)" -n 1 -r
 echo # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   echo "Releasing $VERSION ..."
-  # VERSION=$VERSION npm run build
 
   # commit
   git add -A

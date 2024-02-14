@@ -7,7 +7,7 @@ const pkg = require('../package.json')
 const configFactory = require('./rollup.config')
 /* eslint-enable @typescript-eslint/no-var-requires */
 
-const { version } = pkg
+const version = process.env.VERSION || pkg.version
 
 const definitionFilePath = path.join(__dirname, '../types/better-monitor.d.ts')
 const definitionFileContent = fs.readFileSync(definitionFilePath, 'utf8')
