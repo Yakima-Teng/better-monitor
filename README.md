@@ -18,7 +18,7 @@
 
 [Click here for English document](https://yakima-teng.github.io/better-monitor/index_en.html).
 
-> 用于向网站监控服务上传数据的前端JS SDK（集成了后台服务，可以直接使用[官方管理面板](https://www.verybugs.com/admin/)）。
+> 用于向网站监控服务上传数据的前端JS SDK（集成了后台服务，可以直接使用[官方管理面板](https://www.verybugs.com/admin/)），支持拦截AJAX请求，上报JS运行时错误等。
 
 ## 功能特性
 
