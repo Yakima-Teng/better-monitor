@@ -16,36 +16,36 @@
   </a>
 </p>
 
-> JS SDK used to report data to server for better website monitoring.
+[Click here for English document](./README_en.md).
 
-## Features
+> 用于向网站监控服务上传数据的前端JS SDK。
 
-- 🔥 Report PV (page view) data. So you can know which pages are visited and among them which pages are the most commonly visited.
-- 🔥 Report UV (user view) data. So you can know how many users visited your project.
-- 🔥 Report BV (browser view) data. So you can know which OS (operating systems) and browsers are used to visit your project, and you can then define your frontend compatibility plan.
-- 🔥 Report api request and response data. Our sdk can monitor your AJAX request triggered by raw XMLHttpRequest, Axios, jQuery and so on. So you can find which apis are slow in response time.
-- 🔥 Report JavaScript runtime bugs data.
-- 🔥 Report user actions data, in time order.
+## 功能特性
 
-## Usage
+- 🔥 上报 PV（page view） 数据。从而得知网站上哪些页面被访问得更频繁。
+- 🔥 上报 UV（user view） 数据。从而得知有多少用户访问了你的项目。
+- 🔥 上报 BV（browser view） 数据。从而得知用户使用哪些操作系统下的哪些浏览器来访问我们的项目。可以据此进一步确定网站的前端兼容性计划。
+- 🔥 上报 AJAX 请求和响应数据。该 SDK 会自动拦截通过原生 XMLHttpRequest对象或者诸如 Axios 和 jQuery 等库触发的 AJAX 请求。可以据此查看哪些请求响应速度过慢。
+- 🔥 上报 JavaScript 运行时报错数据。
+- 🔥 上报用户行为数据（按时间顺序）。
 
-### Get your project ID
+## 如何使用
 
-First, you need to register and login the [admin panel](https://www.verybugs.com/admin/) to get your project id.
+### 获取项目ID
+
+首先，你需要注册并登录我们的[管理面板](https://www.verybugs.com/admin/)来获取项目ID。
 
 ![](./attachments/get-project-id.png)
 
-### Include SDK and config
+### 集成SDK并进行配置
 
-#### Install via NPM (RECOMMENDED)
-
-Install better-monitor as your package dependency:
+通过NPM将 better-monitor 作为项目依赖进行安装：
 
 ```bash
 npm install -S better-monitor
 ```
 
-And then you can initialize BetterMonitor configuration like below:
+然后按如下方式将我们刚刚获取到的项目ID配置进去即可：
 
 ```javascript
 import BetterMonitor from 'better-monitor'
@@ -56,88 +56,98 @@ BetterMonitor.init({
 })
 ```
 
-#### Install via HTML Script
+**如果你的项目目前未使用NPM，也可以通过HTML Script标签来引入SDK，具体操作如下：**
 
-Include the SDK through HTML Script element and config directly on the script element.
+说明：可以看到，项目ID是直接以data-project-id属性的方式配置到script元素上的。
 
 ```html
-<!-- data-project-id is where you fill in your project ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.4/dist/better-monitor.min.js"></script>
+<!-- data-project-id 的值就是我们获取的项目ID -->
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.5/dist/better-monitor.min.js"></script>
 ```
 
-## APIs
+## API
 
-The SDK exports some useful api:
+该 SDK 对外暴露了几个实用的 API：
 
 ### BetterMonitor.printLog
 
-`BetterMonitor.printLog` is almost the same as `console.log` except for the following differences:
+`BetterMonitor.printLog` 和 `console.log` 几乎是一样的，除了以下几点：
 
-- Outputted logs will be prefixed with date string.
-- Logs will be reported to the server with log level set to `log`, so you can view them in the admin panel.
+- 输出的日志会在最前面显示一个日期前缀。
+- 这些日志会被上报到服务端（日志级别为 `log` ），你可以在管理面板上进行查看。
 
 ```javascript
 BetterMonitor.printLog('test')
 BetterMonitor.printLog('test', { a: 1 }, 'hello')
 ```
 
-And the output is like:
+输出如下：
 
 ![](./attachments/log-api-example.png)
 
 ### BetterMonitor.printWarn
 
-Like `BetterMonitor.printLog` but diff in:
+与 `BetterMonitor.printLog` 类似，区别在于：
 
-- Text color is between yellow and brown.
-- Log level is set to `warn`.
+- 输出的文本颜色为棕黄色。
+- 日志级别为 `warn`。
 
 ### BetterMonitor.printError
 
-Like `BetterMonitor.printLog` but diff in:
+与 `BetterMonitor.printLog` 类似，区别在于：
 
-- Text color is red.
-- Log level is set to `error`.
+- 输出的文本颜色为红色。
+- 日志级别为 `error`.
 
 ### BetterMonitor.logTime, BetterMonitor.logTimeEnd
 
-`BetterMonitor.logTime` and `BetterMonitor.logTimeEnd` should be used together, like `console.time` and `console.timeEnd`. But they differ from `console.time` and `console.timeEnd` in that:
+`BetterMonitor.logTime` 和 `BetterMonitor.logTimeEnd` 需要组合使用, 使用方法与 `console.time` 和 `console.timeEnd` 类似. 它们与 `console.time` 和 `console.timeEnd` 的区别在于：
 
-- If time duration is less than 100ms, output text will be attached with `quick` note, and reporting log level will be set to `log`.
-- If time duration is equal to or greater than 100ms, output text will be attached with `slow` note, and reporting log level will be set to `error`.
+- 如果开始和结束时间之间的间隔时长少于100ms，输出的日志会带有“耗时较快”文案。日志上报级别为 `log`。
+- 如果开始和结束时间之间的间隔等于或大于100ms，输出的日志会带有“耗时较慢”文案。日志上报级别为 `error`。
 
-So you can quickly filter and find slow actions.
+从而可以方便地过滤出较慢的操作有哪些。
 
-### BetterMonitor.addView, BetterMonitor.addBug, BetterMonitor.init
+### BetterMonitor.init
 
-These apis are rarely used, please refer to the source code.
+初始化配置。一般进需要传入`projectId`参数。
 
-## Snapshots
+```javascript
+BetterMonitor.init({
+  projectId: 1,
+})
+```
 
-**Dashboard:**
+### BetterMonitor.addView, BetterMonitor.addBug
+
+这些API很少会被用到，如确有需要，可以自行查看源码。
+
+## 部分截图预览
+
+**统计面板：**
 
 ![Dashboard](./attachments/dashboard.png)
 
-**Api log:**
+**接口日志：**
 
 ![API log](./attachments/api-log.png)
 
-**Bug log:**
+**JS Bug日志：**
 
 ![Bug management](./attachments/bug-log.png)
 
-**User action log list:**
+**用户行为日志列表：**
 
 ![Action log list](./attachments/action-log.png)
 
-**User action log file:**
+**用户行为日志文件：**
 
 ![Action log file](./attachments/action-log-file.png)
 
-**Project management:**
+**项目管理：**
 
 ![Project management](./attachments/project-management.png)
 
-## License
+## 协议
 
-MIT.
+MIT协议。

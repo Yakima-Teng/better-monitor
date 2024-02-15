@@ -18,16 +18,17 @@ export default defineConfig({
   ],
   rewrites: {
     'README.md': 'index.md',
+    'README_en.md': 'index_en.md',
     'CHANGELOG.md': 'changelog.md',
     'CONTRIBUTING.md': 'contributing.md',
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    outlineTitle: 'Table of Content',
+    outlineTitle: '目录/Table of Content',
     outline: [2, 5],
     nav: [
-      { text: 'Home', link: homepage },
-      { text: 'Change log', link: '/changelog' },
+      { text: '首页/Home', link: homepage },
+      { text: '更新记录/Change log', link: '/changelog' },
       // { text: 'Contributing', link: '/contributing' },
     ],
     socialLinks: [
