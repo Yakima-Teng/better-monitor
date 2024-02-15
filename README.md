@@ -16,9 +16,9 @@
   </a>
 </p>
 
-[Click here for English document](./README_en.md).
+[Click here for English document](https://yakima-teng.github.io/better-monitor/index_en.html).
 
-> 用于向网站监控服务上传数据的前端JS SDK。
+> 用于向网站监控服务上传数据的前端JS SDK（集成了后台服务，可以直接使用[官方管理面板](https://www.verybugs.com/admin/)）。
 
 ## 功能特性
 
@@ -35,7 +35,7 @@
 
 首先，你需要注册并登录我们的[管理面板](https://www.verybugs.com/admin/)来获取项目ID。
 
-![](./attachments/get-project-id.png)
+![](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/get-project-id.png)
 
 ### 集成SDK并进行配置
 
@@ -62,7 +62,7 @@ BetterMonitor.init({
 
 ```html
 <!-- data-project-id 的值就是我们获取的项目ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.5/dist/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.6/dist/better-monitor.min.js"></script>
 ```
 
 ## API
@@ -83,7 +83,7 @@ BetterMonitor.printLog('test', { a: 1 }, 'hello')
 
 输出如下：
 
-![](./attachments/log-api-example.png)
+![](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/log-api-example.png)
 
 ### BetterMonitor.printWarn
 
@@ -126,27 +126,27 @@ BetterMonitor.init({
 
 **统计面板：**
 
-![Dashboard](./attachments/dashboard.png)
+![Dashboard](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/dashboard.png)
 
 **接口日志：**
 
-![API log](./attachments/api-log.png)
+![API log](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/api-log.png)
 
 **JS Bug日志：**
 
-![Bug management](./attachments/bug-log.png)
+![Bug management](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/bug-log.png)
 
 **用户行为日志列表：**
 
-![Action log list](./attachments/action-log.png)
+![Action log list](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/action-log.png)
 
 **用户行为日志文件：**
 
-![Action log file](./attachments/action-log-file.png)
+![Action log file](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/action-log-file.png)
 
 **项目管理：**
 
-![Project management](./attachments/project-management.png)
+![Project management](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/project-management.png)
 
 ## 协议
 

@@ -13,8 +13,8 @@
     "dist/better-monitor.esm.js",
     "dist/better-monitor.js",
     "dist/better-monitor.min.js",
-    "attachments",
     "README.md",
+    "README_en.md",
     "LICENSE",
     "package.json",
     "package-lock.json"

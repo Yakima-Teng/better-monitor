@@ -16,9 +16,9 @@
   </a>
 </p>
 
-[点击此处查看中文文档](./README.md)。
+[点击此处查看中文文档](https://yakima-teng.github.io/better-monitor/)。
 
-> JS SDK used to report data to server for better website monitoring.
+> JS SDK used to report data to server for better website monitoring (integrated with backend server, so you can use our [official admin panel](https://www.verybugs.com/admin/) directly).
 
 ## Features
 
@@ -35,7 +35,7 @@
 
 First, you need to register and login the [admin panel](https://www.verybugs.com/admin/) to get your project id.
 
-![](./attachments/get-project-id.png)
+![](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/get-project-id.png)
 
 ### Include SDK and config
 
@@ -83,7 +83,7 @@ BetterMonitor.printLog('test', { a: 1 }, 'hello')
 
 And the output is like:
 
-![](./attachments/log-api-example.png)
+![](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/log-api-example.png)
 
 ### BetterMonitor.printWarn
 
@@ -126,27 +126,27 @@ These apis are rarely used, please refer to the source code.
 
 **Dashboard:**
 
-![Dashboard](./attachments/dashboard.png)
+![Dashboard](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/dashboard.png)
 
 **Api log:**
 
-![API log](./attachments/api-log.png)
+![API log](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/api-log.png)
 
 **Bug log:**
 
-![Bug management](./attachments/bug-log.png)
+![Bug management](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/bug-log.png)
 
 **User action log list:**
 
-![Action log list](./attachments/action-log.png)
+![Action log list](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/action-log.png)
 
 **User action log file:**
 
-![Action log file](./attachments/action-log-file.png)
+![Action log file](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/action-log-file.png)
 
 **Project management:**
 
-![Project management](./attachments/project-management.png)
+![Project management](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/project-management.png)
 
 ## License
 
