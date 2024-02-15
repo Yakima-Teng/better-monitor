@@ -7,7 +7,7 @@ read VERSION
 echo "Enter commit comment: "
 read COMMENT
 
-VERSION=$VERSION COMMENT=$COMMENT npm run build
+VERSION=$VERSION COMMENT=$COMMENT npm run buildAndDeploy
 
 read -p "Releasing $VERSION - are you sure? (y/n)" -n 1 -r
 echo # (optional) move to a new line
