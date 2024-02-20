@@ -12,9 +12,20 @@ export default defineConfig({
       'script',
       {
         src: '/better-monitor/better-monitor.min.js',
-        'data-project-id': '1',
+        'data-project-id': '22',
       }
     ],
+    [
+      'script',
+      {},
+      `var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?19ded09de8a8d5f9e3405ed5f6aab365";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();`
+    ]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
