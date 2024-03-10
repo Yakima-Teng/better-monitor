@@ -28,6 +28,7 @@
 - 🔥 上报 AJAX 请求和响应数据。该 SDK 会自动拦截通过原生 XMLHttpRequest对象或者诸如 Axios 和 jQuery 等库触发的 AJAX 请求。可以据此查看哪些请求响应速度过慢。
 - 🔥 上报 JavaScript 运行时报错数据。
 - 🔥 上报用户行为数据（按时间顺序）。
+- 🔥 上报页面性能数据（CLS、TTFB、LCP、INP、FCP、FID）。
 
 ## 如何使用
 
@@ -62,7 +63,7 @@ BetterMonitor.init({
 
 ```html
 <!-- data-project-id 的值就是我们获取的项目ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.6/dist/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.7/dist/better-monitor.min.js"></script>
 ```
 
 ## API

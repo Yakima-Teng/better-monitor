@@ -1,5 +1,7 @@
 // 请务必保证声明文件与对应js版本一致，当前声明文件对应的js版本：{{ version }}.min.js
 
+import {Metric} from "web-vitals";
+
 declare namespace BetterMonitor {
   interface IParamsAddBug {
     pageUrl: string
@@ -84,6 +86,10 @@ declare namespace BetterMonitor {
 
   type TParseSearchString = (url: string) => Record<string, string>
 
+  type TPerformanceData = Pick<Metric, 'name' | 'rating' | 'value' | 'navigationType'> & {
+    pageUrl: string
+  }
+
   interface IStore {
     projectId: string
     // 接口日志开关
@@ -102,6 +108,8 @@ declare namespace BetterMonitor {
     queuedLogs: IParamsAddLog[]
     // 待上报的行为日志开关
     queuedActions: IParamsAddAction[]
+    // 待上报的性能日志
+    queuedPerformanceLogs: Set<TPerformanceData>
     // 记录动作的开始时间
     timeLogMap: Map<string, number>
     userId: undefined | string | number

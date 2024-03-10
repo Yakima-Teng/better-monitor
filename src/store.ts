@@ -10,6 +10,7 @@ const store: BetterMonitor.IStore = {
   blackList: [],
   queuedLogs: [],
   queuedActions: [],
+  queuedPerformanceLogs: new Set(),
   timeLogMap: new Map(),
   userId: undefined,
   getUserId: undefined

@@ -8,6 +8,7 @@ import initLogPlugin from '@/plugin/log/initLogPlugin'
 import initActionPlugin from '@/plugin/action/initActionPlugin'
 import initErrorPlugin from '@/plugin/error/initErrorPlugin'
 import initViewPlugin from '@/plugin/view/initViewPlugin'
+import initPerformancePlugin from '@/plugin/performance/initPerformancePlugin'
 
 const init: BetterMonitor.TInit = (settings) => {
   updateStore(settings)
@@ -16,6 +17,7 @@ const init: BetterMonitor.TInit = (settings) => {
   initLogPlugin()
   initActionPlugin()
   initErrorPlugin()
+  initPerformancePlugin()
 }
 
 // 尝试找到引入better-monitor.min.js文件的script标签，如果用户主动设置了`data-project-id`属性则直接进行初始化

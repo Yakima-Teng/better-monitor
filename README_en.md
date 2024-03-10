@@ -28,6 +28,7 @@
 - 🔥 Report api request and response data. Our sdk can monitor your AJAX request triggered by raw XMLHttpRequest, Axios, jQuery and so on. So you can find which apis are slow in response time.
 - 🔥 Report JavaScript runtime bugs data.
 - 🔥 Report user actions data, in time order.
+- 🔥 Report performance data: CLS, TTFB, LCP, FCP and FID.
 
 ## Usage
 

@@ -22,7 +22,8 @@
   "scripts": {
     "ready": "npm install",
     "predev": "rimraf dist",
-    "dev": "npm-run-all --parallel docs:dev lib:dev",
+    "dev": "npm-run-all --parallel docs:dev lib:dev static:server",
+    "static:server": "jmock dist -p 9007",
     "prebuild": "rimraf dist && npm run test && npm run lint && node build/update-version.cjs",
     "build": "npm-run-all --parallel docs:build lib:build",
     "postbuild": "node build/copy-docs.cjs",
@@ -33,9 +34,9 @@
     "deploy:server": "node build/deploy.cjs",
     "deploy": "npm run deploy:gh-pages && npm run deploy:server",
     "buildAndDeploy": "npm run build && npm run deploy",
-    "docs:dev": "vitepress dev ./ --port 9006",
-    "docs:build": "vitepress build ./",
-    "docs:preview": "vitepress preview ./ --port 9006",
+    "docs:dev": "cross-env NODE_ENV=development vitepress dev ./ --port 9006",
+    "docs:build": "cross-env NODE_ENV=production vitepress build ./",
+    "docs:preview": "cross-env NODE_ENV=production vitepress preview ./ --port 9006",
     "lib:dev": "cross-env BABEL_ENV=build NODE_ENV=development node build/dev.js",
     "lib:build": "cross-env BABEL_ENV=build NODE_ENV=production node build/build.js",
     "release": "bash bash/release.sh"
@@ -117,6 +118,7 @@
     "axios": "^1.4.0",
     "D": "^1.0.0",
     "fs-extra": "^11.1.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "web-vitals": "3.5.2"
   }
 }

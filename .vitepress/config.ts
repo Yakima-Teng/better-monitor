@@ -6,12 +6,15 @@ const homepage = 'https://www.verybugs.com'
 export default defineConfig({
   title: "Better Monitor",
   description: "JS SDK used to report data to server for better website monitoring",
-  base: '/better-monitor',
+  // base: '/better-monitor',
+  base: process.env.NODE_ENV === 'development' ? '/' : '/better-monitor',
   head: [
     [
       'script',
       {
-        src: '/better-monitor/better-monitor.min.js',
+        src: process.env.NODE_ENV === 'development'
+          ? 'http://localhost:9007/better-monitor.min.js'
+          : '/better-monitor/better-monitor.min.js',
         'data-project-id': '1',
       }
     ],
