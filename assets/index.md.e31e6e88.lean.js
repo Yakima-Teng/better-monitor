@@ -1,0 +1,1 @@
+import{_ as t,o as a,c as o,U as e}from"./chunks/framework.dfac195e.js";const D=JSON.parse('{"title":"better-monitor","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"README.md"}'),s={name:"index.md"},n=e("",57),r=[n];function l(p,i,c,m,d,h){return a(),o("div",null,r)}const y=t(s,[["render",l]]);export{D as __pageData,y as default};
