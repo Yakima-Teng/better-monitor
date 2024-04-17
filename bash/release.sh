@@ -29,5 +29,6 @@ then
   export http_proxy=http://127.0.0.1:7890
   export all_proxy=socks5://127.0.0.1:7890
 
+  # npm --registry=https://registry.npmjs.org adduser
   npm --registry=https://registry.npmjs.org publish
 fi
