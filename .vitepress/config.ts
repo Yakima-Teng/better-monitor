@@ -12,6 +12,17 @@ export default defineConfig({
     [
       'script',
       {
+        src: 'https://cdn.bootcdn.net/ajax/libs/eruda/3.0.1/eruda.min.js'
+      }
+    ],
+    [
+      'script',
+      {},
+      `eruda.init();`
+    ],
+    [
+      'script',
+      {
         src: process.env.NODE_ENV === 'development'
           ? 'http://localhost:9007/better-monitor.min.js'
           : '/better-monitor/better-monitor.min.js',

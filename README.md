@@ -77,6 +77,8 @@ BetterMonitor.init({
 - 输出的日志会在最前面显示一个日期前缀。
 - 这些日志会被上报到服务端（日志级别为 `log` ），你可以在管理面板上进行查看。
 
+> 注意，通过 `BetterMonitor.printLog` 打印的日志并不会实时上报，而是在达到一定长度或者数量时才会上报，如果需要实时上报，请使用 `BetterMonitor.printLogDirectly` 方法。
+
 ```javascript
 BetterMonitor.printLog('test')
 BetterMonitor.printLog('test', { a: 1 }, 'hello')
@@ -93,12 +95,16 @@ BetterMonitor.printLog('test', { a: 1 }, 'hello')
 - 输出的文本颜色为棕黄色。
 - 日志级别为 `warn`。
 
+> 注意，通过 `BetterMonitor.printWarn` 打印的日志并不会实时上报，而是在达到一定长度或者数量时才会上报，如果需要实时上报，请使用 `BetterMonitor.printWarnDirectly` 方法。
+
 ### BetterMonitor.printError
 
 与 `BetterMonitor.printLog` 类似，区别在于：
 
 - 输出的文本颜色为红色。
 - 日志级别为 `error`.
+
+> 注意，通过 `BetterMonitor.printError` 打印的日志并不会实时上报，而是在达到一定长度或者数量时才会上报，如果需要实时上报，请使用 `BetterMonitor.printErrorDirectly` 方法。
 
 ### BetterMonitor.logTime, BetterMonitor.logTimeEnd
 
@@ -109,6 +115,8 @@ BetterMonitor.printLog('test', { a: 1 }, 'hello')
 
 从而可以方便地过滤出较慢的操作有哪些。
 
+> 注意，通过 `BetterMonitor.logTimeEnd` 打印的日志并不会实时上报，而是在达到一定长度或者数量时才会上报，如果需要实时上报，请使用 `BetterMonitor.logTimeEndDirectly` 方法。
+
 ### BetterMonitor.init
 
 初始化配置。一般进需要传入`projectId`参数。
@@ -118,6 +126,19 @@ BetterMonitor.init({
   projectId: 1,
 })
 ```
+
+如果你希望日志能区分不同用户，可以重写一个 `getUserId` 方法（支持 Promise），不重写该方法的话，默认的 `userId` 始终为 `0`。示意如下：
+
+```javascript
+BetterMonitor.init({
+  projectId: 1,
+  getUserId() {
+    return 123
+  },
+})
+```
+
+> 注意，出于性能考虑，每次上报时使用的 `userId` 都是上一次执行 `getUserId` 时获取到的值。
 
 ### BetterMonitor.addView, BetterMonitor.addBug
 
@@ -149,6 +170,8 @@ BetterMonitor.init({
 
 ![Project management](https://github.com/Yakima-Teng/better-monitor/raw/main/attachments/project-management.png)
 
-## 协议
+## 开源协议
 
 MIT协议。
+
+开源地址：[https://github.com/Yakima-Teng/better-monitor](https://github.com/Yakima-Teng/better-monitor)。
