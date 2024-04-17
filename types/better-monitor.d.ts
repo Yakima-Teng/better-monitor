@@ -28,6 +28,7 @@ declare namespace BetterMonitor {
     level: 'log' | 'warn' | 'error'
     payload: string
     userId: number | string
+    directly?: boolean
   }
   type TAddAction = (params: IParamsAddAction) => void
   type TAddActions = (params: { preferSendBeacon: boolean, delayTime?: number }) => void
@@ -131,6 +132,10 @@ declare namespace BetterMonitor {
     printError: BetterMonitor.TPrintError
     logTime: BetterMonitor.TLogTime
     logTimeEnd: BetterMonitor.TLogTimeEnd
+    printLogDirectly: BetterMonitor.TPrintLog
+    printWarnDirectly: BetterMonitor.TPrintWarn
+    printErrorDirectly: BetterMonitor.TPrintError
+    logTimeEndDirectly: BetterMonitor.TLogTimeEnd
   }
 }
 

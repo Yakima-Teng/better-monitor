@@ -2,7 +2,8 @@ import { updateStore } from '@/store'
 import addBug from '@/api/addBug'
 import addView from '@/api/addView'
 import {
-  printLog, printWarn, printError, logTime, logTimeEnd
+  printLog, printWarn, printError, logTime, logTimeEnd,
+  printLogDirectly, printWarnDirectly, printErrorDirectly, logTimeEndDirectly
 } from '@/api/addAction'
 import initLogPlugin from '@/plugin/log/initLogPlugin'
 import initActionPlugin from '@/plugin/action/initActionPlugin'
@@ -57,10 +58,14 @@ const returnObj: BetterMonitor.IBetterMonitor = {
   addBug,
   addView,
   printLog,
+  printLogDirectly,
   printWarn,
+  printWarnDirectly,
   printError,
+  printErrorDirectly,
   logTime,
-  logTimeEnd
+  logTimeEnd,
+  logTimeEndDirectly
 }
 
 export default returnObj

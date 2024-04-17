@@ -5,6 +5,7 @@ import { BACKEND_DOMAIN } from '@/constant'
 import isString from '@/common/isString'
 import getLogTime from '@/utils/getLogTime'
 import getUserId from '@/utils/getUserId'
+import BetterMonitor from '../../types/better-monitor'
 
 let timerAddActions: number = 0
 const clearTimerAddActions = () => {
@@ -55,7 +56,7 @@ export const addActions: BetterMonitor.TAddActions = (params) => {
  */
 const addAction: BetterMonitor.TAddAction = (params) => {
   const { blackList, queuedActions } = getStore()
-  const { payload } = params
+  const { payload, directly } = params
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
@@ -77,7 +78,7 @@ const addAction: BetterMonitor.TAddAction = (params) => {
   queuedActions.push(params)
   updateStore({ queuedActions })
 
-  if (queuedActions.length > 10) {
+  if (directly || queuedActions.length > 10) {
     addActions({ preferSendBeacon: false, delayTime: 800 })
     return
   }
@@ -124,19 +125,47 @@ const doLog: BetterMonitor.TDoLog = (() => {
   }
 })()
 
+// 直接上报
+const doLogDirectly: BetterMonitor.TDoLog = (() => {
+  // eslint-disable-next-line no-console
+  const rawLog = console.log
+  return (level, ...args: any[]) => {
+    const time = getLogTime()
+    addAction({
+      pageUrl: location.href,
+      time,
+      level,
+      payload: JSON.stringify(args),
+      userId: getUserId(),
+      directly: true
+    })
+    const color = getLogColorByLevel(level)
+    return rawLog(`%c[${time}]`, `color:${color};`, ...args)
+  }
+})()
+
 // 打印普通日志
 export const printLog: BetterMonitor.TPrintLog = (...args) => {
   return doLog('log', ...args)
+}
+export const printLogDirectly: BetterMonitor.TPrintLog = (...args) => {
+  return doLogDirectly('log', ...args)
 }
 
 // 打印警告日志
 export const printWarn: BetterMonitor.TPrintWarn = (...args) => {
   return doLog('warn', ...args)
 }
+export const printWarnDirectly: BetterMonitor.TPrintWarn = (...args) => {
+  return doLogDirectly('warn', ...args)
+}
 
 // 打印错误日志
 export const printError: BetterMonitor.TPrintError = (...args) => {
   return doLog('error', ...args)
+}
+export const printErrorDirectly: BetterMonitor.TPrintError = (...args) => {
+  return doLogDirectly('error', ...args)
 }
 
 export const logTime: BetterMonitor.TLogTime = (label) => {
@@ -157,6 +186,20 @@ export const logTimeEnd: BetterMonitor.TLogTimeEnd = (label) => {
     return
   }
   printError(`${label}耗时较慢：${(duration / 1000).toFixed(3)}s`)
+}
+
+export const logTimeEndDirectly: BetterMonitor.TLogTimeEnd = (label) => {
+  const { timeLogMap } = getStore()
+  const endTime = Date.now()
+  const startTime = timeLogMap.get(label)
+  if (!startTime) return
+  const duration = endTime - startTime
+  timeLogMap.delete(label)
+  if (duration < 100) {
+    printLogDirectly(`${label}耗时较快：${duration}ms`)
+    return
+  }
+  printErrorDirectly(`${label}耗时较慢：${(duration / 1000).toFixed(3)}s`)
 }
 
 export default addAction

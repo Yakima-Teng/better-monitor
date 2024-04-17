@@ -75,7 +75,7 @@ async function restart() {
     port: Number(DEPLOY_SSH_PORT),
     username: DEPLOY_SSH_USERNAME,
     // 私钥路径（不使用私钥的话，把下面这行换成`password`字段，填SSH登录密码）
-    privateKeyPath: path.join(home.resolve('~'), '.ssh/id_rsa')
+    privateKeyPath: path.join(home.resolve('~'), '.ssh/id_ed25519')
   })
 
   // await execCommand(`rm -rf ${subProjectRoot}`)
