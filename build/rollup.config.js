@@ -29,7 +29,17 @@ module.exports = (config) => {
         resolve({ browser: true }),
         babel({
           babelHelpers: 'bundled',
-          presets: ['@babel/preset-env']
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: {
+                  chrome: '58',
+                  ie: '8'
+                }
+              }
+            ]
+          ]
         }),
         isProd && terser(),
         license({

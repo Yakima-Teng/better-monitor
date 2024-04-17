@@ -63,7 +63,7 @@ BetterMonitor.init({
 
 ```html
 <!-- data-project-id 的值就是我们获取的项目ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.9/dist/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.10/dist/better-monitor.min.js"></script>
 ```
 
 ## API
