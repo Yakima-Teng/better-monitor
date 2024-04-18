@@ -29,6 +29,11 @@ export default defineConfig({
         'data-project-id': '1',
       }
     ],
+    [
+      'script',
+      {},
+      `BetterMonitor.init({ getUserId: function() { return Math.floor(10000 * Math.random()); } });`
+    ],
   ],
   rewrites: {
     'README.md': 'index.md',

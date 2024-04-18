@@ -1,4 +1,4 @@
-import { updateStore } from '@/store'
+import { getStore, updateStore } from '@/store'
 import addBug from '@/api/addBug'
 import addView from '@/api/addView'
 import {
@@ -65,7 +65,9 @@ const returnObj: BetterMonitor.IBetterMonitor = {
   printErrorDirectly,
   logTime,
   logTimeEnd,
-  logTimeEndDirectly
+  logTimeEndDirectly,
+  updateStore,
+  getStore
 }
 
 export default returnObj

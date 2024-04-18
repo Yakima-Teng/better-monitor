@@ -13,3 +13,4 @@
 - Support IE8. (2024-4-17)
 - Fix compatibility problem. (2024-4-18)
 - Fix compatibility problem. (2024-4-18)
+- Support getStore and updateStore functions. (2024-4-18)

@@ -136,6 +136,8 @@ declare namespace BetterMonitor {
     printWarnDirectly: BetterMonitor.TPrintWarn
     printErrorDirectly: BetterMonitor.TPrintError
     logTimeEndDirectly: BetterMonitor.TLogTimeEnd
+    updateStore: BetterMonitor.TUpdateStore
+    getStore: BetterMonitor.TGetStore
   }
 }
 
