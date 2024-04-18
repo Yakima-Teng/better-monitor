@@ -34,6 +34,7 @@
     "deploy:server": "node build/deploy.cjs",
     "deploy": "npm run deploy:gh-pages && npm run deploy:server",
     "buildAndDeploy": "npm run build && npm run deploy",
+    "buildAndDeployToServer": "npm run build && npm run deploy:server",
     "docs:dev": "cross-env NODE_ENV=development vitepress dev ./ --port 9006",
     "docs:build": "cross-env NODE_ENV=production vitepress build ./",
     "docs:preview": "cross-env NODE_ENV=production vitepress preview ./ --port 9006",

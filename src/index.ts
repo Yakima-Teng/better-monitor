@@ -70,4 +70,4 @@ const returnObj: BetterMonitor.IBetterMonitor = {
 
 export default returnObj
 
-window.console.log('%c已集成window.BetterMonitor对象😃\nAPI文档和TS类型声明文件可以参阅https://www.verybugs.com/lib', 'background: #ff5900; color: #000')
+window.console.log('%c已集成window.BetterMonitor对象😃\n详情请参阅官网https://www.verybugs.com', 'background: #ff5900; color: #000')

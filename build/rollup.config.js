@@ -28,13 +28,18 @@ module.exports = (config) => {
         commonjs(),
         resolve({ browser: true }),
         babel({
+          babelrc: false,
           babelHelpers: 'bundled',
+          // .ts is needed, because till now, file extension is still .ts, it's .js until the end process flow
+          extensions: ['.ts', '.js', '.jsx', '.es6', '.es', '.mjs'],
           presets: [
             [
               '@babel/preset-env',
               {
+                modules: false,
+                loose: true,
                 targets: {
-                  chrome: '58',
+                  chrome: '60.0.0',
                   ie: '8'
                 }
               }
@@ -53,9 +58,7 @@ module.exports = (config) => {
       file: fileName,
       format,
       name,
-      globals: {
-        BetterMonitor: 'BetterMonitor'
-      },
+      generatedCode: 'es5',
       compact: isProd
     }
   }

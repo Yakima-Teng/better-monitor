@@ -24,8 +24,8 @@ export default defineConfig({
       'script',
       {
         src: process.env.NODE_ENV === 'development'
-          ? 'http://localhost:9007/better-monitor.min.js'
-          : '/better-monitor/better-monitor.min.js',
+          ? `http://localhost:9007/better-monitor.min.js?t=${Date.now()}`
+          : `/better-monitor/better-monitor.min.js?t=${Date.now()}`,
         'data-project-id': '1',
       }
     ],

@@ -11,3 +11,5 @@
 - Support upload log info directly. (2024-4-17)
 - Support IE8. (2024-4-17)
 - Support IE8. (2024-4-17)
+- Fix compatibility problem. (2024-4-18)
+- Fix compatibility problem. (2024-4-18)
