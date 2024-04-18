@@ -30,6 +30,7 @@ export const handlerFuncForJsError = (e: ErrorEvent) => {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('catch error by BetterMonitor:')
+    // eslint-disable-next-line no-console
     console.log(err)
     return true
   }
