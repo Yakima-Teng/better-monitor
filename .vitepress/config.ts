@@ -32,7 +32,7 @@ export default defineConfig({
     [
       'script',
       {},
-      `BetterMonitor.init({ getUserId: function() { return Math.floor(10000 * Math.random()); } });`
+      `BetterMonitor.init({ getUserId: function() { return Math.floor(10000 * Math.random()); } });BetterMonitor.printLogDirectly('first', 'second', { key: 1 }, [{}, 1, true]);`
     ],
   ],
   rewrites: {
