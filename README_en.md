@@ -63,7 +63,7 @@ That's all.
 
 ```html
 <!-- data-project-id is where you fill in your project ID -->
-<script crossorigin="anonymous" data-project-id="1" src="https://cdn.jsdelivr.net/npm/better-monitor@0.0.4/dist/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="1" src="https://cdn.orzzone.com/verybugs/better-monitor.min.js"></script>
 ```
 
 ## APIs

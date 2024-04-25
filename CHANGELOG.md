@@ -14,3 +14,6 @@
 - Fix compatibility problem. (2024-4-18)
 - Fix compatibility problem. (2024-4-18)
 - Support getStore and updateStore functions. (2024-4-18)
+- Upload sdk to qiniu cdn and refresh cdn cache. (2024-4-25)
+- Upload to qiniu cdn and refresh cdn cache after each deployment. (2024-4-25)
+- Upload sdk to qiniu cdn and refresh cdn cache after each deployment. (2024-4-25)

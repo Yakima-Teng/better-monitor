@@ -2,15 +2,16 @@
 const path = require('path')
 require('dotenv').config()
 const { NodeSSH } = require('node-ssh')
-const home = require('home')
-const glob = require('glob')
+// const home = require('home')
+// const glob = require('glob')
 /* eslint-enable @typescript-eslint/no-var-requires */
 
 const {
   DEPLOY_PATH: subProjectRoot,
   DEPLOY_SSH_HOST,
   DEPLOY_SSH_PORT,
-  DEPLOY_SSH_USERNAME
+  DEPLOY_SSH_USERNAME,
+  DEPLOY_SSH_PASSWORD
 } = process.env
 
 const ssh = new NodeSSH()
@@ -70,8 +71,8 @@ const execCommand = async (command) => {
   })
 }
 
-const privateKeyPathList = glob.globSync(path.resolve(home.resolve('~'), '.ssh/id_rsa'))
-const privateKeyPath = privateKeyPathList[0]
+// const privateKeyPathList = glob.globSync(path.resolve(home.resolve('~'), '.ssh/id_rsa'))
+// const privateKeyPath = privateKeyPathList[0]
 
 async function restart() {
   await ssh.connect({
@@ -79,7 +80,8 @@ async function restart() {
     port: Number(DEPLOY_SSH_PORT),
     username: DEPLOY_SSH_USERNAME,
     // 私钥路径（不使用私钥的话，把下面这行换成`password`字段，填SSH登录密码） id_rsa
-    privateKeyPath
+    // privateKeyPath
+    password: DEPLOY_SSH_PASSWORD
   })
 
   // await execCommand(`rm -rf ${subProjectRoot}`)
