@@ -63,7 +63,8 @@ declare namespace BetterMonitor {
     type: string
   }
 
-  type TAddBug = (params: IParamsAddBug) => void
+  function addBug (params: IParamsAddBug): void
+  type TAddBug = typeof addBug
 
   interface IParamsAddLog {
     pageUrl: string
@@ -85,17 +86,32 @@ declare namespace BetterMonitor {
   type TAddAction = (params: IParamsAddAction) => void
   type TAddActions = (params: { preferSendBeacon: boolean, delayTime?: number }) => void
   type TDoLog = (level: 'log' | 'warn' | 'error', ...args: any[]) => void
-  type TPrintLog = (...args: any[]) => void
-  type TPrintWarn = (...args: any[]) => void
-  type TPrintError = (...args: any[]) => void
-  type TLogTime = (label: string) => void
-  type TLogTimeEnd = (label: string) => void
+
+  function printLog(...args: any[]): void
+  type TPrintLog = typeof printLog
+  function printLogDirectly(...args: any[]): void
+  type TPrintLogDirectly = typeof printLogDirectly
+  function printWarn (...args: any[]): void
+  type TPrintWarn = typeof printWarn
+  function printWarnDirectly (...args: any[]): void
+  type TPrintWarnDirectly = typeof printWarnDirectly
+  function printError(...args: any[]): void
+  type TPrintError = typeof printError
+  function printErrorDirectly(...args: any[]): void
+  type TPrintErrorDirectly = typeof printErrorDirectly
+  function logTime(label: string): void
+  type TLogTime = typeof logTime
+  function logTimeEnd(label: string): void
+  type TLogTimeEnd = typeof logTimeEnd
+  function logTimeEndDirectly(label: string): void
+  type TLogTimeEndDirectly = typeof logTimeEndDirectly
 
   interface IParamsAddView {
     pageUrl: string
     userId: string | number
   }
-  type TAddView = (params: IParamsAddView) => void
+  function addView (params: IParamsAddView): void
+  type TAddView = typeof addView
 
   interface IPayloadRequest {
     url: string
@@ -169,11 +185,14 @@ declare namespace BetterMonitor {
     getUserId: undefined | (() => string | number) | (() => Promise<string | number>)
   }
 
-  type TUpdateStore = (config: Partial<IStore>) => IStore
+  function updateStore (config: Partial<IStore>): IStore
+  type TUpdateStore = typeof updateStore
 
-  type TGetStore = () => IStore
+  function getStore (): IStore
+  type TGetStore = typeof getStore
 
-  type TInit = (settings: Partial<IStore>) => void
+  function init (settings: Partial<IStore>): void
+  type TInit = typeof init
 
   interface IBetterMonitor {
     init: BetterMonitor.TInit
@@ -184,10 +203,10 @@ declare namespace BetterMonitor {
     printError: BetterMonitor.TPrintError
     logTime: BetterMonitor.TLogTime
     logTimeEnd: BetterMonitor.TLogTimeEnd
-    printLogDirectly: BetterMonitor.TPrintLog
-    printWarnDirectly: BetterMonitor.TPrintWarn
-    printErrorDirectly: BetterMonitor.TPrintError
-    logTimeEndDirectly: BetterMonitor.TLogTimeEnd
+    printLogDirectly: BetterMonitor.TPrintLogDirectly
+    printWarnDirectly: BetterMonitor.TPrintWarnDirectly
+    printErrorDirectly: BetterMonitor.TPrintErrorDirectly
+    logTimeEndDirectly: BetterMonitor.TLogTimeEndDirectly
     updateStore: BetterMonitor.TUpdateStore
     getStore: BetterMonitor.TGetStore
   }
