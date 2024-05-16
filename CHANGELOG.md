@@ -17,3 +17,4 @@
 - Upload sdk to qiniu cdn and refresh cdn cache. (2024-4-25)
 - Upload to qiniu cdn and refresh cdn cache after each deployment. (2024-4-25)
 - Upload sdk to qiniu cdn and refresh cdn cache after each deployment. (2024-4-25)
+- Update typescript definition file. (2024-5-16)

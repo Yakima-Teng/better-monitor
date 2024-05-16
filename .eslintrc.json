@@ -81,6 +81,7 @@
     "@typescript-eslint/ban-ts-comment": [0],
     "no-shadow": [0],
     "@typescript-eslint/no-shadow": [2],
-    "arrow-body-style": [0]
+    "arrow-body-style": [0],
+    "linebreak-style": ["error", "unix"]
   }
 }
