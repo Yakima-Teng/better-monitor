@@ -66,6 +66,37 @@ BetterMonitor.init({
 <script crossorigin="anonymous" data-project-id="1" src="https://cdn.orzzone.com/verybugs/better-monitor.min.js"></script>
 ```
 
+
+### 特殊处理
+
+如果你的项目使用了 `Vue3`，由于该框架会全局捕获框架内抛出的错误并最终通过 `console.error` 的方式打印，不会通过 `throw` 的方式抛出错误，为了捕获对应的错误日志，需要这样处理一下：
+
+```typescript
+import { createApp } from 'vue'
+import BetterMonitor from 'better-monitor'
+
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.config.errorHandler = function (err, vm, info) { // [!code focus:14]
+  // eslint-disable-next-line no-console
+  console.error('errorHandler', err, vm, info)
+  BetterMonitor.addBug({
+    pageUrl: location.href,
+    // @ts-ignore
+    message: err?.message || 'unknown bug',
+    // @ts-ignore
+    stack: err?.stack || '',
+    // @ts-ignore
+    source: [`name=${vm?._?.type?.__name}`, `scopeId=${vm?._?.type?.__scopeId}`].join('&'),
+    type: info
+  })
+}
+
+// 其他代码...
+```
+
 ## API
 
 该 SDK 对外暴露了几个实用的 API：
