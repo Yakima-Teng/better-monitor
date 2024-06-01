@@ -19,3 +19,6 @@
 - Upload sdk to qiniu cdn and refresh cdn cache after each deployment. (2024-4-25)
 - Update typescript definition file. (2024-5-16)
 - Update typescript definition. (2024-5-16)
+- Update api prefix (2024-6-1)
+- Update api prefix. (2024-6-1)
+- Change api prefix. (2024-6-1)

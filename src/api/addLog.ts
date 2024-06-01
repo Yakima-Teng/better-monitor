@@ -12,7 +12,7 @@ export const addLogs: BetterMonitor.TAddLogs = () => {
 
   if (queuedLogs.length === 0) return
 
-  const requestUrl = `${BACKEND_DOMAIN}/fe/logs/addLogs`
+  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/logs/addLogs`
   const requestData = { projectId, list: queuedLogs }
   const isQueued = sendBeacon(requestUrl, requestData)
   if (!isQueued) {

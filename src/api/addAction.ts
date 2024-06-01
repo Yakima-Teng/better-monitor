@@ -20,7 +20,7 @@ const doAddActions = ({ preferSendBeacon = false }) => {
 
   if (queuedActions.length === 0) return
 
-  const requestUrl = `${BACKEND_DOMAIN}/fe/actions/addActions`
+  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/actions/addActions`
   const requestData = { projectId, list: queuedActions }
   let isQueued = false
   if (preferSendBeacon) {

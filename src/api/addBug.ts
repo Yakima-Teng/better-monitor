@@ -37,7 +37,7 @@ export const validateBugRequestData = (requestData: BetterMonitor.IParamsAddBug)
  */
 const addBug: BetterMonitor.TAddBug = (params) => {
   const { projectId } = getStore()
-  const requestUrl = `${BACKEND_DOMAIN}/fe/bugs/addBug`
+  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/bugs/addBug`
   const requestData = { projectId, ...params }
 
   const isQueued = sendBeacon(requestUrl, requestData)

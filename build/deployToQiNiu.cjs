@@ -8,7 +8,8 @@ const {
   QI_NIU_PUBLIC_BUCKET_DOMAIN: publicBucketDomain,
   QI_NIU_BUCKET_NAME: bucket,
   QI_NIU_ACCESS_KEY: accessKey,
-  QI_NIU_SECRET_KEY: secretKey
+  QI_NIU_SECRET_KEY: secretKey,
+  QI_NIU_ZONE_NAME
 } = process.env
 
 /**
@@ -17,7 +18,7 @@ const {
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
 const config = new qiniu.conf.Config()
 // 空间对应的机房（华东）
-config.zone = qiniu.zone.Zone_z0
+config.zone = qiniu.zone[QI_NIU_ZONE_NAME]
 const bucketManager = new qiniu.rs.BucketManager(mac, config)
 
 // 获取公开空间访问链接

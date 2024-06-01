@@ -26,7 +26,7 @@ const addView: BetterMonitor.TAddView = (params) => {
   if (blackList.some(matchKeyword)) {
     return
   }
-  const requestUrl = `${BACKEND_DOMAIN}/fe/view/addView`
+  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/view/addView`
   const requestData = { projectId, ...params }
   const isQueued = sendBeacon(requestUrl, requestData)
   if (isQueued) return

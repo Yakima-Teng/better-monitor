@@ -12,7 +12,7 @@ export function reportPerformanceLogs() {
   const body = [...queuedPerformanceLogs]
 
   const { projectId } = getStore()
-  const requestUrl = `${BACKEND_DOMAIN}/fe/performance/add`
+  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/performance/add`
   const requestData = { projectId, list: body }
   const isQueued = sendBeacon(requestUrl, requestData)
   if (!isQueued) {

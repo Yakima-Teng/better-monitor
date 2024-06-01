@@ -12,7 +12,7 @@ import isFunction from '@/common/isFunction'
  * ```typescript
  * const addLog = (params: IParamsAddLog) => {
  *   return request<null>({
- *     url: '/fe/logs/addLog',
+ *     url: 'https://api.verysites.com/api/verybugs/logs/addLog',
  *     method: 'post',
  *     data: params,
  *   })
