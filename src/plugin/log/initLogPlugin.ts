@@ -1,6 +1,7 @@
 import addLog, { addLogs } from '@/api/addLog'
 import parseSearchString from '@/url/parseSearchString'
 import { getStore } from '@/store'
+import { safeStringify } from '@/utils/utils'
 
 const initLogPlugin = () => {
   const { log } = getStore()
@@ -105,12 +106,12 @@ const initLogPlugin = () => {
       addLog({
         pageUrl: meta.pageUrl,
         apiUrl: meta.responseURL || meta.apiUrl,
-        payload: JSON.stringify({
+        payload: safeStringify({
           params: meta.params,
           data: meta.body
         }),
         response: meta.responseText.substring(0, 5000),
-        json: JSON.stringify({
+        json: safeStringify({
           method: meta.method,
           status: meta.status,
           timeConsumed: meta.timeConsumed,

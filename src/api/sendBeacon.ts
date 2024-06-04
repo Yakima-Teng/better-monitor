@@ -1,3 +1,5 @@
+import { safeStringify } from '@/utils/utils'
+
 /**
  * 即navigator.sendBeacon()方法，可用于通过HTTP将少量数据异步传输到Web服务器
  *
@@ -5,7 +7,7 @@
  */
 const sendBeacon: BetterMonitor.TSendBeacon = (url, jsonData) => {
   if (typeof navigator.sendBeacon === 'function') {
-    return navigator.sendBeacon(url, JSON.stringify(jsonData))
+    return navigator.sendBeacon(url, safeStringify(jsonData))
   }
   return false
 }

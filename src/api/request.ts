@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, ResponseType } from 'axios'
 import isString from '@/common/isString'
 import isFunction from '@/common/isFunction'
+import { safeStringify } from '@/utils/utils'
 
 /**
  * @apiAnalyze
@@ -44,7 +45,7 @@ const request = async <T = unknown>(payload: BetterMonitor.IPayloadRequest): Pro
       }
     }
     if (!cacheKey) {
-      cacheKey = JSON.stringify({
+      cacheKey = safeStringify({
         url, method, params, data
       })
     }

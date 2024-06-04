@@ -5,6 +5,7 @@ import { BACKEND_DOMAIN } from '@/constant'
 import isString from '@/common/isString'
 import getLogTime from '@/utils/getLogTime'
 import getUserId from '@/utils/getUserId'
+import { safeStringify } from '@/utils/utils'
 import BetterMonitor from '../../types/better-monitor'
 
 let timerAddActions: number = 0
@@ -83,7 +84,7 @@ const addAction: BetterMonitor.TAddAction = (params) => {
     return
   }
   try {
-    const strActions = JSON.stringify(queuedActions)
+    const strActions = safeStringify(queuedActions)
     if (strActions.length > 10000) {
       addActions({ preferSendBeacon: false, delayTime: 800 })
     }
@@ -117,7 +118,7 @@ const doLog: BetterMonitor.TDoLog = (() => {
       pageUrl: location.href,
       time,
       level,
-      payload: JSON.stringify(args),
+      payload: safeStringify(args),
       userId: getUserId()
     })
     const color = getLogColorByLevel(level)
@@ -135,7 +136,7 @@ const doLogDirectly: BetterMonitor.TDoLog = (() => {
       pageUrl: location.href,
       time,
       level,
-      payload: JSON.stringify(args),
+      payload: safeStringify(args),
       userId: getUserId(),
       directly: true
     })
