@@ -23,3 +23,4 @@
 - Update api prefix. (2024-6-1)
 - Change api prefix. (2024-6-1)
 - Support stringify circular Object. (2024-6-4)
+- Update README.md (2024-6-4)

@@ -195,7 +195,7 @@ BetterMonitor.init({
 BetterMonitor.init({
   projectId: 1,
   getUserId() {
-    return 123
+    return '123'
   },
 })
 ```
