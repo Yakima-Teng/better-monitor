@@ -97,6 +97,37 @@ app.config.errorHandler = function (err, vm, info) { // [!code focus:14]
 // 其他代码...
 ```
 
+如果你的项目使用了 `Vue2`，则需要类似这样处理一下：
+
+```javascript
+import Vue from 'vue'
+// 其他代码...
+
+Vue.config.errorHandler = function(err, vm, info) {
+  // eslint-disable-next-line no-console
+  console.error('errorHandler', err, vm, info)
+  if (window.BetterMonitor && window.BetterMonitor.addBug && typeof window.BetterMonitor.addBug === 'function') {
+    try {
+      window.BetterMonitor.addBug({
+        pageUrl: location.href,
+        // @ts-ignore
+        message: (err && err.message) || 'unknown bug',
+        // @ts-ignore
+        stack: (err && err.stack) || '',
+        // @ts-ignore
+        source: [`name=${(vm && vm.$vnode && vm.$vnode.tag) || ''}`, `data=${(vm && vm._data) ? JSON.stringify(vm._data) : ''}`].join('&'),
+        type: info
+      })
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+    }
+  }
+}
+
+// 其他代码...
+```
+
 ## API
 
 该 SDK 对外暴露了几个实用的 API：
