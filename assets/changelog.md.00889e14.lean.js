@@ -1,0 +1,1 @@
+import{_ as i,o as e,c as l,U as t}from"./chunks/framework.dfac195e.js";const _=JSON.parse('{"title":"Change log","description":"","frontmatter":{},"headers":[],"relativePath":"changelog.md","filePath":"CHANGELOG.md"}'),a={name:"changelog.md"},o=t("",2),p=[o];function r(n,c,d,s,u,h){return e(),l("div",null,p)}const g=i(a,[["render",r]]);export{_ as __pageData,g as default};
