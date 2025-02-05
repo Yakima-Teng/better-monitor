@@ -1,0 +1,27 @@
+# OSX
+.DS_Store
+
+# IDE
+.idea
+.vscode
+
+# npm
+node_modules
+yarn.lock
+
+# jest
+coverage
+
+# build
+/esm
+#dev
+demo.js
+/dist
+/.vitepress/cache
+/.vitepress/dist
+
+!/.env.example
+!/.env
+
+/build/**/*.js
+/build/**/*.json
