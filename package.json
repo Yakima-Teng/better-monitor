@@ -108,10 +108,6 @@
     "typescript": "^5.1.6",
     "vitepress": "^1.0.0-beta.5"
   },
-  "volta": {
-    "node": "16.14.2",
-    "npm": "8.5.0"
-  },
   "dependencies": {
     "-": "^0.0.1",
     "axios": "^1.4.0",
