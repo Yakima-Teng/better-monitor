@@ -1,26 +1,21 @@
 {
+  "include": [
+    "build/**/*.mts",
+    "src/**/*.mts",
+    "test/**/*.mts",
+    "types/**/*.d.ts",
+    "./*.mts"
+  ],
+  "exclude": ["node_modules", "dist", "localhost"],
   "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/better-monitor/tsconfig.app.tsbuildinfo",
+    "noEmit": true, // Optional - see note below
     "target": "esnext",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "nodenext",
     "strict": true,
-    "jsx": "preserve",
-    "sourceMap": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["./*"],
-    },
-    "types": ["node"],
-    "allowJs": true,
-    // "checkJs": true
-    "skipLibCheck": true,
-    "outDir": "./dist"
-  },
-  "include": ["types/**/*.d.ts","src/**/*.ts", "src/**/*.d.ts"],
-  "exclude": ["./dist/**"],
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "typeRoots": ["types", "node_modules/@types"]
+  }
 }
