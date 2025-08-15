@@ -2,8 +2,15 @@ import { getStore, updateStore } from '@/store'
 import addBug from '@/api/addBug'
 import addView from '@/api/addView'
 import {
-  printLog, printWarn, printError, logTime, logTimeEnd,
-  printLogDirectly, printWarnDirectly, printErrorDirectly, logTimeEndDirectly
+  printLog,
+  printWarn,
+  printError,
+  logTime,
+  logTimeEnd,
+  printLogDirectly,
+  printWarnDirectly,
+  printErrorDirectly,
+  logTimeEndDirectly
 } from '@/api/addAction'
 import initLogPlugin from '@/plugin/log/initLogPlugin'
 import initActionPlugin from '@/plugin/action/initActionPlugin'
@@ -79,4 +86,4 @@ export default returnObj
 // window.console.log('%c已集成window.BetterMonitor对象😃\n详情请参阅官网https://www.verybugs.com/', 'background: #ff5900; color: #000')
 
 // eslint-disable-next-line max-len
-// window.console.log('%c2024年7月29日最新通知：SDK地址已更新为https://www.verysites.com/verybugs/better-monitor/better-monitor.min.js, \n使用旧地址的同学请尽早更换地址', 'background: #22ddff; color: #000')
+// window.console.log('%c2025年6月23日最新通知：SDK地址已更新为https://cdn.verysites.com/verybugs/better-monitor/better-monitor.min.js, \n使用旧地址的同学请尽早更换地址', 'background: #22ddff; color: #000')

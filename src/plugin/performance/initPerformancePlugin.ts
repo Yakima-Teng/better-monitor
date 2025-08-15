@@ -1,7 +1,10 @@
 import {
   onCLS, onTTFB, onLCP, onINP, onFCP, onFID
 } from 'web-vitals'
-import { addPerformanceLog, reportPerformanceLogs } from '@/api/addPerformanceLog'
+import {
+  addPerformanceLog,
+  reportPerformanceLogs
+} from '@/api/addPerformanceLog'
 
 const initPerformancePlugin = () => {
   onCLS(addPerformanceLog)

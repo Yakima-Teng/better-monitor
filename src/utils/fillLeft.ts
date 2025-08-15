@@ -15,7 +15,11 @@
  * console.log(fillLeft('aa', 10, '0') // '00000000aa'
  * ```
  */
-const fillLeft = (val: string | number, len: number, symbol: string): string => {
+const fillLeft = (
+  val: string | number,
+  len: number,
+  symbol: string
+): string => {
   val = `${val}`
   const diffInLength = len - val.length
   if (diffInLength > 0) {

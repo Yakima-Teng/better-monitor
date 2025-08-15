@@ -7,6 +7,8 @@ import getType from '@/common/getType'
  * @param val {unknown}
  * @return {boolean}
  */
-const isFunction: BetterMonitor.TIsFunction = (val): val is (...args: any[]) => any => getType(val) === 'function'
+const isFunction: BetterMonitor.TIsFunction = (
+  val
+): val is (...args: any[]) => any => getType(val) === 'function'
 
 export default isFunction

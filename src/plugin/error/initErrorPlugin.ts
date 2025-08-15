@@ -10,9 +10,16 @@ const initErrorPlugin = () => {
   }
 
   // 初始化js报错监听器
-  window.addEventListener('error', handlerFuncForJsError, { capture: false, passive: false })
+  window.addEventListener('error', handlerFuncForJsError, {
+    capture: false,
+    passive: false
+  })
   // 初始化js未处理异常报错监听器
-  window.addEventListener('unhandledrejection', handlerFuncForJsUnhandledRejection, { capture: false, passive: false })
+  window.addEventListener(
+    'unhandledrejection',
+    handlerFuncForJsUnhandledRejection,
+    { capture: false, passive: false }
+  )
 }
 
 export default initErrorPlugin

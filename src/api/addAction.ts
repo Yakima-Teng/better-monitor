@@ -21,7 +21,7 @@ const doAddActions = ({ preferSendBeacon = false }) => {
 
   if (queuedActions.length === 0) return
 
-  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/actions/addActions`
+  const requestUrl = `${BACKEND_DOMAIN}/api/bugs/action/addActions`
   const sdk = {
     buildDate,
     buildVersion
@@ -74,7 +74,10 @@ const addAction: BetterMonitor.TAddAction = (params) => {
   }
 
   const selfBlackList = ['better-monitor.min.js', 'better-monitor.js']
-  if (!location.href.includes('verybugs.com') && selfBlackList.some(matchKeyword)) {
+  if (
+    !location.href.includes('verysites.com')
+    && selfBlackList.some(matchKeyword)
+  ) {
     return
   }
 

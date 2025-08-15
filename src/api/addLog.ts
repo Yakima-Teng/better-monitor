@@ -12,7 +12,7 @@ export const addLogs: BetterMonitor.TAddLogs = () => {
 
   if (queuedLogs.length === 0) return
 
-  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/logs/addLogs`
+  const requestUrl = `${BACKEND_DOMAIN}/api/bugs/api/addLogs`
   const requestData = { projectId, list: queuedLogs }
   const isQueued = sendBeacon(requestUrl, requestData)
   if (!isQueued) {
@@ -47,8 +47,11 @@ const addLog: BetterMonitor.TAddLog = (params) => {
     return keyword.test(apiUrl)
   }
 
-  const selfBlackList = ['api.verysites.com']
-  if (!location.href.includes('verybugs.com') && selfBlackList.some(matchKeyword)) {
+  const selfBlackList = ['cdn.verysites.com']
+  if (
+    !location.href.includes('verysites.com')
+    && selfBlackList.some(matchKeyword)
+  ) {
     return
   }
 

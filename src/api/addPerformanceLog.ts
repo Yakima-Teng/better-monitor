@@ -12,7 +12,7 @@ export function reportPerformanceLogs() {
   const body = [...queuedPerformanceLogs]
 
   const { projectId } = getStore()
-  const requestUrl = `${BACKEND_DOMAIN}/api/verybugs/performance/add`
+  const requestUrl = `${BACKEND_DOMAIN}/api/bugs/performance/add`
   const requestData = { projectId, list: body }
   const isQueued = sendBeacon(requestUrl, requestData)
   if (!isQueued) {
@@ -21,11 +21,10 @@ export function reportPerformanceLogs() {
       method: 'post',
       data: requestData,
       timeout: 60 * 1000
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err)
     })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err)
-      })
   }
 
   queuedPerformanceLogs.clear()

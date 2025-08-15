@@ -2,7 +2,9 @@ import addBug, { validateBugRequestData } from '@/api/addBug'
 import { getStackTrace } from '@/plugin/error/modules/getStackTrace'
 import getUserId from '@/utils/getUserId'
 
-export const handlerFuncForJsUnhandledRejection = (e: PromiseRejectionEvent) => {
+export const handlerFuncForJsUnhandledRejection = (
+  e: PromiseRejectionEvent
+) => {
   // eslint-disable-next-line no-console
   console.error(e)
   try {

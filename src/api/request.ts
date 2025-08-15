@@ -13,7 +13,7 @@ import { safeStringify } from '@/utils/utils'
  * ```typescript
  * const addLog = (params: IParamsAddLog) => {
  *   return request<null>({
- *     url: 'https://api.verysites.com/api/verybugs/logs/addLog',
+ *     url: 'https://www.verysites.com/api/bugs/api/addLog',
  *     method: 'post',
  *     data: params,
  *   })
@@ -23,8 +23,13 @@ import { safeStringify } from '@/utils/utils'
  * console.log(res.data.data) // null
  * ```
  */
-const cacheRequests = new Map<string, { ts: number, result: Promise<BetterMonitor.IAxiosResponse<any>> }>()
-const request = async <T = unknown>(payload: BetterMonitor.IPayloadRequest): Promise<BetterMonitor.IAxiosResponse<T>> => {
+const cacheRequests = new Map<
+  string,
+  { ts: number; result: Promise<BetterMonitor.IAxiosResponse<any>> }
+>()
+const request = async <T = unknown>(
+  payload: BetterMonitor.IPayloadRequest
+): Promise<BetterMonitor.IAxiosResponse<T>> => {
   const startTime = Date.now()
   const url = payload.url || ''
   const method = payload.method || 'get'
@@ -46,11 +51,17 @@ const request = async <T = unknown>(payload: BetterMonitor.IPayloadRequest): Pro
     }
     if (!cacheKey) {
       cacheKey = safeStringify({
-        url, method, params, data
+        url,
+        method,
+        params,
+        data
       })
     }
     if (cacheRequests.has(cacheKey)) {
-      const { ts, result } = cacheRequests.get(cacheKey) as { ts: number, result: Promise<BetterMonitor.IAxiosResponse<any>> }
+      const { ts, result } = cacheRequests.get(cacheKey) as {
+        ts: number;
+        result: Promise<BetterMonitor.IAxiosResponse<any>>;
+      }
       // 缓存过期失效
       if (startTime - ts > cacheTime) {
         cacheRequests.delete(cacheKey)
@@ -78,7 +89,9 @@ const request = async <T = unknown>(payload: BetterMonitor.IPayloadRequest): Pro
   }
 
   try {
-    const returnResult = axios(axiosConfig) as Promise<BetterMonitor.IAxiosResponse<any>>
+    const returnResult = axios(axiosConfig) as Promise<
+      BetterMonitor.IAxiosResponse<any>
+    >
     if (cacheTime > 0) {
       cacheRequests.set(cacheKey, {
         ts: startTime,
