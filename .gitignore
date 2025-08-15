@@ -24,4 +24,3 @@ demo.js
 !/.env
 
 /build/**/*.js
-/build/**/*.json
