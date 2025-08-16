@@ -24,7 +24,7 @@ Main features are listed below:
 - 🔥 Report and monitor JavaScript runtime error.
 - 🔥 Report and monitor API/AJAX logs with information like request/response headers and body/params.
 - 🔥 Report and monitor user action logs in time order.
-- 🔥 Report and monitor page performance data like CLS, TTFB, LCP, INP, FCP, FID.
+- 🔥 Report and monitor page performance data like CLS, TTFB, LCP, INP, FCP.
 - 🔥 Report and monitor PV data.
 - 🔥 Report and monitor UV data.
 - 🔥 Report and monitor user operating systems.
