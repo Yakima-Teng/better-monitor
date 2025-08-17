@@ -1,13 +1,17 @@
 import { defineConfig } from 'rollup'
+import { parseEnvFiles } from 'nsuite'
 import typescript from '@rollup/plugin-typescript'
 import { getBabelOutputPlugin } from '@rollup/plugin-babel'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
-import { parseEnvFiles } from 'nsuite'
+import replace from '@rollup/plugin-replace';
+import pkg from './package.json' with { type: 'json'}
 
-const { MODE } = process.env
+const version = pkg.version
+
+const { NODE_ENV, MODE } = process.env
 
 parseEnvFiles([
   '../.env.local',
@@ -39,6 +43,13 @@ const config = defineConfig({
     }
   ],
   plugins: [
+    replace({
+      preventAssignment: true,
+      "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+      "process.env.MODE": JSON.stringify(MODE),
+      "process.env.BUILD_DATE": () => JSON.stringify(new Date()),
+      "process.env.BUILD_VERSION": JSON.stringify(version),
+    }),
     typescript(),
     json(),
     commonjs(),

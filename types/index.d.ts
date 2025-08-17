@@ -5,7 +5,8 @@ type VariableType = 'object' | 'array' | 'function' | 'null' | 'undefined' | 'nu
 type Func = (...args: unknown[]) => unknown
 
 interface ExportObj {
-  env: string
+  NODE_ENV: string
+  MODE: string
   buildDate: string
   buildVersion: string
   init: (settings: Partial<Store>) => void

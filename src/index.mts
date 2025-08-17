@@ -17,7 +17,7 @@ import { initActionPlugin } from '#plugin/action/initActionPlugin'
 import { initErrorPlugin } from '#plugin/error/initErrorPlugin'
 import { initViewPlugin } from '#plugin/view/initViewPlugin'
 import { initPerformancePlugin } from '#plugin/performance/initPerformancePlugin'
-import { env, buildDate, buildVersion } from '#scripts/ConstantUtils'
+import { NODE_ENV, MODE, buildDate, buildVersion } from '#scripts/ConstantUtils'
 
 const init = (settings: Partial<Store>): void => {
   updateStore(settings)
@@ -62,7 +62,8 @@ const tryInitSettingAutomatically = () => {
 tryInitSettingAutomatically()
 
 const exportObj: ExportObj = {
-  env,
+  NODE_ENV,
+  MODE,
   buildDate,
   buildVersion,
   init,
