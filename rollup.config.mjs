@@ -7,6 +7,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
 import replace from '@rollup/plugin-replace';
+import bundleSize from 'rollup-plugin-bundle-size'
 import pkg from './package.json' with { type: 'json'}
 
 const version = pkg.version
@@ -30,16 +31,23 @@ const config = defineConfig({
         getBabelOutputPlugin({
           presets: [['@babel/preset-env', { modules: 'umd' }]]
         }),
-        terser()
+        terser(),
+        bundleSize()
       ]
     },
     {
       file: 'dist/better-monitor.common.js',
-      format: 'cjs'
+      format: 'cjs',
+      plugins: [
+        bundleSize()
+      ]
     },
     {
       file: 'dist/better-monitor.esm.js',
-      format: 'es'
+      format: 'es',
+      plugins: [
+        bundleSize()
+      ]
     }
   ],
   plugins: [
@@ -53,7 +61,7 @@ const config = defineConfig({
     typescript(),
     json(),
     commonjs(),
-    nodeResolve()
+    nodeResolve(),
   ]
 })
 
