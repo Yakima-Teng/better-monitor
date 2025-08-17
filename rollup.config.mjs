@@ -8,6 +8,7 @@ import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
 import replace from '@rollup/plugin-replace';
 import bundleSize from 'rollup-plugin-bundle-size'
+import license from 'rollup-plugin-license'
 import pkg from './package.json' with { type: 'json'}
 
 const version = pkg.version
@@ -20,6 +21,13 @@ parseEnvFiles([
   '../.env'
 ])
 
+const licenseConfig = {
+  banner: [
+    'Bundle of <%= pkg.name %>',
+    'Generated: <%= moment().format(\'YYYY-MM-DD\') %>',
+    'Version: <%= pkg.version %>',
+  ].join('\n'),
+}
 
 const config = defineConfig({
   input: 'src/index.mts',
@@ -32,6 +40,7 @@ const config = defineConfig({
           presets: [['@babel/preset-env', { modules: 'umd' }]]
         }),
         terser(),
+        license(licenseConfig),
         bundleSize()
       ]
     },
@@ -39,6 +48,7 @@ const config = defineConfig({
       file: 'dist/better-monitor.common.js',
       format: 'cjs',
       plugins: [
+        license(licenseConfig),
         bundleSize()
       ]
     },
@@ -46,6 +56,7 @@ const config = defineConfig({
       file: 'dist/better-monitor.esm.js',
       format: 'es',
       plugins: [
+        license(licenseConfig),
         bundleSize()
       ]
     }
