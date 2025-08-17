@@ -12,15 +12,6 @@ yarn.lock
 # jest
 coverage
 
-# build
-/esm
-#dev
-demo.js
 /dist
-/.vitepress/cache
-/.vitepress/dist
 
-!/.env.example
-!/.env
-
-/build/**/*.js
+/.env.local
