@@ -34,10 +34,9 @@ const {
   QINIU_SECRET_KEY = "",
   QINIU_BUCKET_NAME = "",
   QINIU_PUBLIC_BUCKET_DOMAIN = "",
-  CDN_PREFIX = "",
 } = process.env;
 
-const CDN_PATH_PREFIX = new URL(CDN_PREFIX).pathname.replace(/\//g, "");
+const CDN_PATH_PREFIX = MODE === "production" ? "verybugs" : `verybugs-${MODE}`;
 async function deployFilesToCDN() {
   const config = getConfigFromQiniuOSS({});
   const mac = getMacFromQiniuOSS({
