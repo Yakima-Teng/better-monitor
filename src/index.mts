@@ -16,7 +16,6 @@ import { initLogPlugin } from "#plugin/log/initLogPlugin";
 import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
-import { initPerformancePlugin } from "#plugin/performance/initPerformancePlugin";
 import {
   NODE_ENV,
   MODE,
@@ -31,7 +30,6 @@ const init = (settings: Partial<Store>): void => {
   initLogPlugin();
   initActionPlugin();
   initErrorPlugin();
-  initPerformancePlugin();
 };
 
 // 尝试找到引入better-monitor.min.js文件的script标签，如果用户主动设置了`data-project-id`属性则直接进行初始化
@@ -41,7 +39,7 @@ const tryInitSettingAutomatically = () => {
   for (let i = 0, len = elemScripts.length; i < len; i++) {
     const elem = elemScripts[i] as HTMLScriptElement;
     const src = elem.getAttribute("src");
-    if (src && src.includes("/better-monitor.min.js")) {
+    if (src && src.includes("better-monitor")) {
       targetElem = elem;
       break;
     }
