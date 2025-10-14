@@ -1,7 +1,7 @@
-import { getStore } from '#scripts/StoreUtils'
-import { API_PREFIX } from '#scripts/ConstantUtils'
-import { isString } from '#scripts/TypeUtils'
-import { axiosRequest, sendBeacon } from '#scripts/RequestUtils'
+import { getStore } from "#scripts/StoreUtils";
+import { API_PREFIX } from "#scripts/ConstantUtils";
+import { isString } from "#scripts/TypeUtils";
+import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 
 /**
  * @apiAnalyze
@@ -11,31 +11,31 @@ import { axiosRequest, sendBeacon } from '#scripts/RequestUtils'
  * @return {Promise<void>}
  */
 export const addView = (params: ParamsAddView): void => {
-  const { projectId, blackList } = getStore()
-  const { pageUrl } = params
+  const { projectId, blackList } = getStore();
+  const { pageUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
-      return pageUrl.includes(keyword)
+      return pageUrl.includes(keyword);
     }
-    return keyword.test(pageUrl)
-  }
+    return keyword.test(pageUrl);
+  };
 
   // 黑名单中的接口请求不需要进行上报
   if (blackList.some(matchKeyword)) {
-    return
+    return;
   }
-  const requestUrl = `${API_PREFIX}view/addView`
-  const requestData = { projectId, ...params }
-  const isQueued = sendBeacon(requestUrl, requestData)
-  if (isQueued) return
+  const requestUrl = `${API_PREFIX}view/addView`;
+  const requestData = { projectId, ...params };
+  const isQueued = sendBeacon(requestUrl, requestData);
+  if (isQueued) return;
   axiosRequest({
     url: requestUrl,
-    method: 'post',
+    method: "post",
     data: requestData,
-    timeout: 60 * 1000
+    timeout: 60 * 1000,
   }).catch((err) => {
     // eslint-disable-next-line no-console
-    console.log(err)
-  })
-}
+    console.log(err);
+  });
+};

@@ -41,7 +41,7 @@
     "build:production": "cross-env NODE_ENV=production MODE=production node --run build",
     "build": "rollup --config rollup.config.mjs",
     "test": "cross-env BABEL_ENV=test jest",
-    "lint": "eslint --fix src/**/* test/**/* build/**/*",
+    "lint": "npx prettier --write ./src ./test ./build ./*.mts ./*.mjs && eslint --fix src/**/* test/**/* build/**/*",
     "buildAndDeploy:int": "cross-env NODE_ENV=production MODE=int node --run buildAndDeploy",
     "buildAndDeploy:pre": "cross-env NODE_ENV=production MODE=pre node --run buildAndDeploy",
     "buildAndDeploy:production": "cross-env NODE_ENV=production MODE=production node --run buildAndDeploy",

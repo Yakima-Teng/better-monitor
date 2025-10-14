@@ -6,7 +6,7 @@ import { defineConfig } from "eslint/config";
 
 const config = defineConfig([
   {
-    ignores: [".idea/*", ".git/*", "dist/*", `node_modules/*`]
+    ignores: [".idea/*", ".git/*", "dist/*", `node_modules/*`],
   },
   {
     extends: [
@@ -23,7 +23,7 @@ const config = defineConfig([
         ecmaVersion: 2020,
         sourceType: "module",
         project: `./tsconfig.json`,
-        tsconfigRootDir: './',
+        tsconfigRootDir: "./",
       },
       globals: {
         ...globals.browser,

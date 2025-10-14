@@ -11,18 +11,18 @@
  * ```
  */
 export const parseSearchString = (url: string): Record<string, string> => {
-  let urlInstance: URL
-  if (url.startsWith('http')) {
-    urlInstance = new URL(url)
-  } else if (url.startsWith('/')) {
-    urlInstance = new URL(`${location.origin}${url}`)
+  let urlInstance: URL;
+  if (url.startsWith("http")) {
+    urlInstance = new URL(url);
+  } else if (url.startsWith("/")) {
+    urlInstance = new URL(`${location.origin}${url}`);
   } else {
-    urlInstance = new URL(url, location.href)
+    urlInstance = new URL(url, location.href);
   }
-  const { searchParams } = urlInstance
-  const returnObj = Object.create(null)
+  const { searchParams } = urlInstance;
+  const returnObj = Object.create(null);
   searchParams.forEach((val, key) => {
-    returnObj[key] = val
-  })
-  return returnObj
-}
+    returnObj[key] = val;
+  });
+  return returnObj;
+};

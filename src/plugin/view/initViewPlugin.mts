@@ -1,6 +1,6 @@
-import { addView } from '#api/addView'
-import { getStore } from '#scripts/StoreUtils'
-import { getUserId } from '#scripts/StoreUtils'
+import { addView } from "#api/addView";
+import { getStore } from "#scripts/StoreUtils";
+import { getUserId } from "#scripts/StoreUtils";
 
 /**
  * @apiAnalyze
@@ -12,34 +12,38 @@ import { getUserId } from '#scripts/StoreUtils'
  * ```
  */
 export const initViewPlugin = (): void => {
-  const { view } = getStore()
+  const { view } = getStore();
 
   if (!view) {
-    return
+    return;
   }
 
   const addViewBeforeUnload = async (): Promise<void> => {
-    const userId = await getUserId()
+    const userId = await getUserId();
     addView({
       pageUrl: location.href,
-      userId
-    })
-  }
+      userId,
+    });
+  };
 
-  window.addEventListener('load', addViewBeforeUnload)
-  window.addEventListener('hashchange', addViewBeforeUnload)
+  window.addEventListener("load", addViewBeforeUnload);
+  window.addEventListener("hashchange", addViewBeforeUnload);
 
-  const { history } = window
+  const { history } = window;
   // 劫持pushState
-  const oldPushState = history.pushState
-  history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
-    const userId = await getUserId()
-    oldPushState.call(history, state, unused, url)
+  const oldPushState = history.pushState;
+  history.pushState = async (
+    state: unknown,
+    unused: string,
+    url: string | URL,
+  ): Promise<void> => {
+    const userId = await getUserId();
+    oldPushState.call(history, state, unused, url);
     addView({
       pageUrl: location.href,
-      userId
-    })
-  }
+      userId,
+    });
+  };
 
   // 劫持replaceState
   // const oldReplaceState = history.replaceState
@@ -50,4 +54,4 @@ export const initViewPlugin = (): void => {
   //     userId: getUserId(),
   //   })
   // }
-}
+};

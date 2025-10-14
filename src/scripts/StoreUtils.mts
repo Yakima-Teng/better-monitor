@@ -1,7 +1,7 @@
 const store: Store = {
   debugger: false,
   // 项目id
-  projectId: '',
+  projectId: "",
   view: true,
   log: true,
   error: true,
@@ -14,18 +14,18 @@ const store: Store = {
   queuedPerformanceLogs: new Set(),
   timeLogMap: new Map(),
   getUserId: () => {
-    return ''
+    return "";
   },
-}
+};
 
 export const updateStore = (config: Partial<Store>): Store => {
-  return Object.assign(store, config)
-}
+  return Object.assign(store, config);
+};
 
 export const getStore = (): Store => {
-  return store
-}
+  return store;
+};
 
 export const getUserId = (): string | Promise<string> => {
-  return store.getUserId()
-}
+  return store.getUserId();
+};

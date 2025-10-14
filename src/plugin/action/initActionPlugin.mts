@@ -1,25 +1,25 @@
-import { addActions } from '#api/addAction'
-import { getStore } from '#scripts/StoreUtils'
+import { addActions } from "#api/addAction";
+import { getStore } from "#scripts/StoreUtils";
 
 export const initActionPlugin = (): void => {
-  const { action } = getStore()
+  const { action } = getStore();
 
   if (!action) {
-    return
+    return;
   }
 
   const tryAddActions = () => {
-    addActions({ preferSendBeacon: true, delayTime: 0 })
-  }
+    addActions({ preferSendBeacon: true, delayTime: 0 });
+  };
 
-  window.addEventListener('beforeunload', tryAddActions)
-  window.addEventListener('unload', tryAddActions)
+  window.addEventListener("beforeunload", tryAddActions);
+  window.addEventListener("unload", tryAddActions);
 
-  const { history } = window
+  const { history } = window;
   // 劫持pushState
-  const oldPushState = history.pushState
+  const oldPushState = history.pushState;
   history.pushState = (state: unknown, unused: string, url: string | URL) => {
-    oldPushState.call(history, state, unused, url)
-    tryAddActions()
-  }
-}
+    oldPushState.call(history, state, unused, url);
+    tryAddActions();
+  };
+};

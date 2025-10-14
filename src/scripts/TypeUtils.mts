@@ -39,8 +39,8 @@ export const getError = (err?: unknown): Error => {
  */
 
 export const getType = (val: unknown): VariableType => {
-  return ({}).toString.call(val).slice(8, -1).toLowerCase() as VariableType
-}
+  return {}.toString.call(val).slice(8, -1).toLowerCase() as VariableType;
+};
 
 /**
  * @apiAnalyze
@@ -50,8 +50,8 @@ export const getType = (val: unknown): VariableType => {
  * @return {boolean}
  */
 export const isFunction = (val: unknown): val is Func => {
-  return getType(val) === 'function'
-}
+  return getType(val) === "function";
+};
 
 /**
  * @apiAnalyze
@@ -60,9 +60,9 @@ export const isFunction = (val: unknown): val is Func => {
  * @param val {unknown}
  * @return {boolean}
  */
-export const isObject = (val: unknown): val is object =>{
-  return  getType(val) === 'object'
-}
+export const isObject = (val: unknown): val is object => {
+  return getType(val) === "object";
+};
 
 /**
  * @apiAnalyze
@@ -72,5 +72,5 @@ export const isObject = (val: unknown): val is object =>{
  * @return {boolean}
  */
 export const isString = (val: unknown): val is string => {
-  return getType(val) === 'string'
-}
+  return getType(val) === "string";
+};

@@ -1,7 +1,11 @@
-import axios, { type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
-import { API_PREFIX } from '#scripts/ConstantUtils'
-import { getError } from '#scripts/TypeUtils'
-import { cache } from '#scripts/CacheUtils'
+import axios, {
+  type AxiosRequestConfig,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig,
+} from "axios";
+import { API_PREFIX } from "#scripts/ConstantUtils";
+import { getError } from "#scripts/TypeUtils";
+import { cache } from "#scripts/CacheUtils";
 
 const transformRequest = (data: Record<string, string>): string => {
   return JSON.stringify(data);
@@ -20,12 +24,12 @@ const instance = axios.create({
   transformResponse: [transformResponse],
 });
 instance.interceptors.request.use(
-  async function<D> (
+  async function <D>(
     config: InternalAxiosRequestConfig<D>,
   ): Promise<InternalAxiosRequestConfig<D>> {
-    const data = config.data
+    const data = config.data;
     if (data instanceof FormData) {
-      config.headers['Content-Type'] = 'multipart/form-data'
+      config.headers["Content-Type"] = "multipart/form-data";
     }
     return config;
   },
@@ -35,7 +39,7 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  function<T, D> (response: AxiosResponse<T, D>) {
+  function <T, D>(response: AxiosResponse<T, D>) {
     return response;
   },
   function (error: any): { data: IResponse<any> } {
@@ -53,12 +57,14 @@ instance.interceptors.response.use(
 // 传递的类型中D表示入参的类型，T表示返回的data字段的类型
 export const axiosRequest = async <D, T>(
   config: AxiosRequestConfig<D>,
-  options?: RequestOptions
+  options?: RequestOptions,
 ): Promise<TRequestResult<T, AxiosResponse<IResponse<T>>>> => {
   try {
     options = options || {};
 
-    const funcPromise = async (): Promise<TRequestResult<T, AxiosResponse<IResponse<T>>>> => {
+    const funcPromise = async (): Promise<
+      TRequestResult<T, AxiosResponse<IResponse<T>>>
+    > => {
       try {
         const response = await instance.request<
           IResponse<T>,
@@ -80,15 +86,15 @@ export const axiosRequest = async <D, T>(
         }
         return [getError(err), undefined, null];
       }
-    }
+    };
 
-    const cacheOptions = options.cache
+    const cacheOptions = options.cache;
     if (cacheOptions) {
-      const { cacheKey, cacheTimeout } = cacheOptions
-      const key = typeof cacheKey === 'function' ? cacheKey() : cacheKey
-      return cache(key, cacheTimeout, funcPromise)
+      const { cacheKey, cacheTimeout } = cacheOptions;
+      const key = typeof cacheKey === "function" ? cacheKey() : cacheKey;
+      return cache(key, cacheTimeout, funcPromise);
     }
-    return funcPromise()
+    return funcPromise();
   } catch (err) {
     if (axios.isAxiosError<IResponse<T>, D>(err)) {
       return [
@@ -101,9 +107,12 @@ export const axiosRequest = async <D, T>(
   }
 };
 
-export const sendBeacon = (url: string, jsonData: Record<string, unknown>): boolean => {
-  if (typeof navigator.sendBeacon === 'function') {
-    return navigator.sendBeacon(url, JSON.stringify(jsonData))
+export const sendBeacon = (
+  url: string,
+  jsonData: Record<string, unknown>,
+): boolean => {
+  if (typeof navigator.sendBeacon === "function") {
+    return navigator.sendBeacon(url, JSON.stringify(jsonData));
   }
-  return false
-}
+  return false;
+};

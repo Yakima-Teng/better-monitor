@@ -1,4 +1,4 @@
-import inspect from 'object-inspect'
+import inspect from "object-inspect";
 
 /**
  * @apiAnalyze
@@ -20,40 +20,40 @@ import inspect from 'object-inspect'
 export const fillLeft = (
   val: string | number,
   len: number,
-  symbol: string
+  symbol: string,
 ): string => {
-  val = `${val}`
-  const diffInLength = len - val.length
+  val = `${val}`;
+  const diffInLength = len - val.length;
   if (diffInLength > 0) {
     for (let i = 0; i < diffInLength; i++) {
-      val = symbol + val
+      val = symbol + val;
     }
   }
-  return val
-}
+  return val;
+};
 
 export const safeStringify = (value: any): string => {
   try {
-    if (typeof value === 'string') {
-      return value
+    if (typeof value === "string") {
+      return value;
     }
-    return inspect(value)
+    return inspect(value);
   } catch (err) {
     try {
       return JSON.stringify(
         Object.keys(value).reduce(
           (prev, curr) => {
-            prev[curr] = String(value[curr])
-            return prev
+            prev[curr] = String(value[curr]);
+            return prev;
           },
-          {} as Record<string, string>
-        )
-      )
+          {} as Record<string, string>,
+        ),
+      );
     } catch (e2: any) {
       return JSON.stringify({
-        type: 'error',
-        msg: e2?.message || ''
-      })
+        type: "error",
+        msg: e2?.message || "",
+      });
     }
   }
-}
+};

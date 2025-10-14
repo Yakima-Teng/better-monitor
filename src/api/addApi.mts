@@ -1,32 +1,32 @@
-import { axiosRequest, sendBeacon } from '#scripts/RequestUtils'
-import { getStore, updateStore } from '#scripts/StoreUtils'
-import { API_PREFIX } from '#scripts/ConstantUtils'
-import { isString } from '#scripts/TypeUtils'
+import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
+import { getStore, updateStore } from "#scripts/StoreUtils";
+import { API_PREFIX } from "#scripts/ConstantUtils";
+import { isString } from "#scripts/TypeUtils";
 
 /**
  * 批量上报接口日志
  */
 export const addApis = (): void => {
-  const { projectId, queuedLogs } = getStore()
+  const { projectId, queuedLogs } = getStore();
 
-  if (queuedLogs.length === 0) return
+  if (queuedLogs.length === 0) return;
 
-  const requestUrl = `${API_PREFIX}/api/addApis`
-  const requestData = { projectId, list: queuedLogs }
-  const isQueued = sendBeacon(requestUrl, requestData)
+  const requestUrl = `${API_PREFIX}/api/addApis`;
+  const requestData = { projectId, list: queuedLogs };
+  const isQueued = sendBeacon(requestUrl, requestData);
   if (!isQueued) {
     axiosRequest({
       url: requestUrl,
-      method: 'post',
+      method: "post",
       data: requestData,
-      timeout: 60 * 1000
+      timeout: 60 * 1000,
     }).catch((err: any) => {
       // eslint-disable-next-line no-console
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
-  updateStore({ queuedLogs: [] })
-}
+  updateStore({ queuedLogs: [] });
+};
 
 /**
  * @apiAnalyze
@@ -36,33 +36,33 @@ export const addApis = (): void => {
  * @return {Promise<void>}
  */
 export const addApi = (params: ParamsAddApi): void => {
-  const { blackList, queuedLogs } = getStore()
-  const { apiUrl } = params
+  const { blackList, queuedLogs } = getStore();
+  const { apiUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
-      return apiUrl.includes(keyword)
+      return apiUrl.includes(keyword);
     }
-    return keyword.test(apiUrl)
-  }
+    return keyword.test(apiUrl);
+  };
 
-  const selfBlackList = ['cdn.verysites.com']
+  const selfBlackList = ["cdn.verysites.com"];
   if (
-    !location.href.includes('verysites.com')
-    && selfBlackList.some(matchKeyword)
+    !location.href.includes("verysites.com") &&
+    selfBlackList.some(matchKeyword)
   ) {
-    return
+    return;
   }
 
   // 黑名单中的接口请求不需要进行上报
   if (blackList.some(matchKeyword)) {
-    return
+    return;
   }
 
-  queuedLogs.push(params)
-  updateStore({ queuedLogs })
+  queuedLogs.push(params);
+  updateStore({ queuedLogs });
 
   if (getStore().queuedLogs.length > 5) {
-    addApis()
+    addApis();
   }
-}
+};
