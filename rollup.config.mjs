@@ -41,6 +41,17 @@ const config = defineConfig({
       ],
     },
     {
+      file: "dist/better-monitor.js",
+      format: "es",
+      plugins: [
+        getBabelOutputPlugin({
+          presets: [["@babel/preset-env", { modules: "umd" }]],
+        }),
+        license(licenseConfig),
+        bundleSize(),
+      ],
+    },
+    {
       file: "dist/better-monitor.common.js",
       format: "cjs",
       plugins: [license(licenseConfig), bundleSize()],
