@@ -36,7 +36,6 @@ export const initLogPlugin = () => {
   const nativeAjaxOpen = XMLHttpRequest.prototype.open;
   const nativeAjaxSend = XMLHttpRequest.prototype.send;
 
-  // eslint-disable-next-line max-len
   XMLHttpRequest.prototype.open = function (
     method: string,
     url: string,
@@ -82,8 +81,9 @@ export const initLogPlugin = () => {
     if (typeof body === "string") {
       try {
         tempObj.body = JSON.parse(body);
-      } catch (e) {
-        //
+      } catch (err: any) {
+        // eslint-disable-next-line no-console
+        console.log("JSON.parse(body) error:", err);
       }
     }
     Object.assign(meta, tempObj);

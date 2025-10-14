@@ -14,7 +14,7 @@ const config = defineConfig([
       // @ts-expect-error TODO: fix this error
       ...typescriptEslint.configs.recommended,
     ],
-    files: [`**/*.{mts}`],
+    files: [`**/*.{ts,mts,js,mjs}`],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -38,7 +38,12 @@ const config = defineConfig([
       "no-undef": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
-        { vars: "all", args: "after-used", ignoreRestSiblings: false },
+        {
+          vars: "all",
+          args: "after-used",
+          ignoreRestSiblings: false,
+          varsIgnorePattern: "^_",
+        },
       ],
       "vue/no-mutating-props": "off",
     },

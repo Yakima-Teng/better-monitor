@@ -38,7 +38,9 @@ export const safeStringify = (value: any): string => {
       return value;
     }
     return inspect(value);
-  } catch (err) {
+  } catch (err: any) {
+    // eslint-disable-next-line no-console
+    console.log("safeStringify inspect error, try JSON.stringify:", err);
     try {
       return JSON.stringify(
         Object.keys(value).reduce(
