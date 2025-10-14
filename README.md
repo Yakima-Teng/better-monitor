@@ -34,7 +34,7 @@ Main features are listed below:
 In the simplest case, you only need to add one line of code, like below:
 
 ```html
-<script crossorigin="anonymous" data-project-id="999" src="https://cdn.verysites.com/verysites/better-monitor/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="999" src="https://cdn.verysites.com/verybugs/better-monitor/better-monitor.min.js"></script>
 ```
 
 * Note: Your should fill in your own project id created [here](https://www.verysites.com/bugs/).
