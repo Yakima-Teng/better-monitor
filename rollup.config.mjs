@@ -72,8 +72,11 @@ const config = defineConfig({
     }),
     typescript(),
     json(),
+    nodeResolve({
+      browser: true,
+      preferBuiltins: true,
+    }),
     commonjs(),
-    nodeResolve(),
   ],
 });
 

@@ -57,6 +57,9 @@
       "@/(.*)$": "<rootDir>/src/$1"
     }
   },
+  "browser": {
+    "stream": "stream-browserify"
+  },
   "keywords": [
     "bug report",
     "js bug",
@@ -106,6 +109,7 @@
     "axios": "1.11.0",
     "lodash": "4.17.21",
     "object-inspect": "1.13.4",
+    "stream-browserify": "3.0.0",
     "web-vitals": "5.1.0"
   }
 }
