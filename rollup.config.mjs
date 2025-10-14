@@ -20,7 +20,7 @@ parseEnvFiles(["../.env.local", `../.env.${MODE}`, "../.env"]);
 const licenseConfig = {
   banner: [
     "Bundle of <%= pkg.name %>",
-    "Generated: <%= moment().format('YYYY-MM-DD') %>",
+    "Generated: <%= moment().format('YYYY-MM-DD HH:mm:ss') %>",
     "Version: <%= pkg.version %>",
   ].join("\n"),
 };
