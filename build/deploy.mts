@@ -23,8 +23,6 @@ const pathDist = joinPath(__dirname, '../dist');
 
 const { MODE } = process.env
 
-console.log({ MODE })
-
 parseEnvFiles([
   joinPath(__dirname, '../../aimian/.env.local'),
   joinPath(__dirname, `../../aimian/.env.${MODE}`),

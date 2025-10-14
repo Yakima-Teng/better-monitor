@@ -12,7 +12,6 @@
   </a>
 </p>
 
-
 > Automatically detect JavaScript errors in the browser. Get error detection for handled and unhandled errors with reports pushed to your email.
 
 ![](https://www.verybugs.com/screenshot.gif)
@@ -35,10 +34,10 @@ Main features are listed below:
 In the simplest case, you only need to add one line of code, like below:
 
 ```html
-<script crossorigin="anonymous" data-project-id="999" src="https://www.verysites.com/verybugs/better-monitor/better-monitor.min.js"></script>
+<script crossorigin="anonymous" data-project-id="999" src="https://cdn.verysites.com/verysites/better-monitor/better-monitor.min.js"></script>
 ```
 
-* Note: Your should fill in your own project id created [here](https://www.verybugs.com/admin/?t=9#/system/project).
+* Note: Your should fill in your own project id created [here](https://www.verysites.com/bugs/).
 
 For more info, please refer to our [documentation](https://www.verybugs.com/doc.html).
 
@@ -46,4 +45,4 @@ For more info, please refer to our [documentation](https://www.verybugs.com/doc.
 
 If you use WeChat or WeCom (aka Enterprise WeChat), you can scan our official WeCom code below:
 
-![](https://www.verysites.com/service-support-chat-group.png)
+![](https://cdn.verysites.com/verysites/static/img/service-support-chat-group.png)
