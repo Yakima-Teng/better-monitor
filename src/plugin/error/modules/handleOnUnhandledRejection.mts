@@ -28,6 +28,7 @@ export const handlerFuncForJsUnhandledRejection = async (
       source: "",
       type,
       userId,
+      time: String(Date.now()),
     };
 
     if (!validateBugRequestData(requestData)) {

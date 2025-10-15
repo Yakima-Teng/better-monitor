@@ -11,7 +11,6 @@ const store: Store = {
   blackList: [],
   queuedLogs: [],
   queuedActions: [],
-  queuedPerformanceLogs: new Set(),
   timeLogMap: new Map(),
   getUserId: () => {
     return "";

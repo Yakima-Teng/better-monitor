@@ -17,8 +17,6 @@ interface Store {
   queuedLogs: ParamsAddApi[]
   // 待上报的行为日志开关
   queuedActions: ParamsAddAction[]
-  // 待上报的性能日志
-  queuedPerformanceLogs: Set<PerformanceData>
   // 记录动作的开始时间
   timeLogMap: Map<string, number>
   getUserId: () => (string | Promise<string>)

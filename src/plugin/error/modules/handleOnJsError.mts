@@ -22,6 +22,7 @@ export const handlerFuncForJsError = async (
       source: `${filename}:${lineno}行:${colno}列`,
       type,
       userId,
+      time: String(Date.now()),
     };
 
     if (!validateBugRequestData(requestData)) {

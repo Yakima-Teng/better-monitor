@@ -40,22 +40,15 @@
     "build:pre": "cross-env NODE_ENV=production MODE=pre node --run build",
     "build:production": "cross-env NODE_ENV=production MODE=production node --run build",
     "build": "rollup --config rollup.config.mjs",
-    "test": "cross-env BABEL_ENV=test jest",
-    "lint": "npx prettier --write ./src ./test ./build ./*.mts ./*.mjs && eslint --fix src/**/* test/**/* build/**/*",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "prettier": "npx prettier --write ./src ./test ./build ./*.mts ./*.mjs",
+    "eslint": "eslint --fix src/**/* test/**/* build/**/*",
+    "tsc": "tsc --noEmit --project ./tsconfig.json",
+    "lint": "npm run prettier && npm run eslint && npm run test && npm run tsc",
     "buildAndDeploy:int": "cross-env NODE_ENV=production MODE=int node --run buildAndDeploy",
     "buildAndDeploy:pre": "cross-env NODE_ENV=production MODE=pre node --run buildAndDeploy",
     "buildAndDeploy:production": "cross-env NODE_ENV=production MODE=production node --run buildAndDeploy",
     "buildAndDeploy": "node --run build && node ./build/deploy.mts"
-  },
-  "jest": {
-    "roots": [
-      "test"
-    ],
-    "testRegex": "test/(.*?/)?.*test.ts$",
-    "testEnvironment": "jsdom",
-    "moduleNameMapper": {
-      "@/(.*)$": "<rootDir>/src/$1"
-    }
   },
   "browser": {
     "stream": "stream-browserify"
@@ -71,7 +64,9 @@
   "author": "yakima.public@gmail.com",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
+    "@babel/preset-typescript": "7.27.1",
     "@eslint/js": "9.19.0",
     "@jest/globals": "30.0.5",
     "@rollup/plugin-babel": "6.0.4",
@@ -81,11 +76,14 @@
     "@rollup/plugin-replace": "6.0.2",
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "12.1.4",
+    "@types/ali-oss": "6.16.11",
     "@types/eslint-config-prettier": "6.11.3",
     "@types/gulp": "4.0.17",
     "@types/lodash": "4.17.20",
     "@types/node": "22.17.2",
     "@types/object-inspect": "1.13.0",
+    "@types/ssh2": "1.15.5",
+    "babel-jest": "30.2.0",
     "cross-env": "10.0.0",
     "dayjs": "1.11.13",
     "eslint": "9.33.0",
@@ -93,6 +91,8 @@
     "glob": "11.0.3",
     "globals": "15.14.0",
     "gulp": "5.0.1",
+    "jest": "30.2.0",
+    "jest-environment-jsdom": "30.2.0",
     "jiti": "2.6.1",
     "npm-run-all": "4.1.5",
     "nsuite": "0.0.54",

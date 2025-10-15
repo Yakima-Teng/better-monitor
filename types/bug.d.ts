@@ -1,4 +1,5 @@
 interface ParamsAddBug {
+  time: string
   pageUrl: string
   message: string
   stack: string
