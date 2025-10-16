@@ -33,13 +33,13 @@ module.exports = {
       '@test': resolve(__dirname, '../test'),
     },
     extensions: ['.ts', '.tsx', '.js'],
+    plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [
     new WebpackBar({
       name: '正在卖力打包中~',
       color: '#fa8c16',
     }),
-    new TsconfigPathsPlugin()
   ],
   module: {
     rules: [
