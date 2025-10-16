@@ -1,4 +1,26 @@
 {
+  "compilerOptions": {
+    // 指定 ECMAScript 目标版本 "ES3"（默认）， "ES5"， "ES6" / "ES2015"， "ES2016"， "ES2017" 或 "ESNext"。
+    "target": "esnext",
+    "noEmit": true,
+    "module": "nodenext",
+    "strict": true,
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "typeRoots": ["types", "node_modules/@types"],
+    // 非相对模块导入的路径映射配置
+    "paths": {
+      "#build/*": ["./build/*.mts"],
+      "#test/*": ["./test/*.mts"],
+      "#api/*": ["./src/api/*.mts"],
+      "#plugin/*": ["./src/plugin/*.mts"],
+      "#scripts/*": ["./src/scripts/*.mts"],
+      "#src/*": ["./src/*.mts"],
+      "#root/*": ["./*.mts"]
+    }
+  },
+  // 编译器默认包含的编译文件，src是源代码文件夹，test是jest测试代码文件夹
   "include": [
     "build/**/*.mts",
     "src/**/*.mts",
@@ -6,16 +28,6 @@
     "types/**/*.d.ts",
     "./*.mts"
   ],
-  "exclude": ["node_modules", "dist", "localhost"],
-  "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/better-monitor/tsconfig.app.tsbuildinfo",
-    "noEmit": true, // Optional - see note below
-    "target": "esnext",
-    "module": "nodenext",
-    "strict": true,
-    "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true,
-    "verbatimModuleSyntax": true,
-    "typeRoots": ["types", "node_modules/@types"]
-  }
+  // 编译器默认排除的编译文件
+  "exclude": ["node_modules", "dist"]
 }

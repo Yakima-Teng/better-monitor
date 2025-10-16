@@ -1,5 +1,19 @@
 # Ignore artifacts:
-logs/*
-node_modules/*
-dist/*
 .idea/*
+
+# npm包
+/node_modules
+package-lock.json
+
+# build产物
+/dist
+/types
+
+# eslint
+.eslintcache
+
+# jest
+/coverage
+
+# docs api文档
+/docs
