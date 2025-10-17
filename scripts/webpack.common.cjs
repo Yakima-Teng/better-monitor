@@ -2,7 +2,15 @@ const webpack = require("webpack");
 const WebpackBar = require("webpackbar");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { toCamelCase } = require("./utils.cjs");
-const { resolve, PROJECT_PATH, pkgName, pkgVersion, buildDate } = require("./constants.cjs");
+const {
+  resolve,
+  PROJECT_PATH,
+  pkgName,
+  pkgVersion,
+  buildDate,
+  FRONTEND_DOMAIN,
+  BACKEND_DOMAIN,
+} = require("./constants.cjs");
 
 module.exports = {
   // 定义了入口文件路径
@@ -44,6 +52,8 @@ module.exports = {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.BUILD_DATE": JSON.stringify(buildDate),
       "process.env.BUILD_VERSION": JSON.stringify(pkgVersion),
+      "process.env.FRONTEND_DOMAIN": JSON.stringify(FRONTEND_DOMAIN),
+      "process.env.BACKEND_DOMAIN": JSON.stringify(BACKEND_DOMAIN),
     }),
   ],
   module: {

@@ -16,7 +16,7 @@ import { initLogPlugin } from "#plugin/log/initLogPlugin";
 import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
-import { NODE_ENV, MODE, buildDate, buildVersion } from "#scripts/ConstantUtils";
+import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#scripts/ConstantUtils";
 
 const init = (settings: Partial<Store>): void => {
   updateStore(settings);
@@ -82,6 +82,7 @@ const exportObj: ExportObj = {
 
 export default exportObj;
 
-// window.console.log('%c已集成window.BetterMonitor对象😃\n详情请参阅官网https://www.verybugs.com/', 'background: #ff5900; color: #000')
-
-// window.console.log('%c2025年10月14日最新通知：SDK地址已更新为https://cdn.verysites.com/verysites/better-monitor/better-monitor.min.js, \n使用旧地址的同学请尽早更换地址', 'background: #22ddff; color: #000')
+window.console.log(
+  `%c已集成window.BetterMonitor对象😃\n详情请参阅官网${FRONTEND_DOMAIN}`,
+  "background: #ff5900; color: #000",
+);
