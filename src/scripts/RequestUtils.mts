@@ -89,7 +89,8 @@ export const axiosRequest = async <D, T>(
 
 export const sendBeacon = (url: string, jsonData: Record<string, unknown>): boolean => {
   if (typeof navigator.sendBeacon === "function") {
-    return navigator.sendBeacon(url, JSON.stringify(jsonData));
+    // 请求接口以Beacon结尾，方便服务端判断是否为sendBeacon发起的ping请求（依赖服务端判断content-type为text/plain和accept为*/*等特征并不稳妥，因为非ping请求也能带这些特征）
+    return navigator.sendBeacon(`${url}Beacon`, JSON.stringify(jsonData));
   }
   return false;
 };
