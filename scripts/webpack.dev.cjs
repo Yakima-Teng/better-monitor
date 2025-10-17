@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const htmlWebpackInjectAttributesPlugin = require("html-webpack-inject-attributes-plugin");
 const common = require("./webpack.common.cjs");
 const { resolve, PROJECT_PATH } = require("./constants.cjs");
 
@@ -24,6 +25,13 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: resolve(PROJECT_PATH, "./public/index.html"),
       scriptLoading: "blocking",
+      // 添加自定义属性
+      attributes: {
+        // 43是一个测试项目的项目id
+        "data-project-id": "43",
+        crossorigin: "anonymous",
+      },
     }),
+    new htmlWebpackInjectAttributesPlugin(),
   ],
 });
