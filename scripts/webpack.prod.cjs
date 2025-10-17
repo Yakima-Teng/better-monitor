@@ -1,13 +1,14 @@
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
 const TerserPlugin = require("terser-webpack-plugin");
-const pkg = require('../package.json')
-const common = require('./webpack.common.cjs');
+const pkg = require("../package.json");
+const common = require("./webpack.common.cjs");
+const { pkgName, pkgVersion, buildDate } = require("./constants.cjs");
 
-const year = new Date().getFullYear()
+const year = new Date().getFullYear();
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: "production",
   optimization: {
     minimize: true,
     minimizer: [
@@ -20,12 +21,12 @@ module.exports = merge(common, {
   plugins: [
     new webpack.BannerPlugin({
       banner: [
-        `Copyright (c) ${year} ${pkg.name}. All rights reserved.`,
-        `Version: ${pkg.version}`,
-        `Build: ${new Date().toISOString()}`
-      ].join('\n'),
+        `Copyright (c) ${year} ${pkgName}. All rights reserved.`,
+        `Version: ${pkgVersion}`,
+        `Build: ${buildDate}`,
+      ].join("\n"),
       raw: false,
       entryOnly: true,
     }),
-  ]
+  ],
 });

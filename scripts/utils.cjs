@@ -7,9 +7,9 @@
  */
 function toCamelCase(str) {
   return str
-    .split('-') // 使用"-"分割字符串，形成一个数组
+    .split("-") // 使用"-"分割字符串，形成一个数组
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // 对每个单词，将其首字母转为大写，其余部分保持不变
-    .join(''); // 将处理后的单词连接成一个新的字符串
+    .join(""); // 将处理后的单词连接成一个新的字符串
 }
 
 module.exports = {
