@@ -133,7 +133,5 @@ export const logTimeEndDirectly = async (label: string): Promise<void> => {
     await printLogDirectly(`${label}耗时较快：${duration}ms`);
     return;
   }
-  await printErrorDirectly(
-    `${label}耗时较慢：${(duration / 1000).toFixed(3)}s`,
-  );
+  await printErrorDirectly(`${label}耗时较慢：${(duration / 1000).toFixed(3)}s`);
 };

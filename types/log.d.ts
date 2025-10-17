@@ -1,1 +1,1 @@
-type FuncLog = (level: LogLevel, ...args: any[]) => Promise<void>
+type FuncLog = (level: LogLevel, ...args: any[]) => Promise<void>;

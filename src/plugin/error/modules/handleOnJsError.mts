@@ -1,9 +1,7 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
 import { getUserId } from "#scripts/StoreUtils";
 
-export const handlerFuncForJsError = async (
-  e: ErrorEvent,
-): Promise<boolean> => {
+export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => {
   // eslint-disable-next-line no-console
   console.error(e);
   try {

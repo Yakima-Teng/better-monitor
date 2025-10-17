@@ -1,4 +1,4 @@
 interface ParamsAddView {
   pageUrl: string;
-  userId: string
+  userId: string;
 }

@@ -5,12 +5,7 @@ export const getError = (err?: unknown): Error => {
   if (err instanceof Error) {
     return err;
   }
-  if (
-    err &&
-    typeof err === "object" &&
-    "message" in err &&
-    typeof err.message === "string"
-  ) {
+  if (err && typeof err === "object" && "message" in err && typeof err.message === "string") {
     return new Error(err.message);
   }
   return new Error(JSON.stringify(err));

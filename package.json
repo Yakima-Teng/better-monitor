@@ -34,7 +34,7 @@
   "scripts": {
     "ready": "npm install",
     "test": "jest",
-    "prettier": "npx prettier --write ./src ./test ./build ./*.mts ./*.mjs",
+    "prettier": "npx prettier --write ./src ./test ./build ./types ./*.mts",
     "eslint": "eslint --fix src/**/* test/**/* build/**/*",
     "tsc": "tsc --noEmit --project ./tsconfig.json",
     "lint": "npm run prettier && npm run eslint && npm run test && npm run tsc",
@@ -90,7 +90,7 @@
     "jiti": "2.6.1",
     "npm-run-all": "4.1.5",
     "nsuite": "0.0.57",
-    "prettier": "3.4.2",
+    "prettier": "3.6.2",
     "rimraf": "6.0.1",
     "standard-version": "9.5.0",
     "ts-jest": "29.4.5",

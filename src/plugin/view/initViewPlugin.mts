@@ -32,11 +32,7 @@ export const initViewPlugin = (): void => {
   const { history } = window;
   // 劫持pushState
   const oldPushState = history.pushState;
-  history.pushState = async (
-    state: unknown,
-    unused: string,
-    url: string | URL,
-  ): Promise<void> => {
+  history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
     const userId = await getUserId();
     oldPushState.call(history, state, unused, url);
     addView({

@@ -1,15 +1,15 @@
 interface ParamsAddAction {
-  pageUrl: string
-  time: string
-  level: LogLevel
-  payload: string
-  userId: number | string
-  directly?: boolean
+  pageUrl: string;
+  time: string;
+  level: LogLevel;
+  payload: string;
+  userId: number | string;
+  directly?: boolean;
 }
 interface ParamsDoAddActions {
-  preferSendBeacon: boolean
+  preferSendBeacon: boolean;
 }
 
 interface ParamsAddActions extends ParamsDoAddActions {
-  delayTime: number
+  delayTime: number;
 }

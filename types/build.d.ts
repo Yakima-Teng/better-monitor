@@ -1,1 +1,1 @@
-type QiniuZoneName = keyof typeof import('qiniu').zone
+type QiniuZoneName = keyof typeof import("qiniu").zone;

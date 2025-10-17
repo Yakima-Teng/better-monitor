@@ -15,19 +15,12 @@ export const validateBugRequestData = (requestData: ParamsAddBug): boolean => {
         requestData.stack.includes(keyword)
       );
     }
-    return (
-      keyword.test(requestData.message) ||
-      keyword.test(requestData.message) ||
-      keyword.test(requestData.stack)
-    );
+    return keyword.test(requestData.message) || keyword.test(requestData.message) || keyword.test(requestData.stack);
   };
 
   // 当页面不在SDK自身所在项目页面中时，SDK自身的报错不需要上报，否则在上报接口有出错时容易死循环
   const selfBlackList = ["better-monitor.min.js", "better-monitor.js"];
-  if (
-    !requestData.pageUrl.includes("verysites.com") &&
-    selfBlackList.some(matchKeyword)
-  ) {
+  if (!requestData.pageUrl.includes("verysites.com") && selfBlackList.some(matchKeyword)) {
     return false;
   }
   // 没有具体错误信息，上报也没有意义

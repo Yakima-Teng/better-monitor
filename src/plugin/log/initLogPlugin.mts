@@ -68,9 +68,7 @@ export const initLogPlugin = () => {
     ]);
   };
 
-  XMLHttpRequest.prototype.send = function (
-    body?: Document | XMLHttpRequestBodyInit | null | undefined,
-  ): void {
+  XMLHttpRequest.prototype.send = function (body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
     const xhrInstance = this as IXMLHttpRequestWithMeta;
     const { meta } = xhrInstance;
 
@@ -88,60 +86,53 @@ export const initLogPlugin = () => {
     }
     Object.assign(meta, tempObj);
 
-    xhrInstance.addEventListener(
-      "loadend",
-      (e: ProgressEvent<XMLHttpRequestEventTarget>) => {
-        const timeLoadEnd = Date.now();
+    xhrInstance.addEventListener("loadend", (e: ProgressEvent<XMLHttpRequestEventTarget>) => {
+      const timeLoadEnd = Date.now();
 
+      Object.assign(meta, {
+        timeConsumed: `${timeLoadEnd - +meta.timeSend}`,
+        total: `${e.total}`,
+        responseText: "",
+        status: "",
+      });
+
+      /**
+       * DOMException: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
+       */
+      const { target } = e;
+      if (target instanceof XMLHttpRequest) {
+        const { responseType, status } = target;
         Object.assign(meta, {
-          timeConsumed: `${timeLoadEnd - +meta.timeSend}`,
-          total: `${e.total}`,
-          responseText: "",
-          status: "",
+          responseURL: target.responseURL,
+          responseText: ["", "text"].includes(responseType) ? target.responseText : responseType,
+          allResponseHeaders: target.getAllResponseHeaders(),
+          status: `${status}`,
         });
+      }
 
-        /**
-         * DOMException: Failed to read the 'responseText' property from 'XMLHttpRequest': The value is only accessible if the object's 'responseType' is '' or 'text' (was 'arraybuffer').
-         */
-        const { target } = e;
-        if (target instanceof XMLHttpRequest) {
-          const { responseType, status } = target;
-          Object.assign(meta, {
-            responseURL: target.responseURL,
-            responseText: ["", "text"].includes(responseType)
-              ? target.responseText
-              : responseType,
-            allResponseHeaders: target.getAllResponseHeaders(),
-            status: `${status}`,
-          });
-        }
+      const sdk = { buildDate, buildVersion };
 
-        const sdk = { buildDate, buildVersion };
+      addApi({
+        pageUrl: meta.pageUrl,
+        apiUrl: meta.responseURL || meta.apiUrl,
+        payload: safeStringify({
+          params: meta.params,
+          data: meta.body,
+        }),
+        time: String(Date.now()),
+        response: meta.responseText.substring(0, 5000),
+        userId: String(getUserId()),
+        json: safeStringify({
+          method: meta.method,
+          status: meta.status,
+          timeConsumed: meta.timeConsumed,
+          allResponseHeaders: meta.allResponseHeaders,
+          clientTime: meta.clientTime,
+          sdk,
+        }),
+      });
+    });
 
-        addApi({
-          pageUrl: meta.pageUrl,
-          apiUrl: meta.responseURL || meta.apiUrl,
-          payload: safeStringify({
-            params: meta.params,
-            data: meta.body,
-          }),
-          time: String(Date.now()),
-          response: meta.responseText.substring(0, 5000),
-          userId: String(getUserId()),
-          json: safeStringify({
-            method: meta.method,
-            status: meta.status,
-            timeConsumed: meta.timeConsumed,
-            allResponseHeaders: meta.allResponseHeaders,
-            clientTime: meta.clientTime,
-            sdk,
-          }),
-        });
-      },
-    );
-
-    return nativeAjaxSend.apply(this, [
-      typeof body === "undefined" ? null : body,
-    ]);
+    return nativeAjaxSend.apply(this, [typeof body === "undefined" ? null : body]);
   };
 };

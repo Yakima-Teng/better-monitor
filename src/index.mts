@@ -16,12 +16,7 @@ import { initLogPlugin } from "#plugin/log/initLogPlugin";
 import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
-import {
-  NODE_ENV,
-  MODE,
-  buildDate,
-  buildVersion,
-} from "#scripts/ConstantUtils";
+import { NODE_ENV, MODE, buildDate, buildVersion } from "#scripts/ConstantUtils";
 
 const init = (settings: Partial<Store>): void => {
   updateStore(settings);

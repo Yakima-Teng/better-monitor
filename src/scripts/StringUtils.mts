@@ -17,11 +17,7 @@ import inspect from "object-inspect";
  * console.log(fillLeft('aa', 10, '0') // '00000000aa'
  * ```
  */
-export const fillLeft = (
-  val: string | number,
-  len: number,
-  symbol: string,
-): string => {
+export const fillLeft = (val: string | number, len: number, symbol: string): string => {
   val = `${val}`;
   const diffInLength = len - val.length;
   if (diffInLength > 0) {

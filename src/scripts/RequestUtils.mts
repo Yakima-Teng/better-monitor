@@ -1,8 +1,4 @@
-import axios, {
-  type AxiosRequestConfig,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig,
-} from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from "axios";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { getError } from "#scripts/TypeUtils";
 import { cache } from "#scripts/CacheUtils";
@@ -24,9 +20,7 @@ const instance = axios.create({
   transformResponse: [transformResponse],
 });
 instance.interceptors.request.use(
-  async function <D>(
-    config: InternalAxiosRequestConfig<D>,
-  ): Promise<InternalAxiosRequestConfig<D>> {
+  async function <D>(config: InternalAxiosRequestConfig<D>): Promise<InternalAxiosRequestConfig<D>> {
     const data = config.data;
     if (data instanceof FormData) {
       config.headers["Content-Type"] = "multipart/form-data";
@@ -62,15 +56,9 @@ export const axiosRequest = async <D, T>(
   try {
     options = options || {};
 
-    const funcPromise = async (): Promise<
-      TRequestResult<T, AxiosResponse<IResponse<T>>>
-    > => {
+    const funcPromise = async (): Promise<TRequestResult<T, AxiosResponse<IResponse<T>>>> => {
       try {
-        const response = await instance.request<
-          IResponse<T>,
-          AxiosResponse<IResponse<T>, D>,
-          D
-        >(config);
+        const response = await instance.request<IResponse<T>, AxiosResponse<IResponse<T>, D>, D>(config);
         const data = response.data.data;
         if (response.data.code !== 200) {
           return [new Error(response.data.message), undefined, response];
@@ -78,11 +66,7 @@ export const axiosRequest = async <D, T>(
         return [null, data, response];
       } catch (err) {
         if (axios.isAxiosError<IResponse<T>, D>(err)) {
-          return [
-            new Error(err.message),
-            undefined,
-            err.response as AxiosResponse<IResponse<T>>,
-          ];
+          return [new Error(err.message), undefined, err.response as AxiosResponse<IResponse<T>>];
         }
         return [getError(err), undefined, null];
       }
@@ -97,20 +81,13 @@ export const axiosRequest = async <D, T>(
     return funcPromise();
   } catch (err) {
     if (axios.isAxiosError<IResponse<T>, D>(err)) {
-      return [
-        new Error(err.message),
-        undefined,
-        err.response as AxiosResponse<IResponse<T>>,
-      ];
+      return [new Error(err.message), undefined, err.response as AxiosResponse<IResponse<T>>];
     }
     return [getError(err), undefined, null];
   }
 };
 
-export const sendBeacon = (
-  url: string,
-  jsonData: Record<string, unknown>,
-): boolean => {
+export const sendBeacon = (url: string, jsonData: Record<string, unknown>): boolean => {
   if (typeof navigator.sendBeacon === "function") {
     return navigator.sendBeacon(url, JSON.stringify(jsonData));
   }

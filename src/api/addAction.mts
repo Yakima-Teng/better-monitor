@@ -12,9 +12,7 @@ const clearTimerAddActions = () => {
   }
 };
 
-const doAddActions = ({
-  preferSendBeacon = false,
-}: ParamsDoAddActions): void => {
+const doAddActions = ({ preferSendBeacon = false }: ParamsDoAddActions): void => {
   const { projectId, queuedActions } = getStore();
 
   if (queuedActions.length === 0) {
@@ -74,10 +72,7 @@ export const addAction = (params: ParamsAddAction): void => {
   };
 
   const selfBlackList = ["better-monitor.min.js", "better-monitor.js"];
-  if (
-    !location.href.includes("verysites.com") &&
-    selfBlackList.some(matchKeyword)
-  ) {
+  if (!location.href.includes("verysites.com") && selfBlackList.some(matchKeyword)) {
     return;
   }
 

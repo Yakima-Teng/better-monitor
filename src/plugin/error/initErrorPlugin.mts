@@ -15,9 +15,5 @@ export const initErrorPlugin = () => {
     passive: false,
   });
   // 初始化js未处理异常报错监听器
-  window.addEventListener(
-    "unhandledrejection",
-    handlerFuncForJsUnhandledRejection,
-    { capture: false, passive: false },
-  );
+  window.addEventListener("unhandledrejection", handlerFuncForJsUnhandledRejection, { capture: false, passive: false });
 };

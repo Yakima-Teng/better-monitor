@@ -47,10 +47,7 @@ export const addApi = (params: ParamsAddApi): void => {
   };
 
   const selfBlackList = ["cdn.verysites.com"];
-  if (
-    !location.href.includes("verysites.com") &&
-    selfBlackList.some(matchKeyword)
-  ) {
+  if (!location.href.includes("verysites.com") && selfBlackList.some(matchKeyword)) {
     return;
   }
 
