@@ -34,6 +34,7 @@ module.exports = merge(common, {
       attributes: {
         // 43是一个测试项目的项目id
         "data-project-id": "43",
+        "data-api": "1",
         crossorigin: "anonymous",
       },
     }),

@@ -3,7 +3,7 @@ const store: Store = {
   // 项目id
   projectId: 0,
   view: true,
-  log: true,
+  api: false,
   error: true,
   action: true,
   statistics: true,

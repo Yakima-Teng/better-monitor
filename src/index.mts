@@ -12,7 +12,7 @@ import {
   printErrorDirectly,
   logTimeEndDirectly,
 } from "#scripts/LogUtils";
-import { initLogPlugin } from "#plugin/log/initLogPlugin";
+import { initApiPlugin } from "#plugin/api/initApiPlugin";
 import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
@@ -22,7 +22,7 @@ const init = (settings: Partial<Store>): void => {
   updateStore(settings);
 
   initViewPlugin();
-  initLogPlugin();
+  initApiPlugin();
   initActionPlugin();
   initErrorPlugin();
 };
@@ -42,14 +42,14 @@ const tryInitSettingAutomatically = () => {
   if (targetElem) {
     const dataProjectId = targetElem.getAttribute("data-project-id");
     const dataView = targetElem.getAttribute("data-view");
-    const dataLog = targetElem.getAttribute("data-log");
+    const dataApi = targetElem.getAttribute("data-api");
     const dataError = targetElem.getAttribute("data-error");
     const dataAction = targetElem.getAttribute("data-action");
     if (dataProjectId) {
       init({
         projectId: Number(dataProjectId || 0),
         view: ![0, "0"].includes(dataView || ""),
-        log: [1, "1"].includes(dataLog || ""),
+        api: [1, "1"].includes(dataApi || ""),
         error: ![0, "0"].includes(dataError || ""),
         action: ![0, "0"].includes(dataAction || ""),
       });

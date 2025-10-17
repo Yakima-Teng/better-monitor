@@ -2,7 +2,7 @@ interface Store {
   debugger: boolean;
   projectId: number;
   // 接口日志开关
-  log: boolean;
+  api: boolean;
   // 访问日志开关
   view: boolean;
   // 错误日志开关

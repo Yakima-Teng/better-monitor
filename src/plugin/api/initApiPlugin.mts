@@ -4,10 +4,10 @@ import { getStore, getUserId } from "#scripts/StoreUtils";
 import { safeStringify } from "#scripts/StringUtils";
 import { buildDate, buildVersion } from "#scripts/ConstantUtils";
 
-export const initLogPlugin = () => {
-  const { log } = getStore();
+export const initApiPlugin = () => {
+  const { api } = getStore();
 
-  if (!log) {
+  if (!api) {
     return;
   }
 
