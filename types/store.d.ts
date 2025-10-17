@@ -1,6 +1,6 @@
 interface Store {
   debugger: boolean;
-  projectId: string;
+  projectId: number;
   // 接口日志开关
   log: boolean;
   // 访问日志开关

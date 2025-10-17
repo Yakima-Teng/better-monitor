@@ -4,9 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>libraryStarter</title>
+    <title>BetterMonitor Test Page</title>
     <link rel="shortcut icon" href="/logo.svg" >
   </head>
-  <body></body>
-  <script></script>
+  <body>
+  <button id="btnNormalError">Create Normal Error</button>
+  <button id="btnUnhandledRejection">Create Unhandled Promise Rejection</button>
+  </body>
+  <script>
+    window.addEventListener('load', function () {
+      document.getElementById('btnNormalError').addEventListener('click', function () {
+        throw new Error('This is a normal error');
+      });
+      document.getElementById('btnUnhandledRejection').addEventListener('click', function () {
+        Promise.reject(new Error('This is an unhandled promise rejection'));
+      })
+    });
+  </script>
 </html>

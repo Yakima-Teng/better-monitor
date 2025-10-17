@@ -1,7 +1,7 @@
 const store: Store = {
   debugger: false,
   // 项目id
-  projectId: "",
+  projectId: 0,
   view: true,
   log: true,
   error: true,

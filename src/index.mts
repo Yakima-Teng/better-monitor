@@ -47,7 +47,7 @@ const tryInitSettingAutomatically = () => {
     const dataAction = targetElem.getAttribute("data-action");
     if (dataProjectId) {
       init({
-        projectId: dataProjectId,
+        projectId: Number(dataProjectId || 0),
         view: ![0, "0"].includes(dataView || ""),
         log: [1, "1"].includes(dataLog || ""),
         error: ![0, "0"].includes(dataError || ""),
