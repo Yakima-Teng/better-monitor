@@ -119,9 +119,9 @@ export const initLogPlugin = () => {
           params: meta.params,
           data: meta.body,
         }),
-        time: String(Date.now()),
+        time: Date.now(),
         response: meta.responseText.substring(0, 5000),
-        userId: String(getUserId()),
+        userId: getUserId(),
         json: safeStringify({
           method: meta.method,
           status: meta.status,

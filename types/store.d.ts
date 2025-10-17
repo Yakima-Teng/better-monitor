@@ -19,5 +19,5 @@ interface Store {
   queuedActions: ParamsAddAction[];
   // 记录动作的开始时间
   timeLogMap: Map<string, number>;
-  getUserId: () => string | Promise<string>;
+  getUserId: () => string;
 }

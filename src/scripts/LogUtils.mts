@@ -6,8 +6,8 @@ const toDouble = (num: number | string) => {
   return fillLeft(num, 2, "0");
 };
 
-const getLogTime = (): string => {
-  const objDate = new Date();
+const getLogTime = (date?: Date): string => {
+  const objDate = date || new Date();
   const year = objDate.getFullYear();
   const month = toDouble(objDate.getMonth() + 1);
   const day = toDouble(objDate.getDate());
@@ -37,11 +37,12 @@ const doLog: FuncLog = (() => {
   // eslint-disable-next-line no-console
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]): Promise<void> => {
-    const time = getLogTime();
-    const userId = await getUserId();
+    const date = new Date();
+    const timeStr = getLogTime(date);
+    const userId = getUserId();
     addAction({
       pageUrl: location.href,
-      time,
+      time: date.getTime(),
       level,
       payload: safeStringify(args),
       userId,
@@ -49,7 +50,7 @@ const doLog: FuncLog = (() => {
     const store = getStore();
     if (store.debugger) {
       const color = getLogColorByLevel(level);
-      return rawLog(`%c[${time}]`, `color:${color};`, ...args);
+      return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
     }
     return undefined;
   };
@@ -60,19 +61,20 @@ const doLogDirectly: FuncLog = (() => {
   // eslint-disable-next-line no-console
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]) => {
-    const time = getLogTime();
+    const date = new Date();
+    const timeStr = getLogTime(date);
     addAction({
       pageUrl: location.href,
-      time,
+      time: date.getTime(),
       level,
       payload: safeStringify(args),
-      userId: await getUserId(),
+      userId: getUserId(),
       directly: true,
     });
     const store = getStore();
     if (store.debugger) {
       const color = getLogColorByLevel(level);
-      return rawLog(`%c[${time}]`, `color:${color};`, ...args);
+      return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
     }
     return undefined;
   };

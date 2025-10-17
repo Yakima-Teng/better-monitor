@@ -19,7 +19,7 @@ export const initViewPlugin = (): void => {
   }
 
   const addViewBeforeUnload = async (): Promise<void> => {
-    const userId = await getUserId();
+    const userId = getUserId();
     addView({
       pageUrl: location.href,
       userId,
@@ -33,7 +33,7 @@ export const initViewPlugin = (): void => {
   // 劫持pushState
   const oldPushState = history.pushState;
   history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
-    const userId = await getUserId();
+    const userId = getUserId();
     oldPushState.call(history, state, unused, url);
     addView({
       pageUrl: location.href,

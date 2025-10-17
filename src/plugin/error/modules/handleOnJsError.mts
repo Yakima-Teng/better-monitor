@@ -11,7 +11,7 @@ export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => 
     const { error, colno, lineno, filename, type } = e;
     const message: string = error?.message || e.message;
     const stack = error?.stack || "";
-    const userId = await getUserId();
+    const userId = getUserId();
 
     const requestData = {
       pageUrl: location.href,
@@ -20,7 +20,7 @@ export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => 
       source: `${filename}:${lineno}行:${colno}列`,
       type,
       userId,
-      time: String(Date.now()),
+      time: Date.now(),
     };
 
     if (!validateBugRequestData(requestData)) {

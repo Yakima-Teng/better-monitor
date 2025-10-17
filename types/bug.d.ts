@@ -1,5 +1,5 @@
 interface ParamsAddBug {
-  time: string;
+  time: number;
   pageUrl: string;
   message: string;
   stack: string;

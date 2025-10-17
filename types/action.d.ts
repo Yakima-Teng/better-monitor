@@ -1,6 +1,6 @@
 interface ParamsAddAction {
   pageUrl: string;
-  time: string;
+  time: number;
   level: LogLevel;
   payload: string;
   userId: number | string;

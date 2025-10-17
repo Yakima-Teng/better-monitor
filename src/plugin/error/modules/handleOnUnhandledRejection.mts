@@ -17,7 +17,7 @@ export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEven
     const { reason, type } = e;
     const message = reason?.message || reason || "";
     const stack = reason?.stack || getStackTrace() || "";
-    const userId = await getUserId();
+    const userId = getUserId();
 
     const requestData = {
       pageUrl: location.href,
@@ -26,7 +26,7 @@ export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEven
       source: "",
       type,
       userId,
-      time: String(Date.now()),
+      time: Date.now(),
     };
 
     if (!validateBugRequestData(requestData)) {

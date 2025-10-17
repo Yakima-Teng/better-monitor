@@ -25,6 +25,6 @@ export const getStore = (): Store => {
   return store;
 };
 
-export const getUserId = (): string | Promise<string> => {
+export const getUserId = (): string => {
   return store.getUserId();
 };

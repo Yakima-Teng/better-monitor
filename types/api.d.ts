@@ -1,5 +1,5 @@
 interface ParamsAddApi {
-  time: string;
+  time: number;
   pageUrl: string;
   apiUrl: string;
   payload: string;
