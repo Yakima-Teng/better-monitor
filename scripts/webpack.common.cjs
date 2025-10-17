@@ -1,9 +1,12 @@
+const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { toCamelCase } = require('./utils.cjs');
 const { resolve, PROJECT_PATH, pkg } = require('./constants.cjs');
 
 const pkgName = pkg.name;
+const pkgVersion = pkg.version;
+const buildDate = new Date().toISOString()
 
 module.exports = {
   // 定义了入口文件路径
@@ -40,6 +43,12 @@ module.exports = {
       name: '正在卖力打包中~',
       color: '#fa8c16',
     }),
+    new webpack.DefinePlugin({
+      'process.env.MODE': JSON.stringify(process.env.MODE),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.BUILD_DATE': JSON.stringify(buildDate),
+      'process.env.BUILD_VERSION': JSON.stringify(pkgVersion)
+    })
   ],
   module: {
     rules: [
