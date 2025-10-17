@@ -104,10 +104,11 @@ export const printErrorDirectly = (...args: unknown[]): Promise<void> => {
   return doLogDirectly("error", ...args);
 };
 
-export const logTime = (label: string): void => {
+export const logTime = (label: string): string => {
   const { timeLogMap } = getStore();
   const startTime = Date.now();
   timeLogMap.set(label, startTime);
+  return label;
 };
 
 export const logTimeEnd = async (label: string): Promise<void> => {

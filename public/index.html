@@ -8,16 +8,58 @@
     <link rel="shortcut icon" href="/logo.svg" >
   </head>
   <body>
+  <button id="btnAddView">addView</button>
   <button id="btnNormalError">Create Normal Error</button>
   <button id="btnUnhandledRejection">Create Unhandled Promise Rejection</button>
+  <button id="btnPrintLog">printLog</button>
+  <button id="btnPrintLogDirectly">printLogDirectly</button>
+  <button id="btnPrintWarn">printWarn</button>
+  <button id="btnPrintWarnDirectly">printWarnDirectly</button>
+  <button id="btnPrintError">printError</button>
+  <button id="btnPrintErrorDirectly">printErrorDirectly</button>
+  <button id="btnLogTime">logTime + logTimeEnd</button>
+  <button id="btnLogTimeDirectly">logTime + logTimeEndDirectly</button>
   </body>
   <script>
     window.addEventListener('load', function () {
+      document.getElementById('btnAddView').addEventListener('click', function () {
+        location.reload()
+      })
       document.getElementById('btnNormalError').addEventListener('click', function () {
         throw new Error('This is a normal error');
       });
       document.getElementById('btnUnhandledRejection').addEventListener('click', function () {
         Promise.reject(new Error('This is an unhandled promise rejection'));
+      })
+      document.getElementById('btnPrintLog').addEventListener('click', function () {
+        BetterMonitor.printLog('This is a log');
+      });
+      document.getElementById('btnPrintLogDirectly').addEventListener('click', function () {
+        BetterMonitor.printLogDirectly('This is a log');
+      });
+      document.getElementById('btnPrintWarn').addEventListener('click', function () {
+        BetterMonitor.printWarn('This is a warn');
+      })
+      document.getElementById('btnPrintWarnDirectly').addEventListener('click', function () {
+        BetterMonitor.printWarnDirectly('This is a warn');
+      })
+      document.getElementById('btnPrintError').addEventListener('click', function () {
+        BetterMonitor.printError('This is an error');
+      })
+      document.getElementById('btnPrintErrorDirectly').addEventListener('click', function () {
+        BetterMonitor.printErrorDirectly('This is an error');
+      })
+      document.getElementById('btnLogTime').addEventListener('click', function () {
+        const label = BetterMonitor.logTime('logTime + logTimeEnd');
+        setTimeout(function () {
+          BetterMonitor.logTimeEnd(label);
+        }, 1000);
+      })
+      document.getElementById('btnLogTimeDirectly').addEventListener('click', function () {
+        const label = BetterMonitor.logTime('logTime + logTimeEndDirectly');
+        setTimeout(function () {
+          BetterMonitor.logTimeEndDirectly(label);
+        }, 1000);
       })
     });
   </script>
