@@ -14,6 +14,10 @@ module.exports = merge(common, {
     compress: true, // 是否启用 压缩
     open: true, // 打开默认浏览器
     hot: true, // 热更新
+    client: {
+      // 禁用错误遮罩层
+      overlay: false,
+    },
   },
   plugins: [
     new BundleAnalyzerPlugin({
