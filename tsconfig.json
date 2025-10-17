@@ -2,7 +2,7 @@
   "compilerOptions": {
     // 指定 ECMAScript 目标版本 "ES3"（默认）， "ES5"， "ES6" / "ES2015"， "ES2016"， "ES2017" 或 "ESNext"。
     "target": "esnext",
-    "noEmit": true,
+    "noEmitOnError": true,
     "module": "nodenext",
     "strict": true,
     "rewriteRelativeImportExtensions": true,
