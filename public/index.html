@@ -19,6 +19,7 @@
   <button id="btnPrintErrorDirectly">printErrorDirectly</button>
   <button id="btnLogTime">logTime + logTimeEnd</button>
   <button id="btnLogTimeDirectly">logTime + logTimeEndDirectly</button>
+  <button id="btnSendAjax">send ajax request</button>
   </body>
   <script>
     window.addEventListener('load', function () {
@@ -60,6 +61,11 @@
         setTimeout(function () {
           BetterMonitor.logTimeEndDirectly(label);
         }, 1000);
+      })
+      document.getElementById('btnSendAjax').addEventListener('click', function () {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://www.baidu.com');
+        xhr.send();
       })
     });
   </script>
