@@ -60,7 +60,13 @@ module.exports = {
     rules: [
       {
         test: /\.(?:js|mjs|cjs)$/,
-        // exclude: /node_modules/,
+        exclude: (modulePath) => {
+          if (/node_modules/.test(modulePath)) {
+            // axios需要用babel转码
+            return !/node_modules[/\\]axios/.test(modulePath);
+          }
+          return false;
+        },
         use: {
           loader: "babel-loader",
           options: {
