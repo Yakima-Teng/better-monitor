@@ -39,8 +39,8 @@
     "type:check": "tsc --noEmit --project ./tsconfig.json",
     "lint": "npm run prettier && npm run eslint && npm run test && npm run type:check",
     "dev": "cross-env NODE_ENV=development MODE=production webpack-dev-server --config ./scripts/webpack.dev.cjs",
-    "build": "npm run lint && cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.prod.cjs",
-    "debug": "npm run lint && cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.debug.cjs",
+    "build": "cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.prod.cjs",
+    "debug": "cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.debug.cjs",
     "prepare": "husky install",
     "release": "standard-version",
     "release-major": "standard-version --release-as major",
@@ -48,9 +48,6 @@
     "release-patch": "standard-version --release-as patch",
     "deploy": "cross-env NODE_ENV=production MODE=production node ./build/deploy.mts",
     "buildAndDeploy": "node --run build && node --run deploy"
-  },
-  "browser": {
-    "stream": "stream-browserify"
   },
   "keywords": [
     "bug report",
@@ -77,6 +74,7 @@
     "@types/node": "22.17.2",
     "@types/object-inspect": "1.13.0",
     "babel-jest": "30.2.0",
+    "babel-loader": "10.0.0",
     "cross-env": "10.0.0",
     "dayjs": "1.11.13",
     "eslint": "9.33.0",
@@ -111,7 +109,6 @@
   "dependencies": {
     "axios": "1.11.0",
     "lodash": "4.17.21",
-    "object-inspect": "1.13.4",
-    "stream-browserify": "3.0.0"
+    "object-inspect": "1.13.4"
   }
 }

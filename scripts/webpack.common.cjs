@@ -39,7 +39,7 @@ module.exports = {
       "@public": resolve(__dirname, "../public"),
       "@test": resolve(__dirname, "../test"),
     },
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".mts", ".ts", ".tsx", ".js"],
     plugins: [new TsconfigPathsPlugin()],
   },
   plugins: [
@@ -59,13 +59,37 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js)$/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
+        test: /\.(?:js|mjs|cjs)$/,
+        // exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [["@babel/preset-env"]],
+          },
+        },
       },
       {
         test: /\.(mts)$/,
-        loader: "ts-loader",
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [["@babel/preset-env"]],
+            },
+          },
+          {
+            loader: "ts-loader",
+            options: {
+              // ts-loader 配置
+              compilerOptions: {
+                // TypeScript 编译选项
+                target: "esnext",
+                module: "nodenext",
+                moduleResolution: "nodenext",
+              },
+            },
+          },
+        ],
         exclude: /node_modules/,
       },
     ],

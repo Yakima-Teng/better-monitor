@@ -1,7 +1,6 @@
 const webpack = require("webpack");
 const { merge } = require("webpack-merge");
 const TerserPlugin = require("terser-webpack-plugin");
-const pkg = require("../package.json");
 const common = require("./webpack.common.cjs");
 const { pkgName, pkgVersion, buildDate } = require("./constants.cjs");
 

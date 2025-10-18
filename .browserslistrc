@@ -1,3 +1,4 @@
-> 5%
-last 2 versions
-not ie < 11
+> 99%
+last 20 versions
+not ie < 8
+chrome >= 45
