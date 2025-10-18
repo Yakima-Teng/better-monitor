@@ -11,7 +11,7 @@ export const addApis = (): void => {
 
   if (queuedLogs.length === 0) return;
 
-  const requestUrl = `${API_PREFIX}/api/addApis`;
+  const requestUrl = `${API_PREFIX}api/addApis`;
   const requestData = { projectId, list: queuedLogs };
   const isQueued = sendBeacon(requestUrl, requestData);
   if (!isQueued) {
