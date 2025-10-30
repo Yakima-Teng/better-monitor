@@ -13,12 +13,15 @@ export const addApis = (): void => {
 
   const requestUrl = `${API_PREFIX}api/addApis`;
   const requestData: RequestListData<RequestItemAddApi> = { l: queuedApis };
-  const isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
+  const stringifyRequestData = JSON.stringify(requestData);
+  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (!isQueued) {
-    axiosRequest({
-      url: requestUrl,
+    axiosRequest(requestUrl, {
       method: "post",
-      data: requestData,
+      headers: {
+        "Content-Type": "application/json", // 告诉服务器你发送的是 JSON
+      },
+      body: stringifyRequestData,
       timeout: 60 * 1000,
     }).catch((err: any) => {
       // eslint-disable-next-line no-console

@@ -41,14 +41,16 @@ export const validateBugRequestData = (requestData: RequestItemAddBug): boolean 
  */
 export const addBug = (params: RequestItemAddBug): void => {
   const requestUrl = `${API_PREFIX}bug/addBug`;
-  const requestData = { ...params };
 
-  const isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
+  const stringifyRequestData = JSON.stringify(params);
+  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (isQueued) return;
-  axiosRequest({
-    url: requestUrl,
+  axiosRequest(requestUrl, {
     method: "post",
-    data: requestData,
+    headers: {
+      "Content-Type": "application/json", // 告诉服务器你发送的是 JSON
+    },
+    body: stringifyRequestData,
     timeout: 60 * 1000,
   }).catch((err) => {
     // eslint-disable-next-line no-console

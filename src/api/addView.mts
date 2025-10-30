@@ -29,10 +29,12 @@ export const addView = (params: RequestItemAddView): void => {
   const stringifyRequestData = JSON.stringify(params);
   const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (isQueued) return;
-  axiosRequest({
-    url: requestUrl,
+  axiosRequest(requestUrl, {
     method: "post",
-    data: params,
+    headers: {
+      "Content-Type": "application/json", // 告诉服务器你发送的是 JSON
+    },
+    body: stringifyRequestData,
     timeout: 60 * 1000,
   }).catch((err) => {
     // eslint-disable-next-line no-console

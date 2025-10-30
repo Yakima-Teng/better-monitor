@@ -27,16 +27,19 @@ const doAddActions = (): void => {
 
   let isQueued = false;
   if (preferSendBeacon) {
-    isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
+    isQueued = sendBeacon(requestUrl, stringifyRequestData);
   }
   if (!isQueued) {
-    axiosRequest({
-      url: requestUrl,
+    axiosRequest(requestUrl, {
       method: "post",
-      data: requestData,
+      headers: {
+        "Content-Type": "application/json", // 告诉服务器你发送的是 JSON
+      },
+      body: stringifyRequestData,
       timeout: 30 * 1000,
     }).catch((err) => {
-      throw err;
+      // eslint-disable-next-line no-console
+      console.error(err);
     });
   }
   updateStore({ queuedActions: [] });

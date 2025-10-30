@@ -96,20 +96,22 @@ interface RequestItemAddView {
   u: string;
 }
 
-interface RequestOptions {
-  cache?: {
-    cacheTimeout: number;
-    cacheKey: string | (() => string);
-  };
+interface RequestOptions extends RequestInit {
+  /**
+   * 是否携带凭证（cookies、HTTP 认证等）
+   * - true: 同源和跨域都携带（等价于 credentials: 'include'）
+   * - false: 不携带（默认，等价于 credentials: 'omit'）
+   * - 'same-origin': 仅同源携带
+   *
+   * 注意：当使用 XMLHttpRequest 降级时，仅支持 boolean（true/false）
+   */
+  withCredentials?: boolean | "same-origin";
+  /**
+   * 请求超时时间（毫秒）
+   * 默认：0（表示无超时）
+   */
+  timeout?: number;
 }
-type TResponseCode = 200 | 401 | 403 | 404 | 500 | number;
-interface IResponse<T> {
-  code: TResponseCode;
-  data: T;
-  message: string;
-  timestamp: number;
-}
-type TRequestResult<T, V> = [Error, undefined, V | null] | [null, T, V];
 
 interface XMLHttpRequestMeta {
   method: string;
