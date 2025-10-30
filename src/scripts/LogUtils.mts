@@ -28,6 +28,19 @@ const getLogColorByLevel = (level: LogLevel): string => {
   return "gray";
 };
 
+function transferLogLevelToNumber(level: LogLevel): RequestItemAddAction["l"] {
+  switch (level) {
+    case "log":
+      return 0;
+    case "warn":
+      return 1;
+    case "error":
+      return 2;
+    default:
+      throw new Error(`Invalid log level: ${level}`);
+  }
+}
+
 /**
  * @apiAnalyze
  * 打日志的方法（本地开发时如为方便追中调用栈，可以使用console.error代替console.log）
@@ -47,7 +60,7 @@ const doLog: FuncLog = (() => {
       s: sdk,
       pu: location.href,
       t: date.getTime(),
-      l: level,
+      l: transferLogLevelToNumber(level),
       p: payload,
       u: userId,
     };
@@ -73,7 +86,7 @@ const doLogDirectly: FuncLog = (() => {
       s: sdk,
       pu: location.href,
       t: date.getTime(),
-      l: level,
+      l: transferLogLevelToNumber(level),
       p: limitStringLength(safeStringify(args), 2000),
       u: getUserId(),
     };

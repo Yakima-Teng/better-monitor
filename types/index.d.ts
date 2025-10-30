@@ -29,8 +29,8 @@ interface RequestItemAddAction {
   pu: string;
   // time
   t: number;
-  // level
-  l: LogLevel;
+  // level: 0-log, 1-warn, 2-error
+  l: 0 | 1 | 2;
   // payload
   p: string;
   // userId
