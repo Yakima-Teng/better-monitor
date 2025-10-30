@@ -19,10 +19,12 @@ export const initViewPlugin = (): void => {
   }
 
   const addViewBeforeUnload = async (): Promise<void> => {
+    const { projectId } = getStore();
     const userId = getUserId();
     addView({
-      pageUrl: location.href,
-      userId,
+      pi: projectId,
+      p: location.href,
+      u: userId,
     });
   };
 
@@ -34,20 +36,12 @@ export const initViewPlugin = (): void => {
   const oldPushState = history.pushState;
   history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
     const userId = getUserId();
+    const { projectId } = getStore();
     oldPushState.call(history, state, unused, url);
     addView({
-      pageUrl: location.href,
-      userId,
+      pi: projectId,
+      p: location.href,
+      u: userId,
     });
   };
-
-  // 劫持replaceState
-  // const oldReplaceState = history.replaceState
-  // history.replaceState = (stateObj: any, title: string, url: string | URL) => {
-  //   oldReplaceState.call(history, stateObj, title, url)
-  //   addView({
-  //     pageUrl: location.href,
-  //     userId: getUserId(),
-  //   })
-  // }
 };

@@ -20,8 +20,8 @@ interface ExportObj {
   buildDate: string;
   buildVersion: string;
   init: (settings: Partial<Store>) => void;
-  addBug: (params: ParamsAddBug) => void;
-  addView: (params: ParamsAddView) => void;
+  addBug: (params: RequestItemAddBug) => void;
+  addView: (params: RequestItemAddView) => void;
   printLog: (...args: unknown[]) => Promise<void>;
   printWarn: (...args: unknown[]) => Promise<void>;
   printError: (...args: unknown[]) => Promise<void>;

@@ -9,7 +9,7 @@ export const initActionPlugin = (): void => {
   }
 
   const tryAddActions = () => {
-    addActions({ preferSendBeacon: true, delayTime: 0 });
+    addActions(0);
   };
 
   window.addEventListener("beforeunload", tryAddActions);

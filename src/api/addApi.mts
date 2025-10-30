@@ -7,13 +7,13 @@ import { isString } from "#scripts/TypeUtils";
  * 批量上报接口日志
  */
 export const addApis = (): void => {
-  const { projectId, queuedLogs } = getStore();
+  const { queuedApis } = getStore();
 
-  if (queuedLogs.length === 0) return;
+  if (queuedApis.length === 0) return;
 
   const requestUrl = `${API_PREFIX}api/addApis`;
-  const requestData = { projectId, list: queuedLogs };
-  const isQueued = sendBeacon(requestUrl, requestData);
+  const requestData: RequestListData<RequestItemAddApi> = { l: queuedApis };
+  const isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
   if (!isQueued) {
     axiosRequest({
       url: requestUrl,
@@ -25,7 +25,7 @@ export const addApis = (): void => {
       console.log(err);
     });
   }
-  updateStore({ queuedLogs: [] });
+  updateStore({ queuedApis: [] });
 };
 
 /**
@@ -35,9 +35,9 @@ export const addApis = (): void => {
  * @param params {Object} 包含字段`{ pageUrl: string; apiUrl: string; payload: string; response: string; json: string; }`
  * @return {Promise<void>}
  */
-export const addApi = (params: ParamsAddApi): void => {
-  const { blackList, queuedLogs } = getStore();
-  const { apiUrl } = params;
+export const addApi = (params: RequestItemAddApi): void => {
+  const { blackList, queuedApis } = getStore();
+  const { au: apiUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
@@ -56,10 +56,10 @@ export const addApi = (params: ParamsAddApi): void => {
     return;
   }
 
-  queuedLogs.push(params);
-  updateStore({ queuedLogs });
+  queuedApis.push(params);
+  updateStore({ queuedApis });
 
-  if (getStore().queuedLogs.length > 5) {
+  if (getStore().queuedApis.length > 5) {
     addApis();
   }
 };

@@ -1,6 +1,6 @@
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { getStore, updateStore } from "#scripts/StoreUtils";
-import { buildVersion, buildDate, API_PREFIX } from "#scripts/ConstantUtils";
+import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { safeStringify } from "#scripts/StringUtils";
 
@@ -12,22 +12,22 @@ const clearTimerAddActions = () => {
   }
 };
 
-const doAddActions = ({ preferSendBeacon = false }: ParamsDoAddActions): void => {
-  const { projectId, queuedActions } = getStore();
+const doAddActions = (): void => {
+  const { queuedActions } = getStore();
 
   if (queuedActions.length === 0) {
     return;
   }
 
   const requestUrl = `${API_PREFIX}action/addActions`;
-  const sdk = {
-    buildDate,
-    buildVersion,
-  };
-  const requestData = { projectId, sdk, list: queuedActions };
+  const requestData: RequestListData<RequestItemAddAction> = { l: queuedActions };
+
+  const stringifyRequestData = JSON.stringify(requestData);
+  const preferSendBeacon = stringifyRequestData.length > 10000;
+
   let isQueued = false;
   if (preferSendBeacon) {
-    isQueued = sendBeacon(requestUrl, requestData);
+    isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
   }
   if (!isQueued) {
     axiosRequest({
@@ -45,24 +45,21 @@ const doAddActions = ({ preferSendBeacon = false }: ParamsDoAddActions): void =>
 /**
  * 批量上报行为日志
  */
-export const addActions = (params: ParamsAddActions): void => {
-  const { preferSendBeacon, delayTime = 0 } = params;
+export const addActions = (delayTime: number): void => {
   clearTimerAddActions();
   if (!delayTime) {
-    doAddActions({ preferSendBeacon });
+    doAddActions();
     return;
   }
-  timerAddActions = window.setTimeout(() => {
-    doAddActions({ preferSendBeacon });
-  }, delayTime);
+  timerAddActions = window.setTimeout(doAddActions, delayTime);
 };
 
 /**
  * 上报单条行为日志
  */
-export const addAction = (params: ParamsAddAction): void => {
+export const addAction = (params: RequestItemAddAction, directly: boolean): void => {
   const { blackList, queuedActions } = getStore();
-  const { payload, directly } = params;
+  const { p: payload } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
@@ -81,27 +78,19 @@ export const addAction = (params: ParamsAddAction): void => {
     return;
   }
 
-  if (params.payload.length > 2000) {
-    params.payload = params.payload.substring(0, 2000);
-  }
   queuedActions.push(params);
   updateStore({ queuedActions });
 
+  // 如果队列条数超过10条，则立即上报
   if (queuedActions.length > 10) {
-    addActions({ preferSendBeacon: false, delayTime: 0 });
+    addActions(0);
     return;
   }
-  if (directly) {
-    addActions({ preferSendBeacon: false, delayTime: 300 });
+  // 如果消息内容较长，也直接上报
+  const strActions = safeStringify(queuedActions);
+  if (strActions.length > 10000) {
+    addActions(0);
     return;
   }
-  try {
-    const strActions = safeStringify(queuedActions);
-    if (strActions.length > 10000) {
-      addActions({ preferSendBeacon: false, delayTime: 0 });
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log("部分日志因JSON.stringify失败导致无法上传", e);
-  }
+  addActions(directly ? 0 : 300);
 };

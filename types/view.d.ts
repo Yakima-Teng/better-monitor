@@ -1,4 +1,8 @@
-interface ParamsAddView {
-  pageUrl: string;
-  userId: string;
+interface RequestItemAddView {
+  // projectId
+  pi: number;
+  // pageUrl
+  p: string;
+  // userId
+  u: string;
 }

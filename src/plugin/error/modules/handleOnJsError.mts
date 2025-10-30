@@ -1,9 +1,8 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
-import { getUserId } from "#scripts/StoreUtils";
+import { getStore, getUserId } from "#scripts/StoreUtils";
+import { limitStringLength } from "#scripts/StringUtils";
 
 export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => {
-  // eslint-disable-next-line no-console
-  console.error(e);
   try {
     e.preventDefault();
 
@@ -12,15 +11,19 @@ export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => 
     const message: string = error?.message || e.message;
     const stack = error?.stack || "";
     const userId = getUserId();
+    const source = `${filename}:${lineno}行:${colno}列`;
+    const { projectId, sdk } = getStore();
 
-    const requestData = {
-      pageUrl: location.href,
-      message,
-      stack: stack.substring(0, 2000),
-      source: `${filename}:${lineno}行:${colno}列`,
-      type,
-      userId,
-      time: Date.now(),
+    const requestData: RequestItemAddBug = {
+      pi: projectId,
+      s: sdk,
+      pu: location.href,
+      m: message,
+      u: userId,
+      st: limitStringLength(stack, 2000),
+      so: source,
+      ty: type,
+      t: Date.now(),
     };
 
     if (!validateBugRequestData(requestData)) {

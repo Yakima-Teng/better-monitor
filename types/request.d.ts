@@ -12,3 +12,23 @@ interface IResponse<T> {
   timestamp: number;
 }
 type TRequestResult<T, V> = [Error, undefined, V | null] | [null, T, V];
+
+interface XMLHttpRequestMeta {
+  method: string;
+  pageUrl: string;
+  apiUrl: string;
+  params: Record<string, any>;
+  timeSend: number;
+  body: Record<string, any>;
+  timeConsumed: number;
+  total: string;
+  responseURL: string;
+  responseText: string;
+  allResponseHeaders: string;
+  status: string;
+  // 客户端时间戳
+  clientTime: number;
+}
+interface XMLHttpRequestWithMeta extends XMLHttpRequest {
+  meta: XMLHttpRequestMeta;
+}

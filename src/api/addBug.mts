@@ -1,26 +1,23 @@
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { getStore } from "#scripts/StoreUtils";
-import { API_PREFIX, buildDate, buildVersion } from "#scripts/ConstantUtils";
+import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 
 // 校验请求参数是否在黑名单中，如果返回false表示在黑名单中，不继续后续上报操作
-export const validateBugRequestData = (requestData: ParamsAddBug): boolean => {
+export const validateBugRequestData = (requestData: RequestItemAddBug): boolean => {
+  const { m: message, st: stack, pu: pageUrl } = requestData;
   const { blackList } = getStore();
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
-      return (
-        requestData.message.includes(keyword) ||
-        requestData.message.includes(keyword) ||
-        requestData.stack.includes(keyword)
-      );
+      return message.includes(keyword) || message.includes(keyword) || stack.includes(keyword);
     }
-    return keyword.test(requestData.message) || keyword.test(requestData.message) || keyword.test(requestData.stack);
+    return keyword.test(message) || keyword.test(message) || keyword.test(stack);
   };
 
   // 当页面不在SDK自身所在项目页面中时，SDK自身的报错不需要上报，否则在上报接口有出错时容易死循环
   const selfBlackList = ["better-monitor.min.js", "better-monitor.js"];
-  if (!requestData.pageUrl.includes("verysites.com") && selfBlackList.some(matchKeyword)) {
+  if (!pageUrl.includes("verysites.com") && selfBlackList.some(matchKeyword)) {
     return false;
   }
   // 没有具体错误信息，上报也没有意义
@@ -42,13 +39,11 @@ export const validateBugRequestData = (requestData: ParamsAddBug): boolean => {
  * @param params {Object} 包含字段`{ pageUrl: string; errorMessage: string; errorStack: string; json: string }`
  * @return {Promise<void>}
  */
-export const addBug = (params: ParamsAddBug): void => {
-  const { projectId } = getStore();
+export const addBug = (params: RequestItemAddBug): void => {
   const requestUrl = `${API_PREFIX}bug/addBug`;
-  const sdk = { buildDate, buildVersion };
-  const requestData = { projectId, sdk, ...params };
+  const requestData = { ...params };
 
-  const isQueued = sendBeacon(requestUrl, requestData);
+  const isQueued = sendBeacon(requestUrl, JSON.stringify(requestData));
   if (isQueued) return;
   axiosRequest({
     url: requestUrl,

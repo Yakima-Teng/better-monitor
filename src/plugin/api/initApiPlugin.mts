@@ -1,8 +1,7 @@
 import { addApis, addApi } from "#api/addApi";
 import { parseSearchString } from "#scripts/UrlUtils";
 import { getStore, getUserId } from "#scripts/StoreUtils";
-import { safeStringify } from "#scripts/StringUtils";
-import { buildDate, buildVersion } from "#scripts/ConstantUtils";
+import { limitStringLength } from "#scripts/StringUtils";
 
 export const initApiPlugin = () => {
   const { api } = getStore();
@@ -14,25 +13,6 @@ export const initApiPlugin = () => {
   window.addEventListener("beforeunload", addApis);
   window.addEventListener("unload", addApis);
 
-  interface IXMLHttpRequestWithMeta extends XMLHttpRequest {
-    meta: {
-      method: string;
-      pageUrl: string;
-      apiUrl: string;
-      params: Record<string, any>;
-      timeSend: string;
-      body: Record<string, any>;
-      timeConsumed: string;
-      total: string;
-      responseURL: string;
-      responseText: string;
-      allResponseHeaders: string;
-      status: string;
-      // 客户端时间戳
-      clientTime: number;
-    };
-  }
-
   const nativeAjaxOpen = XMLHttpRequest.prototype.open;
   const nativeAjaxSend = XMLHttpRequest.prototype.send;
 
@@ -43,15 +23,15 @@ export const initApiPlugin = () => {
     user?: null | string,
     password?: null | string,
   ): void {
-    const xhrInstance = this as IXMLHttpRequestWithMeta;
+    const xhrInstance = this as XMLHttpRequestWithMeta;
     xhrInstance.meta = {
       method,
       pageUrl: location.href,
       apiUrl: url.startsWith("http") ? url : `${location.origin}${url}`,
       params: parseSearchString(url),
-      timeSend: "",
+      timeSend: 0,
       body: {},
-      timeConsumed: "",
+      timeConsumed: 0,
       total: "",
       responseURL: "",
       responseText: "",
@@ -69,11 +49,11 @@ export const initApiPlugin = () => {
   };
 
   XMLHttpRequest.prototype.send = function (body?: Document | XMLHttpRequestBodyInit | null | undefined): void {
-    const xhrInstance = this as IXMLHttpRequestWithMeta;
+    const xhrInstance = this as XMLHttpRequestWithMeta;
     const { meta } = xhrInstance;
 
-    const tempObj = {
-      timeSend: `${Date.now()}`,
+    const tempObj: Pick<XMLHttpRequestMeta, "timeSend" | "body"> = {
+      timeSend: Date.now(),
       body: {},
     };
     if (typeof body === "string") {
@@ -90,7 +70,7 @@ export const initApiPlugin = () => {
       const timeLoadEnd = Date.now();
 
       Object.assign(meta, {
-        timeConsumed: `${timeLoadEnd - +meta.timeSend}`,
+        timeConsumed: timeLoadEnd - meta.timeSend,
         total: `${e.total}`,
         responseText: "",
         status: "",
@@ -110,26 +90,21 @@ export const initApiPlugin = () => {
         });
       }
 
-      const sdk = { buildDate, buildVersion };
-
+      const { projectId, sdk } = getStore();
       addApi({
-        pageUrl: meta.pageUrl,
-        apiUrl: meta.responseURL || meta.apiUrl,
-        payload: safeStringify({
-          params: meta.params,
-          data: meta.body,
-        }),
-        time: Date.now(),
-        response: meta.responseText.substring(0, 5000),
-        userId: getUserId(),
-        json: safeStringify({
-          method: meta.method,
-          status: meta.status,
-          timeConsumed: meta.timeConsumed,
-          allResponseHeaders: meta.allResponseHeaders,
-          clientTime: meta.clientTime,
-          sdk,
-        }),
+        pi: projectId,
+        s: sdk,
+        t: meta.clientTime,
+        pu: meta.pageUrl,
+        au: meta.responseURL || meta.apiUrl,
+        r: limitStringLength(meta.responseText, 5000),
+        u: getUserId(),
+        pa: JSON.stringify(meta.params),
+        da: JSON.stringify(meta.body),
+        m: meta.method,
+        st: meta.status,
+        tc: meta.timeConsumed,
+        rh: meta.allResponseHeaders,
       });
     });
 

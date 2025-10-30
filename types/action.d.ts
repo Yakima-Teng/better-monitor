@@ -1,15 +1,16 @@
-interface ParamsAddAction {
-  pageUrl: string;
-  time: number;
-  level: LogLevel;
-  payload: string;
-  userId: number | string;
-  directly?: boolean;
-}
-interface ParamsDoAddActions {
-  preferSendBeacon: boolean;
-}
-
-interface ParamsAddActions extends ParamsDoAddActions {
-  delayTime: number;
+interface RequestItemAddAction {
+  // projectId
+  pi: number;
+  // sdk
+  s: string;
+  // pageUrl
+  pu: string;
+  // time
+  t: number;
+  // level
+  l: LogLevel;
+  // payload
+  p: string;
+  // userId
+  u: string;
 }

@@ -1,6 +1,6 @@
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import { addAction } from "#api/addAction";
-import { fillLeft, safeStringify } from "#scripts/StringUtils";
+import { fillLeft, limitStringLength, safeStringify } from "#scripts/StringUtils";
 
 const toDouble = (num: number | string) => {
   return fillLeft(num, 2, "0");
@@ -37,18 +37,22 @@ const doLog: FuncLog = (() => {
   // eslint-disable-next-line no-console
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]): Promise<void> => {
+    const { projectId, sdk, debug } = getStore();
     const date = new Date();
     const timeStr = getLogTime(date);
     const userId = getUserId();
-    addAction({
-      pageUrl: location.href,
-      time: date.getTime(),
-      level,
-      payload: safeStringify(args),
-      userId,
-    });
-    const store = getStore();
-    if (store.debugger) {
+    const payload = limitStringLength(safeStringify(args), 2000);
+    const dataToAdd: RequestItemAddAction = {
+      pi: projectId,
+      s: sdk,
+      pu: location.href,
+      t: date.getTime(),
+      l: level,
+      p: payload,
+      u: userId,
+    };
+    addAction(dataToAdd, false);
+    if (debug) {
       const color = getLogColorByLevel(level);
       return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
     }
@@ -62,17 +66,20 @@ const doLogDirectly: FuncLog = (() => {
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]) => {
     const date = new Date();
+    const { projectId, sdk, debug } = getStore();
     const timeStr = getLogTime(date);
-    addAction({
-      pageUrl: location.href,
-      time: date.getTime(),
-      level,
-      payload: safeStringify(args),
-      userId: getUserId(),
-      directly: true,
-    });
-    const store = getStore();
-    if (store.debugger) {
+    const dataToAdd: RequestItemAddAction = {
+      pi: projectId,
+      s: sdk,
+      pu: location.href,
+      t: date.getTime(),
+      l: level,
+      p: limitStringLength(safeStringify(args), 2000),
+      u: getUserId(),
+    };
+    addAction(dataToAdd, true);
+
+    if (debug) {
       const color = getLogColorByLevel(level);
       return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
     }

@@ -1,8 +1,20 @@
-interface ParamsAddBug {
-  time: number;
-  pageUrl: string;
-  message: string;
-  stack: string;
-  source: string;
-  type: string;
+interface RequestItemAddBug {
+  // projectId
+  pi: number;
+  // sdk
+  s: string;
+  // pageUrl
+  pu: string;
+  // message
+  m: string;
+  // userId
+  u: string;
+  // stack
+  st: string;
+  // source
+  so: string;
+  // type
+  ty: string;
+  // time
+  t: number;
 }

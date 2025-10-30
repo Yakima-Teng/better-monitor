@@ -10,9 +10,9 @@ import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
  * @param params {Object} 包含字段`{ pageUrl: string; userId: string |number; }`
  * @return {Promise<void>}
  */
-export const addView = (params: ParamsAddView): void => {
-  const { projectId, blackList } = getStore();
-  const { pageUrl } = params;
+export const addView = (params: RequestItemAddView): void => {
+  const { blackList } = getStore();
+  const { p: pageUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
     if (isString(keyword)) {
@@ -26,13 +26,13 @@ export const addView = (params: ParamsAddView): void => {
     return;
   }
   const requestUrl = `${API_PREFIX}view/addView`;
-  const requestData = { projectId, ...params };
-  const isQueued = sendBeacon(requestUrl, requestData);
+  const stringifyRequestData = JSON.stringify(params);
+  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (isQueued) return;
   axiosRequest({
     url: requestUrl,
     method: "post",
-    data: requestData,
+    data: params,
     timeout: 60 * 1000,
   }).catch((err) => {
     // eslint-disable-next-line no-console

@@ -1,10 +1,9 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
 import { getStackTrace } from "#plugin/error/modules/getStackTrace";
-import { getUserId } from "#scripts/StoreUtils";
+import { getStore, getUserId } from "#scripts/StoreUtils";
+import { limitStringLength } from "#scripts/StringUtils";
 
 export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEvent): Promise<boolean> => {
-  // eslint-disable-next-line no-console
-  console.error(e);
   try {
     e.preventDefault();
 
@@ -18,15 +17,19 @@ export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEven
     const message = reason?.message || reason || "";
     const stack = reason?.stack || getStackTrace() || "";
     const userId = getUserId();
+    const { projectId, sdk } = getStore();
+    const source = "";
 
-    const requestData = {
-      pageUrl: location.href,
-      message,
-      stack: stack.substring(0, 2000),
-      source: "",
-      type,
-      userId,
-      time: Date.now(),
+    const requestData: RequestItemAddBug = {
+      pi: projectId,
+      s: sdk,
+      pu: location.href,
+      m: message,
+      st: limitStringLength(stack, 2000),
+      so: source,
+      ty: type,
+      u: userId,
+      t: Date.now(),
     };
 
     if (!validateBugRequestData(requestData)) {

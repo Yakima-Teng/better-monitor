@@ -1,5 +1,8 @@
+import { buildVersion } from "#scripts/ConstantUtils";
+
 const store: Store = {
-  debugger: false,
+  sdk: buildVersion,
+  debug: false,
   // 项目id
   projectId: 0,
   view: true,
@@ -9,7 +12,7 @@ const store: Store = {
   statistics: true,
   // 黑名单中的接口不会进行上报
   blackList: [],
-  queuedLogs: [],
+  queuedApis: [],
   queuedActions: [],
   timeLogMap: new Map(),
   getUserId: () => {
