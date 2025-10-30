@@ -156,14 +156,27 @@ interface Store {
   getUserId: () => string;
 }
 
+interface ParamsAddBug {
+  pageUrl: string;
+  message: string;
+  stack: string;
+  source: string;
+  type: string;
+}
+
+interface ParamsAddView {
+  pageUrl: string;
+  userId?: string | number;
+}
+
 interface ExportObj {
   NODE_ENV: string;
   MODE: string;
   buildDate: string;
   buildVersion: string;
   init: (settings: Partial<Store>) => void;
-  addBug: (params: RequestItemAddBug) => void;
-  addView: (params: RequestItemAddView) => void;
+  addBug: (params: ParamsAddBug) => void;
+  addView: (params: ParamsAddView) => void;
   printLog: (...args: unknown[]) => Promise<void>;
   printWarn: (...args: unknown[]) => Promise<void>;
   printError: (...args: unknown[]) => Promise<void>;

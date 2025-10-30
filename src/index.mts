@@ -1,6 +1,6 @@
-import { getStore, updateStore } from "#scripts/StoreUtils";
-import { addBug } from "#api/addBug";
-import { addView } from "#api/addView";
+import { getStore, getUserId, updateStore } from "#scripts/StoreUtils";
+import { addBug as rawAddBug } from "#api/addBug";
+import { addView as rawAddView } from "#api/addView";
 import {
   printLog,
   printWarn,
@@ -58,6 +58,36 @@ const tryInitSettingAutomatically = () => {
 };
 
 tryInitSettingAutomatically();
+
+function addBug(params: ParamsAddBug): void {
+  const { projectId: pi, sdk: s } = getStore();
+  const u = getUserId();
+  const { pageUrl: pu, message: m, stack: st, source: so, type: ty } = params;
+  return rawAddBug({
+    pi,
+    s,
+    pu,
+    m,
+    u,
+    st,
+    so,
+    ty,
+    t: Date.now(),
+  });
+}
+function addView(params: ParamsAddView): void {
+  const { projectId: pi } = getStore();
+  const { pageUrl: p, userId } = params;
+  let u: string = String(userId || "");
+  if (!u) {
+    u = getUserId();
+  }
+  return rawAddView({
+    pi,
+    p,
+    u,
+  });
+}
 
 const exportObj: ExportObj = {
   NODE_ENV,
