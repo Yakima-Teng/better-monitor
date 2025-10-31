@@ -14,8 +14,6 @@
 
 > Automatically detect JavaScript errors in the browser. Get error detection for handled and unhandled errors with reports pushed to your email.
 
-![](https://www.verybugs.com/screenshot.gif)
-
 ## Features
 
 Main features are listed below:
@@ -39,6 +37,12 @@ In the simplest case, you only need to add one line of code, like below:
 * Note: Your should fill in your own project id created [here](https://www.verysites.com/bugs/).
 
 For more info, please refer to our [documentation](https://www.verybugs.com/doc.html).
+
+## Screenshots
+
+![](./attachments/screenshot_pv.png)
+
+![](./attachments/screenshot_bug.png)
 
 ## Contact US
 
