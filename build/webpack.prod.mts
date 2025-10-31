@@ -1,19 +1,16 @@
-const webpack = require("webpack");
-const fs = require("fs");
-const { merge } = require("webpack-merge");
-const TerserPlugin = require("terser-webpack-plugin");
-const common = require("./webpack.common.cjs");
-const { resolve, PROJECT_PATH, pkgName, pkgVersion, buildDate } = require("./constants.cjs");
-const { toCamelCase } = require("./utils.cjs");
+import webpack from "webpack";
+import { rmSync } from "node:fs";
+import { merge } from "webpack-merge";
+import TerserPlugin from "terser-webpack-plugin";
+import common from "#build/webpack.common";
+import { toCamelCase } from "#build/utils";
+import { PATH_DIST, pkgName, pkgVersion, buildDate, buildYear } from "#build/constants";
 
-const pathDist = resolve(PROJECT_PATH, "./dist");
-fs.rmSync(pathDist, { recursive: true, force: true });
-
-const year = new Date().getFullYear();
+rmSync(PATH_DIST, { recursive: true, force: true });
 
 const bannerPlugin = new webpack.BannerPlugin({
   banner: [
-    `Copyright (c) ${year} ${pkgName}. All rights reserved.`,
+    `Copyright (c) ${buildYear} ${pkgName}. All rights reserved.`,
     `Version: ${pkgVersion}`,
     `Build: ${buildDate}`,
   ].join("\n"),
@@ -31,12 +28,13 @@ const optimization = {
   ],
 };
 
-module.exports = [
+const configs: webpack.Configuration[] = [
   // 默认为UMD版本
   merge(common, {
     mode: "production",
     output: {
       clean: false,
+      // @ts-ignore
       library: {
         name: toCamelCase(pkgName),
       },
@@ -83,3 +81,5 @@ module.exports = [
     plugins: [bannerPlugin],
   }),
 ];
+
+export default configs;

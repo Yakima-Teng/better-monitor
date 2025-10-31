@@ -1,21 +1,13 @@
-const webpack = require("webpack");
-const WebpackBar = require("webpackbar");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const { toCamelCase } = require("./utils.cjs");
-const {
-  resolve,
-  PROJECT_PATH,
-  pkgName,
-  pkgVersion,
-  buildDate,
-  FRONTEND_DOMAIN,
-  BACKEND_DOMAIN,
-} = require("./constants.cjs");
+import webpack from "webpack";
+import WebpackBar from "webpackbar";
+import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+import { joinPath } from "nsuite";
+import { PATH_SRC, PATH_DIST, pkgName, pkgVersion, buildDate, FRONTEND_DOMAIN, BACKEND_DOMAIN } from "#build/constants";
 
-module.exports = {
+const config: webpack.Configuration = {
   // 定义了入口文件路径
   entry: {
-    index: resolve(PROJECT_PATH, "./src/index.mts"),
+    index: joinPath(PATH_SRC, "./index.mts"),
   },
   // 定义了编译打包之后的文件名以及所在路径。还有打包的模块类型
   output: {
@@ -30,15 +22,12 @@ module.exports = {
       export: "default",
     },
     // 路径
-    path: resolve(PROJECT_PATH, "./dist"),
+    path: PATH_DIST,
     globalObject: "this",
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "../src"),
-      "@docs": resolve(__dirname, "../docs"),
-      "@public": resolve(__dirname, "../public"),
-      "@test": resolve(__dirname, "../test"),
+      "@": PATH_SRC,
     },
     extensions: [".mts", ".ts", ".tsx", ".js"],
     plugins: [new TsconfigPathsPlugin()],
@@ -102,3 +91,5 @@ module.exports = {
     ],
   },
 };
+
+export default config;

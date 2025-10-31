@@ -1,12 +1,14 @@
-const { merge } = require("webpack-merge");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const common = require("./webpack.common.cjs");
-const { toCamelCase } = require("./utils.cjs");
-const { pkgName } = require("./constants.cjs");
+import webpack from "webpack";
+import { merge } from "webpack-merge";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import common from "#build/webpack.common";
+import { toCamelCase } from "#build/utils";
+import { pkgName } from "#build/constants";
 
-module.exports = merge(common, {
+const config: webpack.Configuration = merge(common, {
   mode: "none",
   output: {
+    // @ts-ignore
     library: {
       name: toCamelCase(pkgName),
     },
@@ -24,3 +26,5 @@ module.exports = merge(common, {
     }),
   ],
 });
+
+export default config;

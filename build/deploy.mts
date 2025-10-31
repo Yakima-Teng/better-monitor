@@ -1,9 +1,5 @@
 import { rm } from "node:fs/promises";
-import { createRequire } from "node:module";
 import {
-  parseEnvFiles,
-  getDirname,
-  joinPath,
   getConfigFromQiniuOSS,
   getMacFromQiniuOSS,
   uploadDirToQiniuOSS,
@@ -13,28 +9,15 @@ import {
   logInfo,
   logError,
 } from "nsuite";
-
-const require = createRequire(import.meta.url);
-const pkg = require("../package.json");
-const appName = pkg.name;
-
-const __dirname = getDirname(import.meta.url);
-const pathDist = joinPath(__dirname, "../dist");
-
-const { MODE } = process.env;
-
-parseEnvFiles([
-  joinPath(__dirname, "../../aimian/.env.local"),
-  joinPath(__dirname, `../../aimian/.env.${MODE}`),
-  joinPath(__dirname, "../../aimian/.env"),
-]);
-
-const {
-  QINIU_ACCESS_KEY = "",
-  QINIU_SECRET_KEY = "",
-  QINIU_BUCKET_NAME = "",
-  QINIU_PUBLIC_BUCKET_DOMAIN = "",
-} = process.env;
+import {
+  pkgName as appName,
+  MODE,
+  QINIU_ACCESS_KEY,
+  QINIU_SECRET_KEY,
+  QINIU_BUCKET_NAME,
+  QINIU_PUBLIC_BUCKET_DOMAIN,
+  PATH_DIST,
+} from "#build/constants";
 
 const CDN_PATH_PREFIX = MODE === "production" ? "verybugs" : `verybugs-${MODE}`;
 async function deployFilesToCDN() {
@@ -67,7 +50,7 @@ async function deployFilesToCDN() {
     baseUrl,
     keyPrefix,
     putPolicyOptions: {},
-    localPath: pathDist,
+    localPath: PATH_DIST,
     ignorePathList: ["node_modules"],
     refresh: false,
     recursive: true,
@@ -108,7 +91,7 @@ try {
   process.exit(1);
 }
 
-await rm(pathDist, { recursive: true, force: true });
+await rm(PATH_DIST, { recursive: true, force: true });
 
 logInfo(`Deployed successfully for app: ${appName}`);
 

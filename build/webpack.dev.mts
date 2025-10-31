@@ -1,13 +1,18 @@
-const { merge } = require("webpack-merge");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const htmlWebpackInjectAttributesPlugin = require("html-webpack-inject-attributes-plugin");
-const common = require("./webpack.common.cjs");
-const { resolve, pkgName, PROJECT_PATH } = require("./constants.cjs");
-const { toCamelCase } = require("./utils.cjs");
+import webpack from "webpack";
+// in case you run into any typescript error when configuring `devServer`
+import "webpack-dev-server";
+import { merge } from "webpack-merge";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import htmlWebpackInjectAttributesPlugin from "html-webpack-inject-attributes-plugin";
+import { joinPath } from "nsuite";
+import common from "#build/webpack.common";
+import { PATH_PUBLIC, pkgName } from "#build/constants";
+import { toCamelCase } from "#build/utils";
 
-module.exports = merge(common, {
+const config: webpack.Configuration = merge(common, {
   mode: "development",
   output: {
+    // @ts-ignore
     library: {
       name: toCamelCase(pkgName),
     },
@@ -26,7 +31,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(PROJECT_PATH, "./public/index.html"),
+      template: joinPath(PATH_PUBLIC, "./index.html"),
       scriptLoading: "blocking",
       // 添加自定义属性
       attributes: {
@@ -39,3 +44,5 @@ module.exports = merge(common, {
     new htmlWebpackInjectAttributesPlugin(),
   ],
 });
+
+export default config;
