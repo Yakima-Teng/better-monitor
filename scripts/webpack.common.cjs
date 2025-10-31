@@ -21,13 +21,14 @@ module.exports = {
   output: {
     clean: true,
     // 打包后的产物名
-    filename: `${pkgName}.min.js`,
+    filename: `${pkgName}.umd.js`,
     // 在全局变量中增加一个全局变量用于访问SDK，如 window.TypescriptSdkStarter
-    library: toCamelCase(pkgName),
-    // 打包成umd模块
-    libraryTarget: "umd",
-    // libraryExport这个属性需要设置，否则导出后，外层会包有一层default
-    libraryExport: "default",
+    library: {
+      // 打包成umd模块
+      type: "umd",
+      // export这个属性需要设置，否则导出后，外层会包有一层default
+      export: "default",
+    },
     // 路径
     path: resolve(PROJECT_PATH, "./dist"),
     globalObject: "this",

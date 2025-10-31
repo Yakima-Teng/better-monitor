@@ -5,10 +5,17 @@
   "description": "JS SDK used to report data to server for better website monitoring",
   "type": "module",
   "types": "./types/index.d.ts",
-  "main": "dist/better-monitor.common.js",
-  "module": "dist/better-monitor.esm.js",
-  "unpkg": "dist/better-monitor.js",
-  "jsdelivr": "dist/better-monitor.min.js",
+  "main": "./dist/better-monitor.cjs.js",
+  "module": "./dist/better-monitor.esm.js",
+  "browser": "./dist/better-monitor.umd.js",
+  "unpkg": "./dist/better-monitor.js",
+  "jsdelivr": "./dist/better-monitor.min.js",
+  "exports": {
+    "import": "./dist/better-monitor.esm.js",
+    "require": "./dist/better-monitor.cjs.js",
+    "browser": "./dist/better-monitor.umd.js",
+    "default": "./dist/better-monitor.cjs.js"
+  },
   "imports": {
     "#build/*": "./build/*.mts",
     "#test/*": "./test/*.mts",
@@ -19,9 +26,9 @@
     "#root/*": "./*.mts"
   },
   "files": [
-    "dist/better-monitor.common.js",
     "dist/better-monitor.esm.js",
-    "dist/better-monitor.min.js",
+    "dist/better-monitor.cjs.js",
+    "dist/better-monitor.umd.js",
     "types",
     "README.md",
     "LICENSE",
@@ -34,7 +41,7 @@
   "scripts": {
     "ready": "npm install",
     "prettier": "npx prettier --write ./src ./test ./build ./types ./scripts ./*.mts ./*.ts",
-    "eslint": "eslint --fix src/**/* test/**/* build/**/*",
+    "eslint": "eslint --fix src/**/* test/**/* build/**/* scripts/**/* ./*.mts ./*.ts ./*.cjs",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.ts",
     "type:check": "tsc --noEmit --project ./tsconfig.json",
     "lint": "npm run prettier && npm run eslint && npm run test && npm run type:check",
@@ -93,6 +100,7 @@
     "prettier": "3.6.2",
     "rimraf": "6.0.1",
     "standard-version": "9.5.0",
+    "terser-webpack-plugin": "5.3.14",
     "ts-jest": "29.4.5",
     "ts-loader": "9.5.4",
     "tsconfig-paths-webpack-plugin": "4.2.0",
