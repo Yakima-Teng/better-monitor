@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **api:** remove extra slash in addApis endpoint URL ([191e8cf](https://github.com/Yakima-Teng/better-monitor/commit/191e8cfdfce087ef2805cb737acb4589533f9748))
 * **bugs:** 统一userId类型为字符串 ([99ad015](https://github.com/Yakima-Teng/better-monitor/commit/99ad015af4ce978e7913de05e1f2aef377792c48))
 
-# Change log
+### History Changes
 
 - support update changelog automatically. (2024-2-14)
 - Add chinese document. (2024-2-15)
