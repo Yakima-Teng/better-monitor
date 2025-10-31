@@ -15,3 +15,5 @@ coverage
 /dist
 
 /.env.local
+
+.husky/_

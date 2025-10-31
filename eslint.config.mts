@@ -46,30 +46,6 @@ const config = defineConfig([
       ],
     },
   },
-  {
-    extends: [eslint.configs.recommended],
-    files: [`**/*.{cjs}`],
-    languageOptions: {
-      // 指定使用 CommonJS（script 模式）
-      sourceType: "script",
-      ecmaVersion: 2022,
-      // 注入 CommonJS 和 Node.js 全局变量
-      globals: {
-        ...globals.node, // Node.js 全局变量（__dirname, process 等）
-        ...globals.commonjs, // CommonJS 全局变量（require, module, exports）
-      },
-    },
-    rules: {
-      // 基础规则
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-      "no-undef": "error",
-      eqeqeq: ["error", "always"],
-      quotes: ["error", "single"],
-      semi: ["error", "always"],
-      indent: ["error", 2],
-      "no-console": "warn",
-    },
-  },
   eslintConfigPrettier,
 ]);
 
