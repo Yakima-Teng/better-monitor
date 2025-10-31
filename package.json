@@ -49,7 +49,6 @@
     "build": "cross-env NODE_ENV=production MODE=production webpack --config ./build/webpack.prod.mts",
     "debug": "cross-env NODE_ENV=production MODE=production webpack --config ./build/webpack.debug.mts",
     "prepare": "husky",
-    "release": "standard-version",
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
