@@ -56,9 +56,11 @@ export const safeStringify = (value: any): string => {
   }
 };
 
-export function limitStringLength(str: string, maxLength: number): string {
-  if (str.length <= maxLength) {
-    return str;
-  }
-  return str.slice(0, maxLength);
-}
+// limit string length
+export const limitStringLength = <T extends string>(str: T, len: number): T => {
+  return str.substring(0, len) as T;
+};
+
+export const toDouble = (num: number | string) => {
+  return fillLeft(num, 2, "0");
+};

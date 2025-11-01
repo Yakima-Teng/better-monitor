@@ -42,6 +42,21 @@ const configs: webpack.Configuration[] = [
     optimization,
     plugins: [bannerPlugin],
   }),
+  // .min.js其实也是UMD版本
+  merge(common, {
+    mode: "production",
+    output: {
+      clean: false,
+      // 打包后的产物名
+      filename: `${pkgName}.min.js`,
+      // @ts-ignore
+      library: {
+        name: toCamelCase(pkgName),
+      },
+    },
+    optimization,
+    plugins: [bannerPlugin],
+  }),
   // CommonJS版本
   merge(common, {
     output: {

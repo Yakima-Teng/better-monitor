@@ -2,6 +2,7 @@ import { getStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
+import { limitStringLength } from "#scripts/StringUtils";
 
 /**
  * @apiAnalyze
@@ -25,6 +26,12 @@ export const addView = (params: RequestItemAddView): void => {
   if (blackList.some(matchKeyword)) {
     return;
   }
+
+  // 限制字段长度
+  const { fields } = getStore();
+  params.p = limitStringLength(params.p, fields.MAX_LENGTH_PAGE_URL);
+  params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
+
   const requestUrl = `${API_PREFIX}view/addView`;
   const stringifyRequestData = JSON.stringify(params);
   const isQueued = sendBeacon(requestUrl, stringifyRequestData);

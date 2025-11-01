@@ -1,10 +1,6 @@
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import { addAction } from "#api/addAction";
-import { fillLeft, limitStringLength, safeStringify } from "#scripts/StringUtils";
-
-const toDouble = (num: number | string) => {
-  return fillLeft(num, 2, "0");
-};
+import { toDouble, safeStringify } from "#scripts/StringUtils";
 
 const getLogTime = (date?: Date): string => {
   const objDate = date || new Date();
@@ -54,7 +50,7 @@ const doLog: FuncLog = (() => {
     const date = new Date();
     const timeStr = getLogTime(date);
     const userId = getUserId();
-    const payload = limitStringLength(safeStringify(args), 2000);
+    const payload = safeStringify(args);
     const dataToAdd: RequestItemAddAction = {
       pi: projectId,
       s: sdk,
@@ -87,7 +83,7 @@ const doLogDirectly: FuncLog = (() => {
       pu: location.href,
       t: date.getTime(),
       l: transferLogLevelToNumber(level),
-      p: limitStringLength(safeStringify(args), 2000),
+      p: safeStringify(args),
       u: getUserId(),
     };
     addAction(dataToAdd, true);

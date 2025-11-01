@@ -16,6 +16,8 @@ type Func = (...args: unknown[]) => unknown;
 
 type FuncLog = (level: LogLevel, ...args: any[]) => Promise<void>;
 
+type BMJSONString<T = any> = string & { __brand: "JSONString"; __type: T };
+
 interface RequestListData<T> {
   l: T[];
 }
@@ -133,10 +135,51 @@ interface XMLHttpRequestWithMeta extends XMLHttpRequest {
   meta: XMLHttpRequestMeta;
 }
 
+interface BMResponseData<T = unknown> {
+  code: number;
+  data: T;
+  encrypted: boolean;
+  message: string;
+  timestamp: number;
+}
+interface BMConfigDataFields {
+  MAX_LENGTH_USER_ID: number;
+  MAX_LENGTH_PAGE_URL: number;
+  MAX_LENGTH_API_URL: number;
+  MAX_LENGTH_API_PAYLOAD: number;
+  MAX_LENGTH_REFERER: number;
+  MAX_LENGTH_COOKIE: number;
+  MAX_LENGTH_MESSAGE: number;
+  MAX_LENGTH_USER_AGENT: number;
+  MAX_LENGTH_ORIGIN: number;
+  MAX_LENGTH_MULTIPLE_ORIGINS: number;
+  MAX_LENGTH_PROJECT_NAME: number;
+  MAX_LENGTH_OPERATING_SYSTEM: number;
+  MAX_LENGTH_BROWSER: number;
+  MAX_LENGTH_DATE: number;
+  MAX_LENGTH_JSON: number;
+  MAX_LENGTH_ACTION: number;
+  MAX_LENGTH_SDK_VERSION: number;
+  MIN_LENGTH_SDK_VERSION: number;
+  MAX_LENGTH_HTTP_METHOD: number;
+  MIN_LENGTH_HTTP_METHOD: number;
+  MAX_LENGTH_HTTP_STATUS: number;
+  MAX_LENGTH_TIMESTAMP: number;
+  MAX_LENGTH_RESPONSE_HEADERS: number;
+}
+interface ConfigData {
+  projectName: string;
+  originList: string[];
+  fields: BMConfigDataFields;
+}
+
 interface Store {
   sdk: string;
   debug: boolean;
   projectId: number;
+  projectName: ConfigData["projectName"];
+  originList: ConfigData["originList"];
+  fields: ConfigData["fields"];
   // 接口日志开关
   api: boolean;
   // 访问日志开关

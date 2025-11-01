@@ -10,7 +10,7 @@ export const PATH_ROOT = joinPath(__dirname, "../");
 export const PATH_SRC = joinPath(PATH_ROOT, "./src");
 export const PATH_DIST = joinPath(PATH_ROOT, "./dist");
 export const PATH_PUBLIC = joinPath(PATH_ROOT, "./public");
-export const PATH_AIMIAN = joinPath(PATH_ROOT, "../../aimian");
+export const PATH_AIMIAN = joinPath(PATH_ROOT, "../aimian");
 
 parseEnvFiles([
   joinPath(PATH_AIMIAN, "./.env.local"),

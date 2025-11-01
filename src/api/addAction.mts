@@ -2,7 +2,7 @@ import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
-import { safeStringify } from "#scripts/StringUtils";
+import { limitStringLength, safeStringify } from "#scripts/StringUtils";
 
 let timerAddActions: number = 0;
 const clearTimerAddActions = () => {
@@ -80,6 +80,12 @@ export const addAction = (params: RequestItemAddAction, directly: boolean): void
   if (blackList.some(matchKeyword)) {
     return;
   }
+
+  // 限制字段长度
+  const { fields } = getStore();
+  params.pu = limitStringLength(params.pu, fields.MAX_LENGTH_PAGE_URL);
+  params.p = limitStringLength(params.p, fields.MAX_LENGTH_ACTION);
+  params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
 
   queuedActions.push(params);
   updateStore({ queuedActions });

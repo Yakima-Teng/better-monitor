@@ -1,7 +1,6 @@
 import { addApis, addApi } from "#api/addApi";
 import { parseSearchString } from "#scripts/UrlUtils";
 import { getStore, getUserId } from "#scripts/StoreUtils";
-import { limitStringLength } from "#scripts/StringUtils";
 
 export const initApiPlugin = () => {
   const { api } = getStore();
@@ -97,7 +96,7 @@ export const initApiPlugin = () => {
         t: meta.clientTime,
         pu: meta.pageUrl,
         au: meta.responseURL || meta.apiUrl,
-        r: limitStringLength(meta.responseText, 5000),
+        r: meta.responseText,
         u: getUserId(),
         pa: JSON.stringify(meta.params),
         da: JSON.stringify(meta.body),

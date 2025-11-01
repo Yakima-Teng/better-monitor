@@ -2,6 +2,7 @@ import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { getStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
+import { limitStringLength } from "#scripts/StringUtils";
 
 // 校验请求参数是否在黑名单中，如果返回false表示在黑名单中，不继续后续上报操作
 export const validateBugRequestData = (requestData: RequestItemAddBug): boolean => {
@@ -41,6 +42,15 @@ export const validateBugRequestData = (requestData: RequestItemAddBug): boolean 
  */
 export const addBug = (params: RequestItemAddBug): void => {
   const requestUrl = `${API_PREFIX}bug/addBug`;
+
+  // 限制字段长度
+  const { fields } = getStore();
+  params.pu = limitStringLength(params.pu, fields.MAX_LENGTH_PAGE_URL);
+  params.m = limitStringLength(params.m, fields.MAX_LENGTH_MESSAGE);
+  params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
+  if (params.so.length + params.s.length + params.ty.length > fields.MAX_LENGTH_JSON) {
+    params.so = limitStringLength(params.so, fields.MAX_LENGTH_JSON - params.s.length - params.ty.length);
+  }
 
   const stringifyRequestData = JSON.stringify(params);
   const isQueued = sendBeacon(requestUrl, stringifyRequestData);

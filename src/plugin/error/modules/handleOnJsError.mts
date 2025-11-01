@@ -1,6 +1,5 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
 import { getStore, getUserId } from "#scripts/StoreUtils";
-import { limitStringLength } from "#scripts/StringUtils";
 
 export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => {
   try {
@@ -20,7 +19,7 @@ export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => 
       pu: location.href,
       m: message,
       u: userId,
-      st: limitStringLength(stack, 2000),
+      st: stack,
       so: source,
       ty: type,
       t: Date.now(),

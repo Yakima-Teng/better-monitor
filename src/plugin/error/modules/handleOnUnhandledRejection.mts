@@ -1,7 +1,6 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
 import { getStackTrace } from "#plugin/error/modules/getStackTrace";
 import { getStore, getUserId } from "#scripts/StoreUtils";
-import { limitStringLength } from "#scripts/StringUtils";
 
 export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEvent): Promise<boolean> => {
   try {
@@ -25,7 +24,7 @@ export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEven
       s: sdk,
       pu: location.href,
       m: message,
-      st: limitStringLength(stack, 2000),
+      st: stack,
       so: source,
       ty: type,
       u: userId,

@@ -17,6 +17,7 @@ import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
 import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#scripts/ConstantUtils";
+import { queryConfigData } from "#scripts/ConfigUtils";
 
 const init = (settings: Partial<Store>): void => {
   updateStore(settings);
@@ -25,6 +26,11 @@ const init = (settings: Partial<Store>): void => {
   initApiPlugin();
   initActionPlugin();
   initErrorPlugin();
+
+  queryConfigData().catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  });
 };
 
 // 尝试找到引入better-monitor.min.js文件的script标签，如果用户主动设置了`data-project-id`属性则直接进行初始化
