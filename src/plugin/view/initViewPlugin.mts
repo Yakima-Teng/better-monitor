@@ -19,10 +19,11 @@ export const initViewPlugin = (): void => {
   }
 
   const addViewBeforeUnload = async (): Promise<void> => {
-    const { projectId } = getStore();
+    const { projectId, sdk: s } = getStore();
     const userId = getUserId();
     addView({
       pi: projectId,
+      s,
       p: location.href,
       u: userId,
     });
@@ -36,10 +37,11 @@ export const initViewPlugin = (): void => {
   const oldPushState = history.pushState;
   history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
     const userId = getUserId();
-    const { projectId } = getStore();
+    const { projectId, sdk: s } = getStore();
     oldPushState.call(history, state, unused, url);
     addView({
       pi: projectId,
+      s,
       p: location.href,
       u: userId,
     });

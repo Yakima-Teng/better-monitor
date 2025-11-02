@@ -82,7 +82,7 @@ function addBug(params: ParamsAddBug): void {
   });
 }
 function addView(params: ParamsAddView): void {
-  const { projectId: pi } = getStore();
+  const { projectId: pi, sdk: s } = getStore();
   const { pageUrl: p, userId } = params;
   let u: string = String(userId || "");
   if (!u) {
@@ -90,6 +90,7 @@ function addView(params: ParamsAddView): void {
   }
   return rawAddView({
     pi,
+    s,
     p,
     u,
   });

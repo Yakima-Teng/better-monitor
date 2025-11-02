@@ -92,6 +92,8 @@ interface RequestItemAddBug {
 interface RequestItemAddView {
   // projectId
   pi: number;
+  // sdk
+  s: string;
   // pageUrl
   p: string;
   // userId
