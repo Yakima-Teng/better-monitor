@@ -1,7 +1,7 @@
 {
   "name": "better-monitor",
   "homepage": "https://www.verybugs.com",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "JS SDK used to report data to server for better website monitoring",
   "type": "module",
   "types": "./types/index.d.ts",
