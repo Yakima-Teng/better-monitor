@@ -1,4 +1,5 @@
 import { buildVersion } from "#scripts/ConstantUtils";
+import { generateRobustUserId } from "#scripts/UserUtils";
 
 const store: Store = {
   sdk: buildVersion,
@@ -42,9 +43,7 @@ const store: Store = {
     MAX_LENGTH_TIMESTAMP: 13,
     MAX_LENGTH_RESPONSE_HEADERS: 1024 - 100 - 8 - 7 - 3 - 13,
   },
-  getUserId: () => {
-    return "";
-  },
+  getUserId: generateRobustUserId,
 };
 
 export const updateStore = (config: Partial<Store>): Store => {
