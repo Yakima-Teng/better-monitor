@@ -298,7 +298,33 @@ SDK 会对上报字段进行长度限制，确保数据不会过大。默认限�
 ## 兼容性
 
 - 支持所有现代浏览器（Chrome、Firefox、Safari、Edge 等）
-- 支持 IE11+（部分功能可能受限）
+- 支持 IE11+（部分功能可能受限，详见下方说明）
+
+### IE11 兼容性说明
+
+在 IE11 环境中，以下功能会受到影响：
+
+1. **Promise 拒绝监控（unhandledrejection）**
+   - **受限原因**：IE11 原生不支持 Promise，也不支持 `unhandledrejection` 事件
+   - **影响**：无法自动捕获未处理的 Promise 拒绝错误（如 `Promise.reject()` 未被 catch）
+   - **解决方案**：建议在业务代码中主动捕获 Promise 错误，或使用 `BetterMonitor.addBug()` 手动上报
+
+2. **sendBeacon API**
+   - **受限原因**：IE11 不支持 `navigator.sendBeacon()` API
+   - **影响**：在页面卸载时上报数据时，会降级使用 `XMLHttpRequest`，在极端情况下（如网络中断、页面强制关闭）可能丢失少量数据
+   - **解决方案**：功能仍可正常使用，但可靠性略低于现代浏览器
+
+3. **fetch API**
+   - **受限原因**：IE11 不支持 `fetch` API
+   - **影响**：SDK 会自动降级使用 `XMLHttpRequest`，功能完全可用，无实际影响
+
+**其他功能在 IE11 中均正常工作：**
+- ✅ JavaScript 运行时错误监控（`window.addEventListener('error')`）
+- ✅ XMLHttpRequest 拦截和 API 监控
+- ✅ 用户行为日志记录
+- ✅ 页面访问统计（PV/UV）
+- ✅ 手动上报功能（`addBug`、`addView`）
+- ✅ 日志打印功能（`printLog`、`printWarn`、`printError`）
 
 ## 相关链接
 
