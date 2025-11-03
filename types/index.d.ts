@@ -203,6 +203,9 @@ interface Store {
   getUserId: () => string;
 }
 
+type ParamsInitStore = Pick<Store, "projectId"> &
+  Pick<Partial<Store>, "debug" | "api" | "view" | "error" | "action" | "statistics" | "blackList" | "getUserId">;
+
 interface ParamsAddBug {
   pageUrl: string;
   message: string;
@@ -221,7 +224,7 @@ interface ExportObj {
   MODE: string;
   buildDate: string;
   buildVersion: string;
-  init: (settings: Partial<Store>) => void;
+  init: (settings: ParamsInitStore) => void;
   addBug: (params: ParamsAddBug) => void;
   addView: (params: ParamsAddView) => void;
   printLog: (...args: unknown[]) => Promise<void>;
