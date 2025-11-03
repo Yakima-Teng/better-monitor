@@ -204,7 +204,9 @@ interface Store {
 }
 
 type ParamsInitStore = Pick<Store, "projectId"> &
-  Pick<Partial<Store>, "debug" | "api" | "view" | "error" | "action" | "statistics" | "blackList" | "getUserId">;
+  Pick<Partial<Store>, "debug" | "api" | "view" | "error" | "action" | "statistics" | "blackList"> & {
+    getUserId?: (defaultStrategy: () => string) => string;
+  };
 
 interface ParamsAddBug {
   pageUrl: string;

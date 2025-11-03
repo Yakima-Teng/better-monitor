@@ -18,9 +18,19 @@ import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
 import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#scripts/ConstantUtils";
 import { queryConfigData } from "#scripts/ConfigUtils";
+import { generateRobustUserId } from "#scripts/UserUtils";
 
 const init = (settings: ParamsInitStore): void => {
-  updateStore(settings);
+  const storeToUpdate: Partial<Store> = {
+    ...settings,
+    getUserId: function () {
+      if (typeof settings.getUserId === "function") {
+        return settings.getUserId(generateRobustUserId);
+      }
+      return generateRobustUserId();
+    },
+  };
+  updateStore(storeToUpdate);
 
   initViewPlugin();
   initApiPlugin();
