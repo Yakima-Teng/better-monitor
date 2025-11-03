@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.1...v0.1.4) (2025-11-03)
+
+
+### Features
+
+* **monitor:** implement field length limits ([e2f61b2](https://github.com/Yakima-Teng/better-monitor/commit/e2f61b2ea054f80a6565e8e3369dadb7d25c44c8))
+* **user:** implement robust user ID generation mechanism ([f5246a9](https://github.com/Yakima-Teng/better-monitor/commit/f5246a9630c62979303af86e456a6100cff4ae42))
+* **view:** add sdk parameter to view tracking ([d37e0f9](https://github.com/Yakima-Teng/better-monitor/commit/d37e0f9996d79fe34690626886fda081087205c3))
+
 ### [0.1.3](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.2...v0.1.3) (2025-11-02)
 
 
