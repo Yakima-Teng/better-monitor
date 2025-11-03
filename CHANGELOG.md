@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.4...v0.1.5) (2025-11-03)
+
+
+### Features
+
+* **monitor:** enhance userId generation with custom strategy ([26139ad](https://github.com/Yakima-Teng/better-monitor/commit/26139adb7a6123fd1cc249ec73f8ece4ea15832e))
+
 ### [0.1.4](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.1...v0.1.4) (2025-11-03)
 
 
