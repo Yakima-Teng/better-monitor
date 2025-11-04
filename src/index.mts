@@ -1,6 +1,7 @@
 import { getStore, getUserId, updateStore as rawUpdateStore } from "#scripts/StoreUtils";
 import { addBug as rawAddBug } from "#api/addBug";
 import { addView as rawAddView } from "#api/addView";
+import { addEvent } from "#api/addEvent";
 import {
   printLog,
   printWarn,
@@ -122,6 +123,7 @@ const exportObj: ExportObj = {
   init,
   addBug,
   addView,
+  addEvent,
   printLog,
   printLogDirectly,
   printWarn,

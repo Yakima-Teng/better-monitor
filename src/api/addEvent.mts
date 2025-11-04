@@ -1,0 +1,46 @@
+import type { ParamsAddEvent, RequestItemAddEvent } from "#types/index";
+import { getStore } from "#scripts/StoreUtils";
+import { limitStringLength } from "#scripts/StringUtils";
+import { API_PREFIX } from "#scripts/ConstantUtils";
+import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
+
+export const addEvent = (params: ParamsAddEvent): void => {
+  const { name, payload = {} } = params;
+  const { projectId, sdk, fields } = getStore();
+
+  const requestData: RequestItemAddEvent = {
+    // projectId
+    pi: projectId,
+    // sdk
+    s: sdk,
+    // pageUrl
+    pu: location.href,
+    // event name
+    n: name,
+    // event payload
+    p: JSON.stringify(payload),
+    // time
+    t: Date.now(),
+  };
+
+  // 限制字段长度
+  requestData.pu = limitStringLength(requestData.pu, fields.MAX_LENGTH_PAGE_URL);
+  requestData.n = limitStringLength(requestData.n, fields.MAX_LENGTH_EVENT_NAME);
+  requestData.p = limitStringLength(requestData.p, fields.MAX_LENGTH_EVENT_PAYLOAD);
+
+  const requestUrl = `${API_PREFIX}event/addEvent`;
+  const stringifyRequestData = JSON.stringify(params);
+  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
+  if (isQueued) return;
+  axiosRequest(requestUrl, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json", // 告诉服务器你发送的是 JSON
+    },
+    body: stringifyRequestData,
+    timeout: 60 * 1000,
+  }).catch((err) => {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  });
+};

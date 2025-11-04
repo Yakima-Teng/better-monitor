@@ -89,6 +89,21 @@ export interface RequestItemAddBug {
   t: number;
 }
 
+export interface RequestItemAddEvent {
+  // projectId
+  pi: number;
+  // sdk
+  s: string;
+  // pageUrl
+  pu: string;
+  // event name
+  n: string;
+  // event payload
+  p: string;
+  // time
+  t: number;
+}
+
 export interface RequestItemAddView {
   // projectId
   pi: number;
@@ -154,6 +169,8 @@ export interface BMConfigDataFields {
   MAX_LENGTH_MESSAGE: number;
   MAX_LENGTH_USER_AGENT: number;
   MAX_LENGTH_ORIGIN: number;
+  MAX_LENGTH_EVENT_NAME: number;
+  MAX_LENGTH_EVENT_PAYLOAD: number;
   MAX_LENGTH_MULTIPLE_ORIGINS: number;
   MAX_LENGTH_PROJECT_NAME: number;
   MAX_LENGTH_OPERATING_SYSTEM: number;
@@ -221,6 +238,11 @@ export interface ParamsAddView {
   userId?: string | number;
 }
 
+export interface ParamsAddEvent {
+  name: string;
+  payload?: string;
+}
+
 export interface ExportObj {
   NODE_ENV: string;
   MODE: string;
@@ -229,6 +251,7 @@ export interface ExportObj {
   init: (settings: ParamsInitStore) => void;
   addBug: (params: ParamsAddBug) => void;
   addView: (params: ParamsAddView) => void;
+  addEvent: (params: ParamsAddEvent) => void;
   printLog: (...args: unknown[]) => Promise<void>;
   printWarn: (...args: unknown[]) => Promise<void>;
   printError: (...args: unknown[]) => Promise<void>;
