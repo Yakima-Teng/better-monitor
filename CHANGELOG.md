@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.5...v0.1.6) (2025-11-04)
+
+
+### Features
+
+* **deploy:** add npm publish step to deploy script ([d166782](https://github.com/Yakima-Teng/better-monitor/commit/d1667824118ca9722844232f6e27b3d13b34dd93))
+
 ### [0.1.5](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.4...v0.1.5) (2025-11-03)
 
 
