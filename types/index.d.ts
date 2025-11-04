@@ -242,4 +242,6 @@ export interface ExportObj {
   getStore: () => Store;
 }
 
-export default ExportObj;
+// 声明一个具体的导出对象实例
+declare const BetterMonitor: ExportObj;
+export default BetterMonitor;
