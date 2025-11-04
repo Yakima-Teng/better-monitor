@@ -35,7 +35,8 @@
     "#plugin/*": "./src/plugin/*.mts",
     "#scripts/*": "./src/scripts/*.mts",
     "#src/*": "./src/*.mts",
-    "#root/*": "./*.mts"
+    "#root/*": "./*.mts",
+    "#types/*": "./types/*.d.ts"
   },
   "files": [
     "dist/better-monitor.esm.js",

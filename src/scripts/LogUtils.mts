@@ -1,6 +1,7 @@
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import { addAction } from "#api/addAction";
 import { toDouble, safeStringify } from "#scripts/StringUtils";
+import type { FuncLog, LogLevel, RequestItemAddAction } from "#types/index";
 
 const getLogTime = (date?: Date): string => {
   const objDate = date || new Date();
@@ -26,7 +27,7 @@ const getLogColorByLevel = (level: LogLevel): string => {
 
 function transferLogLevelToNumber(level: LogLevel): RequestItemAddAction["l"] {
   switch (level) {
-    case "log":
+    case "info":
       return 0;
     case "warn":
       return 1;
@@ -98,10 +99,10 @@ const doLogDirectly: FuncLog = (() => {
 
 // 打印普通日志
 export const printLog = (...args: unknown[]): Promise<void> => {
-  return doLog("log", ...args);
+  return doLog("info", ...args);
 };
 export const printLogDirectly = (...args: unknown[]): Promise<void> => {
-  return doLogDirectly("log", ...args);
+  return doLogDirectly("info", ...args);
 };
 
 // 打印警告日志

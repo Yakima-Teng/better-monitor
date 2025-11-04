@@ -3,6 +3,7 @@ import { getStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import type { RequestItemAddBug } from "#types/index";
 
 // 校验请求参数是否在黑名单中，如果返回false表示在黑名单中，不继续后续上报操作
 export const validateBugRequestData = (requestData: RequestItemAddBug): boolean => {

@@ -1,5 +1,6 @@
 import { buildVersion } from "#scripts/ConstantUtils";
 import { generateRobustUserId } from "#scripts/UserUtils";
+import type { Store } from "#types/index";
 
 const store: Store = {
   sdk: buildVersion,

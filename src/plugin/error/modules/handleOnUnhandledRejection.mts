@@ -1,6 +1,7 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
 import { getStackTrace } from "#plugin/error/modules/getStackTrace";
 import { getStore, getUserId } from "#scripts/StoreUtils";
+import type { RequestItemAddBug } from "#types/index";
 
 export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEvent): Promise<boolean> => {
   try {

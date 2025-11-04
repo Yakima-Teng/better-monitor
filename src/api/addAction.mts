@@ -3,6 +3,7 @@ import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { limitStringLength, safeStringify } from "#scripts/StringUtils";
+import type { RequestItemAddAction, RequestListData } from "#types/index";
 
 let timerAddActions: number = 0;
 const clearTimerAddActions = () => {

@@ -3,6 +3,7 @@ import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import type { RequestItemAddApi, RequestListData } from "#types/index";
 
 /**
  * 批量上报接口日志

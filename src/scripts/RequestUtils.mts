@@ -1,3 +1,5 @@
+import type { RequestOptions } from "#types/index";
+
 export const sendBeacon = (url: string, jsonString: string): boolean => {
   if (typeof navigator.sendBeacon === "function") {
     // 请求接口以Beacon结尾，方便服务端判断是否为sendBeacon发起的ping请求（依赖服务端判断content-type为text/plain和accept为*/*等特征并不稳妥，因为非ping请求也能带这些特征）

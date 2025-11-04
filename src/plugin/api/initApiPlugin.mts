@@ -1,6 +1,7 @@
 import { addApis, addApi } from "#api/addApi";
 import { parseSearchString } from "#scripts/UrlUtils";
 import { getStore, getUserId } from "#scripts/StoreUtils";
+import type { XMLHttpRequestMeta, XMLHttpRequestWithMeta } from "#types/index";
 
 export const initApiPlugin = () => {
   const { api } = getStore();

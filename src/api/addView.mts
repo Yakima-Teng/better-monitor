@@ -3,6 +3,7 @@ import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import type { RequestItemAddView } from "#types/index";
 
 /**
  * @apiAnalyze

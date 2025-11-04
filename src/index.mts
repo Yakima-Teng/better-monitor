@@ -19,6 +19,7 @@ import { initViewPlugin } from "#plugin/view/initViewPlugin";
 import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#scripts/ConstantUtils";
 import { queryConfigData } from "#scripts/ConfigUtils";
 import { generateRobustUserId } from "#scripts/UserUtils";
+import type { ExportObj, ParamsAddBug, ParamsAddView, ParamsInitStore, Store } from "#types/index";
 
 const init = (settings: ParamsInitStore): void => {
   const storeToUpdate: Partial<Store> = {
@@ -92,6 +93,7 @@ function addBug(params: ParamsAddBug): void {
   });
 }
 function addView(params: ParamsAddView): void {
+  // TODO
   window.console.log("addView 方法已废弃，后续将不再对外暴露，请勿继续使用该 API。");
   const { projectId: pi, sdk: s } = getStore();
   const { pageUrl: p, userId } = params;
@@ -107,6 +109,7 @@ function addView(params: ParamsAddView): void {
   });
 }
 function updateStore(params: Partial<Store>) {
+  // TODO
   window.console.log("updateStore 方法已废弃，后续将不再对外暴露，请勿继续使用该 API。");
   return rawUpdateStore(params);
 }
@@ -128,7 +131,6 @@ const exportObj: ExportObj = {
   logTime,
   logTimeEnd,
   logTimeEndDirectly,
-  // TODO: 该 API 后续将废弃
   updateStore,
   getStore,
 };

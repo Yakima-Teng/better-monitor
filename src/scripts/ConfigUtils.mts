@@ -1,6 +1,7 @@
 import { axiosRequest } from "#scripts/RequestUtils";
 import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
+import type { BMResponseData, ConfigData } from "#types/index";
 
 export async function queryConfigData(): Promise<void> {
   try {

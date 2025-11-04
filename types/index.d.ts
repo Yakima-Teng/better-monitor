@@ -1,4 +1,4 @@
-type LogLevel = "log" | "warn" | "error";
+type LogLevel = "info" | "warn" | "error";
 
 type VariableType =
   | "object"
@@ -221,7 +221,7 @@ interface ParamsAddView {
   userId?: string | number;
 }
 
-interface ExportObj {
+export interface ExportObj {
   NODE_ENV: string;
   MODE: string;
   buildDate: string;

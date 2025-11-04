@@ -1,3 +1,5 @@
+import type { Func, VariableType } from "#types/index";
+
 export const getError = (err?: unknown): Error => {
   if (typeof err === "string") {
     return new Error(err);
