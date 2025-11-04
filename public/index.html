@@ -213,6 +213,14 @@
       <div class="group-title">Network Requests</div>
       <button id="btnSendAjax" class="btn btn-success">Send AJAX Request</button>
     </div>
+
+    <!-- 在现有的 .buttons-grid 中添加新的按钮组 -->
+    <div class="button-group">
+      <div class="group-title">事件埋点</div>
+      <button id="btnTrackEvent" class="btn btn-primary">触发事件埋点</button>
+      <button id="btnTrackCustomEvent" class="btn btn-info">触发自定义事件埋点</button>
+    </div>
+
   </div>
 
   <div class="footer">
@@ -266,6 +274,19 @@
       xhr.open('GET', 'https://www.baidu.com');
       xhr.send();
     })
+    // 在 window.addEventListener('load', function () { ... }) 内添加以下代码
+    document.getElementById('btnTrackEvent').addEventListener('click', function () {
+      BetterMonitor.addEvent('user_click');
+    });
+
+    document.getElementById('btnTrackCustomEvent').addEventListener('click', function () {
+      BetterMonitor.addEvent('111222333', {
+        custom: true,
+        source: 'user_input',
+        value: Math.random()
+      });
+    });
+
   });
 </script>
 </body>

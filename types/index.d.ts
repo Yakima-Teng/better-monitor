@@ -251,7 +251,7 @@ export interface ExportObj {
   init: (settings: ParamsInitStore) => void;
   addBug: (params: ParamsAddBug) => void;
   addView: (params: ParamsAddView) => void;
-  addEvent: (params: ParamsAddEvent) => void;
+  addEvent: (name: string, payload?: object) => void;
   printLog: (...args: unknown[]) => Promise<void>;
   printWarn: (...args: unknown[]) => Promise<void>;
   printError: (...args: unknown[]) => Promise<void>;

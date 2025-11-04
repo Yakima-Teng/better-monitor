@@ -1,11 +1,10 @@
-import type { ParamsAddEvent, RequestItemAddEvent } from "#types/index";
+import type { RequestItemAddEvent } from "#types/index";
 import { getStore } from "#scripts/StoreUtils";
 import { limitStringLength } from "#scripts/StringUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 
-export const addEvent = (params: ParamsAddEvent): void => {
-  const { name, payload = {} } = params;
+export const addEvent = (name: string, payload?: object): void => {
   const { projectId, sdk, fields } = getStore();
 
   const requestData: RequestItemAddEvent = {
@@ -18,7 +17,7 @@ export const addEvent = (params: ParamsAddEvent): void => {
     // event name
     n: name,
     // event payload
-    p: JSON.stringify(payload),
+    p: JSON.stringify(payload || {}),
     // time
     t: Date.now(),
   };
@@ -29,7 +28,7 @@ export const addEvent = (params: ParamsAddEvent): void => {
   requestData.p = limitStringLength(requestData.p, fields.MAX_LENGTH_EVENT_PAYLOAD);
 
   const requestUrl = `${API_PREFIX}event/addEvent`;
-  const stringifyRequestData = JSON.stringify(params);
+  const stringifyRequestData = JSON.stringify(requestData);
   const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (isQueued) return;
   axiosRequest(requestUrl, {
