@@ -65,7 +65,7 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "deploy": "npm publish --registry=https://registry.npmjs.org/ &&cross-env NODE_ENV=production MODE=production node ./build/deploy.mts",
+    "deploy": "git push --follow-tags origin main &&npm publish --registry=https://registry.npmjs.org/ &&cross-env NODE_ENV=production MODE=production node ./build/deploy.mts",
     "buildAndDeploy": "node --run build && node --run deploy"
   },
   "keywords": [
