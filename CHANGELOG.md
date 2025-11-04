@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.6...v0.1.7) (2025-11-04)
+
+
+### Features
+
+* **types:** add type definitions and update log level ([0774dd1](https://github.com/Yakima-Teng/better-monitor/commit/0774dd1dafdb95c323be61c6a51d6cc01ee281c2))
+
 ### [0.1.6](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.5...v0.1.6) (2025-11-04)
 
 
