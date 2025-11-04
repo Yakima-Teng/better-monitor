@@ -26,6 +26,13 @@
 
 **注意**：该 SDK 需搭配后端服务使用。你可以参考项目文档自行实现后端服务，或者使用我们的[在线服务](https://www.verybugs.com/)（适合**访问量不大**的站点）。
 
+## 相关链接
+
+- [官方网站](https://www.verybugs.com)
+- [API 文档](https://www.verybugs.com/doc.html)
+- [GitHub 仓库](https://github.com/Yakima-Teng/better-monitor)
+- [NPM 包](https://www.npmjs.com/package/better-monitor)
+
 ## 快速开始
 
 ### 方式一：CDN 引入（推荐）
@@ -41,7 +48,7 @@
 if ("BetterMonitor" in window) {
   // 初始化 SDK 参数
   window.BetterMonitor.init({
-    // 替换成你的项目ID，其他可配置参数见后文
+    // 替换成你的项目ID，其他可配置参数见 API 文档
     projectId: 999,
   });
 }
@@ -71,14 +78,10 @@ import BetterMonitor from "better-monitor";
 
 // 初始化 SDK 参数
 BetterMonitor.init({
-  // 替换成你的项目ID，其他可配置参数见后文
+  // 替换成你的项目ID，其他可配置参数见 API 文档
   projectId: 999,
 });
 ```
-
-## API 文档
-
-详见 [BetterMonitor SDK 使用文档](https://www.verybugs.com/doc.html)。
 
 ## 截图展示
 
@@ -89,13 +92,6 @@ BetterMonitor.init({
 ### JS 报错日志
 
 ![](./attachments/screenshot_bug.png)
-
-## 相关链接
-
-- [官方网站](https://www.verybugs.com)
-- [项目文档](https://www.verybugs.com/doc.html)
-- [GitHub 仓库](https://github.com/Yakima-Teng/better-monitor)
-- [NPM 包](https://www.npmjs.com/package/better-monitor)
 
 ## 许可证
 

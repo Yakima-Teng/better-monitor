@@ -8,13 +8,25 @@
   "main": "./dist/better-monitor.cjs.js",
   "module": "./dist/better-monitor.esm.js",
   "browser": "./dist/better-monitor.umd.js",
-  "unpkg": "./dist/better-monitor.js",
+  "unpkg": "./dist/better-monitor.min.js",
   "jsdelivr": "./dist/better-monitor.min.js",
   "exports": {
-    "import": "./dist/better-monitor.esm.js",
-    "require": "./dist/better-monitor.cjs.js",
-    "browser": "./dist/better-monitor.umd.js",
-    "default": "./dist/better-monitor.cjs.js"
+    "import": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/better-monitor.esm.js"
+    },
+    "require": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/better-monitor.cjs.js"
+    },
+    "browser": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/better-monitor.umd.js"
+    },
+    "default": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/better-monitor.cjs.js"
+    }
   },
   "imports": {
     "#build/*": "./build/*.mts",
