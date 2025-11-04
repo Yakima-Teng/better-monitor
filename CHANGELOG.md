@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.9...v0.1.10) (2025-11-04)
+
+
+### Bug Fixes
+
+* **view:** update addViewBeforeUnload function to remove async and handle document ready state ([c8fd481](https://github.com/Yakima-Teng/better-monitor/commit/c8fd4819f739ede3a84ba9e7de10d34912489b58))
+
 ### [0.1.9](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.8...v0.1.9) (2025-11-04)
 
 
