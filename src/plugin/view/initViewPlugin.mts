@@ -18,7 +18,7 @@ export const initViewPlugin = (): void => {
     return;
   }
 
-  const addViewBeforeUnload = async (): Promise<void> => {
+  const addViewBeforeUnload = (): void => {
     const { projectId, sdk: s } = getStore();
     const userId = getUserId();
     addView({
@@ -31,6 +31,11 @@ export const initViewPlugin = (): void => {
 
   window.addEventListener("load", addViewBeforeUnload);
   window.addEventListener("hashchange", addViewBeforeUnload);
+
+  // 执行到这段代码的时候，可能 load 事件已经触发过了，这时候需要判断如果 readyState === 'complete' 时手动执行一次
+  if (document.readyState === "complete") {
+    addViewBeforeUnload();
+  }
 
   const { history } = window;
   // 劫持pushState
