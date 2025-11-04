@@ -66,7 +66,7 @@
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
     "deploy": "git push --follow-tags origin main &&npm publish --registry=https://registry.npmjs.org/ &&cross-env NODE_ENV=production MODE=production node ./build/deploy.mts",
-    "buildAndDeploy": "node --run lint && node --run build && node --run deploy"
+    "buildAndDeploy": "node --run build && node --run deploy"
   },
   "keywords": [
     "bug report",

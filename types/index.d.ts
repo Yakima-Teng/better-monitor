@@ -1,6 +1,6 @@
-type LogLevel = "info" | "warn" | "error";
+export type LogLevel = "info" | "warn" | "error";
 
-type VariableType =
+export type VariableType =
   | "object"
   | "array"
   | "function"
@@ -12,17 +12,17 @@ type VariableType =
   | "regexp"
   | "string";
 
-type Func = (...args: unknown[]) => unknown;
+export type Func = (...args: unknown[]) => unknown;
 
-type FuncLog = (level: LogLevel, ...args: any[]) => Promise<void>;
+export type FuncLog = (level: LogLevel, ...args: any[]) => Promise<void>;
 
-type BMJSONString<T = any> = string & { __brand: "JSONString"; __type: T };
+export type BMJSONString<T = any> = string & { __brand: "JSONString"; __type: T };
 
-interface RequestListData<T> {
+export interface RequestListData<T> {
   l: T[];
 }
 
-interface RequestItemAddAction {
+export interface RequestItemAddAction {
   // projectId
   pi: number;
   // sdk
@@ -39,7 +39,7 @@ interface RequestItemAddAction {
   u: string;
 }
 
-interface RequestItemAddApi {
+export interface RequestItemAddApi {
   // projectId
   pi: number;
   // sdk
@@ -68,7 +68,7 @@ interface RequestItemAddApi {
   rh: string;
 }
 
-interface RequestItemAddBug {
+export interface RequestItemAddBug {
   // projectId
   pi: number;
   // sdk
@@ -89,7 +89,7 @@ interface RequestItemAddBug {
   t: number;
 }
 
-interface RequestItemAddView {
+export interface RequestItemAddView {
   // projectId
   pi: number;
   // sdk
@@ -100,7 +100,7 @@ interface RequestItemAddView {
   u: string;
 }
 
-interface RequestOptions extends RequestInit {
+export interface RequestOptions extends RequestInit {
   /**
    * 是否携带凭证（cookies、HTTP 认证等）
    * - true: 同源和跨域都携带（等价于 credentials: 'include'）
@@ -117,7 +117,7 @@ interface RequestOptions extends RequestInit {
   timeout?: number;
 }
 
-interface XMLHttpRequestMeta {
+export interface XMLHttpRequestMeta {
   method: string;
   pageUrl: string;
   apiUrl: string;
@@ -133,18 +133,18 @@ interface XMLHttpRequestMeta {
   // 客户端时间戳
   clientTime: number;
 }
-interface XMLHttpRequestWithMeta extends XMLHttpRequest {
+export interface XMLHttpRequestWithMeta extends XMLHttpRequest {
   meta: XMLHttpRequestMeta;
 }
 
-interface BMResponseData<T = unknown> {
+export interface BMResponseData<T = unknown> {
   code: number;
   data: T;
   encrypted: boolean;
   message: string;
   timestamp: number;
 }
-interface BMConfigDataFields {
+export interface BMConfigDataFields {
   MAX_LENGTH_USER_ID: number;
   MAX_LENGTH_PAGE_URL: number;
   MAX_LENGTH_API_URL: number;
@@ -169,13 +169,13 @@ interface BMConfigDataFields {
   MAX_LENGTH_TIMESTAMP: number;
   MAX_LENGTH_RESPONSE_HEADERS: number;
 }
-interface ConfigData {
+export interface ConfigData {
   projectName: string;
   originList: string[];
   fields: BMConfigDataFields;
 }
 
-interface Store {
+export interface Store {
   sdk: string;
   debug: boolean;
   projectId: number;
@@ -203,12 +203,12 @@ interface Store {
   getUserId: () => string;
 }
 
-type ParamsInitStore = Pick<Store, "projectId"> &
+export type ParamsInitStore = Pick<Store, "projectId"> &
   Pick<Partial<Store>, "debug" | "api" | "view" | "error" | "action" | "statistics" | "blackList"> & {
     getUserId?: (defaultStrategy: () => string) => string;
   };
 
-interface ParamsAddBug {
+export interface ParamsAddBug {
   pageUrl: string;
   message: string;
   stack: string;
@@ -216,7 +216,7 @@ interface ParamsAddBug {
   type: string;
 }
 
-interface ParamsAddView {
+export interface ParamsAddView {
   pageUrl: string;
   userId?: string | number;
 }
@@ -241,3 +241,5 @@ export interface ExportObj {
   updateStore: (config: Partial<Store>) => Store;
   getStore: () => Store;
 }
+
+export default ExportObj;
