@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.10...v0.1.11) (2025-11-05)
+
+
+### Features
+
+* **bugs:** 增加事件上报接口并优化消费者配置 ([420ca3f](https://github.com/Yakima-Teng/better-monitor/commit/420ca3f8943cbab2d467b67ca7558978cedef068))
+* **monitor:** add event tracking functionality ([98b58f6](https://github.com/Yakima-Teng/better-monitor/commit/98b58f6fc0f3177d4ba0c7580ca58cb1178e9cd3))
+
 ### [0.1.10](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.9...v0.1.10) (2025-11-04)
 
 
