@@ -3,7 +3,7 @@ import { getStackTrace } from "#plugin/error/modules/getStackTrace";
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import type { RequestItemAddBug } from "#types/index";
 
-export const handlerFuncForJsUnhandledRejection = async (e: PromiseRejectionEvent): Promise<boolean> => {
+export const handlerFuncForJsUnhandledRejection = (e: PromiseRejectionEvent): boolean => {
   try {
     e.preventDefault();
 

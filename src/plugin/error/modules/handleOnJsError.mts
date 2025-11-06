@@ -2,7 +2,7 @@ import { addBug, validateBugRequestData } from "#api/addBug";
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import type { RequestItemAddBug } from "#types/index";
 
-export const handlerFuncForJsError = async (e: ErrorEvent): Promise<boolean> => {
+export const handlerFuncForJsError = (e: ErrorEvent): boolean => {
   try {
     e.preventDefault();
 
