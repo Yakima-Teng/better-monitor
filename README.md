@@ -13,16 +13,22 @@
   <a href="https://github.com/Yakima-Teng/better-monitor" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/github/stars/Yakima-Teng/better-monitor.svg?label=Star&color=yellow" alt="GitHub Stars">
   </a>
+  <a href="https://github.com/Yakima-Teng/better-monitor">
+    <img src="https://img.shields.io/badge/dependencies-0-brightgreen.svg" alt="Zero Dependencies">
+  </a>
 </p>
 
-**better-monitor** 是一个前端日志监控SDK，用于帮助开发者快速集成前端监控功能，SDK 代码已完全开源在 [GitHub](https://github.com/Yakima-Teng/better-monitor)（如有帮助，请 star 支持一下😎）。
+**better-monitor** 是一个**完全零依赖**的前端日志监控SDK，用于帮助开发者快速集成前端监控功能，SDK 代码已完全开源在 [GitHub](https://github.com/Yakima-Teng/better-monitor)（如有帮助，请 star 支持一下😎）。
 
-- 🔥 **错误监控**：支持捕获 JavaScript 报错：`error` 和 `unhandledrejection`。
-- 🔥 **API 监控**：支持拦截并记录基于 XMLHttpRequest 对象的接口请求/响应数据（支持 `axios`、`jQuery` 等库）。
-- 🔥 **行为日志**：记录用户操作日志，支持按时间顺序追踪用户行为。
-- 🔥 **访问统计**：自动记录访问统计数据：PV（页面访问量）、UV（独立访客数）和 BV（浏览器/操作系统访问量）。
-- 🔥 **埋点统计**：支持上报事件埋点查看统计信息。
-- 🔥 **性能测量**：提供时间测量功能，方便追踪性能问题。
+## ✨ 核心优势
+
+- 🚀 **完全零依赖**：不依赖任何第三方库，体积小巧，加载速度快，避免依赖冲突
+- 🔥 **错误监控**：支持捕获 JavaScript 报错：`error` 和 `unhandledrejection`
+- 🔥 **API 监控**：支持拦截并记录基于 XMLHttpRequest 对象的接口请求/响应数据（支持 `axios`、`jQuery` 等库）
+- 🔥 **行为日志**：记录用户操作日志，支持按时间顺序追踪用户行为
+- 🔥 **访问统计**：自动记录访问统计数据：PV（页面访问量）、UV（独立访客数）和 BV（浏览器/操作系统访问量）
+- 🔥 **埋点统计**：支持上报事件埋点查看统计信息
+- 🔥 **性能测量**：提供时间测量功能，方便追踪性能问题
 
 **注意**：该 SDK 需搭配后端服务使用。你可以参考项目文档自行实现后端服务，或者使用我们的[在线服务](https://www.verybugs.com/)（适合**访问量不大**的站点）。
 
@@ -69,7 +75,7 @@ if ("BetterMonitor" in window) {
 ### 方式二：NPM 安装
 
 ```bash
-# 在项目里安装依赖
+# 在项目里安装依赖 - 完全零依赖，无需担心版本冲突
 npm install -S better-monitor
 ```
 
@@ -83,15 +89,39 @@ BetterMonitor.init({
 });
 ```
 
+## 🎯 零依赖优势
+
+better-monitor 采用完全零依赖设计，带来以下显著优势：
+
+### 体积优势
+- **极小的包体积**：压缩后仅几十KB，加载速度快
+- **无额外依赖**：不会引入任何第三方库，避免依赖膨胀
+
+### 兼容性优势
+- **无版本冲突**：不会与项目中的其他依赖产生冲突
+- **稳定可靠**：不依赖外部库，避免因第三方库更新导致的兼容性问题
+
+### 安全性优势
+- **代码透明**：所有功能都是自主实现，代码完全可控
+- **安全可靠**：避免引入第三方库可能带来的安全风险
+
 ## 截图展示
 
-### PV 统计
+<details>
+<summary>点击展开查看 PV 统计截图</summary>
+<br />
 
-![](./attachments/screenshot_pv.png)
+![PV 统计截图](./attachments/screenshot_pv.png)
 
-### JS 报错日志
+</details>
 
-![](./attachments/screenshot_bug.png)
+<details>
+<summary>点击展开查看 JS 报错日志截图</summary>
+<br />
+
+![JS 报错日志截图](./attachments/screenshot_bug.png)
+
+</details>  
 
 ## 许可证
 
