@@ -126,8 +126,5 @@
     "webpack-dev-server": "5.2.2",
     "webpack-merge": "6.0.1",
     "webpackbar": "7.0.0"
-  },
-  "dependencies": {
-    "object-inspect": "1.13.4"
   }
 }

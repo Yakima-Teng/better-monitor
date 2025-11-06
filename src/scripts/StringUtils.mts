@@ -1,5 +1,3 @@
-import inspect from "object-inspect";
-
 /**
  * @apiAnalyze
  * 将一个数字或字符串用指定的字符从左侧开始填充到指定长度
@@ -29,30 +27,31 @@ export const fillLeft = (val: string | number, len: number, symbol: string): str
 };
 
 export const safeStringify = (value: any): string => {
+  if (typeof value === "string") {
+    return value;
+  }
   try {
-    if (typeof value === "string") {
-      return value;
-    }
-    return inspect(value);
+    return JSON.stringify(value);
   } catch (err: any) {
     // eslint-disable-next-line no-console
-    console.log("safeStringify inspect error, try JSON.stringify:", err);
+    console.log("safeStringify1 error:", err);
     try {
-      return JSON.stringify(
-        Object.keys(value).reduce(
-          (prev, curr) => {
-            prev[curr] = String(value[curr]);
-            return prev;
-          },
-          {} as Record<string, string>,
-        ),
-      );
+      if (value && typeof value === "object") {
+        return JSON.stringify(
+          Object.keys(value).reduce(
+            (prev, curr) => {
+              prev[curr] = String(value[curr]);
+              return prev;
+            },
+            {} as Record<string, string>,
+          ),
+        );
+      }
     } catch (e2: any) {
-      return JSON.stringify({
-        type: "error",
-        msg: e2?.message || "",
-      });
+      // eslint-disable-next-line no-console
+      console.log("safeStringify2 error:", e2);
     }
+    return String(value);
   }
 };
 
