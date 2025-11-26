@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.12...v0.1.13) (2025-11-26)
+
+
+### Features
+
+* **api:** implement token request deduplication in getProjectId function ([a7fa77f](https://github.com/Yakima-Teng/better-monitor/commit/a7fa77f5f6560ddfa324109b20ddaf1616ba4db0))
+* **api:** refactor bug, view, and action reporting to support asynchronous projectId retrieval ([e7806c6](https://github.com/Yakima-Teng/better-monitor/commit/e7806c6a2d2f87d99683ea885c2a4da01e212aa3))
+
 ### [0.1.12](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.11...v0.1.12) (2025-11-06)
 
 ### [0.1.11](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.10...v0.1.11) (2025-11-05)
