@@ -17,11 +17,11 @@ export const handlerFuncForJsUnhandledRejection = (e: PromiseRejectionEvent): bo
     const message = reason?.message || reason || "";
     const stack = reason?.stack || getStackTrace() || "";
     const userId = getUserId();
-    const { projectId, sdk } = getStore();
+    const { sdk } = getStore();
     const source = "";
 
     const requestData: RequestItemAddBug = {
-      pi: projectId,
+      pi: "", // 临时值，addBug 内部会异步获取并替换
       s: sdk,
       pu: location.href,
       m: message,
@@ -36,7 +36,11 @@ export const handlerFuncForJsUnhandledRejection = (e: PromiseRejectionEvent): bo
       return true;
     }
 
-    addBug(requestData);
+    // addBug 现在是异步的，但不阻塞错误处理
+    addBug(requestData).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error("BetterMonitor: Failed to report error:", err);
+    });
     return true;
   } catch (err) {
     // eslint-disable-next-line no-console

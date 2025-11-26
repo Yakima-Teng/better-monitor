@@ -3,6 +3,7 @@ import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import { getProjectId, getProjectIdSync } from "#scripts/ProjectIdUtils";
 import type { RequestItemAddView } from "#types/index";
 
 /**
@@ -12,8 +13,8 @@ import type { RequestItemAddView } from "#types/index";
  * @param params {Object} 包含字段`{ pageUrl: string; userId: string |number; }`
  * @return {Promise<void>}
  */
-export const addView = (params: RequestItemAddView): void => {
-  const { blackList } = getStore();
+export const addView = async (params: RequestItemAddView): Promise<void> => {
+  const { blackList, sdk, fields } = getStore();
   const { p: pageUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
@@ -29,14 +30,36 @@ export const addView = (params: RequestItemAddView): void => {
   }
 
   // 限制字段长度
-  const { fields } = getStore();
   params.p = limitStringLength(params.p, fields.MAX_LENGTH_PAGE_URL);
   params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
 
+  // 先尝试同步获取 projectId（用于 sendBeacon）
+  let projectId = getProjectIdSync();
+
+  if (projectId) {
+    // 同步获取成功，立即使用 sendBeacon
+    params.pi = projectId;
+    params.s = sdk;
+    const requestUrl = `${API_PREFIX}view/addView`;
+    const stringifyRequestData = JSON.stringify(params);
+    const isQueued = sendBeacon(requestUrl, stringifyRequestData);
+    if (isQueued) return;
+  }
+
+  // 同步获取失败或 sendBeacon 失败，异步获取 projectId 并使用 axiosRequest
+  projectId = await getProjectId();
+  if (!projectId) {
+    // eslint-disable-next-line no-console
+    console.warn("BetterMonitor: Failed to get projectId, skip reporting");
+    return;
+  }
+
+  // 设置 projectId 和 sdk
+  params.pi = projectId;
+  params.s = sdk;
+
   const requestUrl = `${API_PREFIX}view/addView`;
   const stringifyRequestData = JSON.stringify(params);
-  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
-  if (isQueued) return;
   axiosRequest(requestUrl, {
     method: "post",
     headers: {

@@ -1,14 +1,24 @@
 import { axiosRequest } from "#scripts/RequestUtils";
 import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
+import { getProjectId } from "#scripts/ProjectIdUtils";
 import type { BMResponseData, ConfigData } from "#types/index";
 
 export async function queryConfigData(): Promise<void> {
   try {
-    const { sdk, projectId } = getStore();
-    if (!sdk || !projectId) {
+    const { sdk } = getStore();
+    if (!sdk) {
       return;
     }
+
+    // 获取 projectId（支持异步）
+    const projectId = await getProjectId();
+    if (!projectId) {
+      // eslint-disable-next-line no-console
+      console.warn("BetterMonitor: Failed to get projectId, skip querying config");
+      return;
+    }
+
     const requestUrl = `${API_PREFIX}project/sdk-config?id=${projectId}&sdk=${sdk}`;
     const res = await axiosRequest<BMResponseData<ConfigData>>(requestUrl, {
       method: "get",

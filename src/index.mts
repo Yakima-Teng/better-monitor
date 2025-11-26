@@ -77,12 +77,13 @@ const tryInitSettingAutomatically = () => {
 
 tryInitSettingAutomatically();
 
-function addBug(params: ParamsAddBug): void {
-  const { projectId: pi, sdk: s } = getStore();
+async function addBug(params: ParamsAddBug): Promise<void> {
+  const { sdk: s } = getStore();
   const u = getUserId();
   const { pageUrl: pu, message: m, stack: st, source: so, type: ty } = params;
+  // rawAddBug 内部会异步获取 projectId，这里传递临时值
   return rawAddBug({
-    pi,
+    pi: "", // 临时值，rawAddBug 内部会异步获取并替换
     s,
     pu,
     m,
@@ -93,17 +94,18 @@ function addBug(params: ParamsAddBug): void {
     t: Date.now(),
   });
 }
-function addView(params: ParamsAddView): void {
+async function addView(params: ParamsAddView): Promise<void> {
   // TODO
   window.console.log("addView 方法已废弃，后续将不再对外暴露，请勿继续使用该 API。");
-  const { projectId: pi, sdk: s } = getStore();
+  const { sdk: s } = getStore();
   const { pageUrl: p, userId } = params;
   let u: string = String(userId || "");
   if (!u) {
     u = getUserId();
   }
+  // rawAddView 内部会异步获取 projectId，这里传递临时值
   return rawAddView({
-    pi,
+    pi: "", // 临时值，rawAddView 内部会异步获取并替换
     s,
     p,
     u,

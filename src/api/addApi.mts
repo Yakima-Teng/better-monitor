@@ -3,18 +3,26 @@ import { getStore, updateStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import { getProjectId } from "#scripts/ProjectIdUtils";
 import type { RequestItemAddApi, RequestListData } from "#types/index";
 
 /**
  * 批量上报接口日志
  */
-export const addApis = (): void => {
+export const addApis = async (): Promise<void> => {
   const { queuedApis } = getStore();
 
   if (queuedApis.length === 0) return;
 
+  // 确保所有队列中的数据都有有效的 projectId
+  const validApis = queuedApis.filter((api) => api.pi !== undefined && api.pi !== null && api.pi !== "");
+  if (validApis.length === 0) {
+    updateStore({ queuedApis: [] });
+    return;
+  }
+
   const requestUrl = `${API_PREFIX}api/addApis`;
-  const requestData: RequestListData<RequestItemAddApi> = { l: queuedApis };
+  const requestData: RequestListData<RequestItemAddApi> = { l: validApis };
   const stringifyRequestData = JSON.stringify(requestData);
   const isQueued = sendBeacon(requestUrl, stringifyRequestData);
   if (!isQueued) {
@@ -40,8 +48,8 @@ export const addApis = (): void => {
  * @param params {Object} 包含字段`{ pageUrl: string; apiUrl: string; payload: string; response: string; json: string; }`
  * @return {Promise<void>}
  */
-export const addApi = (params: RequestItemAddApi): void => {
-  const { blackList, queuedApis } = getStore();
+export const addApi = async (params: RequestItemAddApi): Promise<void> => {
+  const { blackList, queuedApis, sdk, fields } = getStore();
   const { au: apiUrl } = params;
 
   const matchKeyword = (keyword: string | RegExp): boolean => {
@@ -61,8 +69,15 @@ export const addApi = (params: RequestItemAddApi): void => {
     return;
   }
 
+  // 获取 projectId（支持异步）
+  const projectId = await getProjectId();
+  if (!projectId) {
+    // eslint-disable-next-line no-console
+    console.warn("BetterMonitor: Failed to get projectId, skip reporting");
+    return;
+  }
+
   // 对上报字段长度进行限制
-  const { fields } = getStore();
   params.pu = limitStringLength(params.pu, fields.MAX_LENGTH_PAGE_URL);
   params.au = limitStringLength(params.au, fields.MAX_LENGTH_API_URL);
   params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
@@ -75,10 +90,17 @@ export const addApi = (params: RequestItemAddApi): void => {
     params.da = limitStringLength(params.da, Math.floor(params.da.length * ratio) - 1);
   }
 
+  // 设置 projectId 和 sdk
+  params.pi = projectId;
+  params.s = sdk;
+
   queuedApis.push(params);
   updateStore({ queuedApis });
 
   if (getStore().queuedApis.length > 5) {
-    addApis();
+    addApis().catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
   }
 };

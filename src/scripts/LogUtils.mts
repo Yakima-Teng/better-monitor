@@ -1,6 +1,7 @@
 import { getStore, getUserId } from "#scripts/StoreUtils";
 import { addAction } from "#api/addAction";
 import { toDouble, safeStringify } from "#scripts/StringUtils";
+import { getProjectId } from "#scripts/ProjectIdUtils";
 import type { FuncLog, LogLevel, RequestItemAddAction } from "#types/index";
 
 const getLogTime = (date?: Date): string => {
@@ -47,11 +48,24 @@ const doLog: FuncLog = (() => {
   // eslint-disable-next-line no-console
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]): Promise<void> => {
-    const { projectId, sdk, debug } = getStore();
+    const { sdk, debug } = getStore();
     const date = new Date();
     const timeStr = getLogTime(date);
     const userId = getUserId();
     const payload = safeStringify(args);
+
+    // 获取 projectId（支持异步）
+    const projectId = await getProjectId();
+    if (!projectId) {
+      // eslint-disable-next-line no-console
+      console.warn("BetterMonitor: Failed to get projectId, skip reporting");
+      if (debug) {
+        const color = getLogColorByLevel(level);
+        return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
+      }
+      return;
+    }
+
     const dataToAdd: RequestItemAddAction = {
       pi: projectId,
       s: sdk,
@@ -61,7 +75,10 @@ const doLog: FuncLog = (() => {
       p: payload,
       u: userId,
     };
-    addAction(dataToAdd, false);
+    addAction(dataToAdd, false).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error("BetterMonitor: Failed to report action:", err);
+    });
     if (debug) {
       const color = getLogColorByLevel(level);
       return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
@@ -76,8 +93,21 @@ const doLogDirectly: FuncLog = (() => {
   const rawLog = console.log;
   return async (level: LogLevel, ...args: unknown[]) => {
     const date = new Date();
-    const { projectId, sdk, debug } = getStore();
+    const { sdk, debug } = getStore();
     const timeStr = getLogTime(date);
+
+    // 获取 projectId（支持异步）
+    const projectId = await getProjectId();
+    if (!projectId) {
+      // eslint-disable-next-line no-console
+      console.warn("BetterMonitor: Failed to get projectId, skip reporting");
+      if (debug) {
+        const color = getLogColorByLevel(level);
+        return rawLog(`%c[${timeStr}]`, `color:${color};`, ...args);
+      }
+      return;
+    }
+
     const dataToAdd: RequestItemAddAction = {
       pi: projectId,
       s: sdk,
@@ -87,7 +117,10 @@ const doLogDirectly: FuncLog = (() => {
       p: safeStringify(args),
       u: getUserId(),
     };
-    addAction(dataToAdd, true);
+    addAction(dataToAdd, true).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error("BetterMonitor: Failed to report action:", err);
+    });
 
     if (debug) {
       const color = getLogColorByLevel(level);

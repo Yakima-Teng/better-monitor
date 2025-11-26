@@ -3,6 +3,7 @@ import { getStore } from "#scripts/StoreUtils";
 import { API_PREFIX } from "#scripts/ConstantUtils";
 import { isString } from "#scripts/TypeUtils";
 import { limitStringLength } from "#scripts/StringUtils";
+import { getProjectId, getProjectIdSync } from "#scripts/ProjectIdUtils";
 import type { RequestItemAddBug } from "#types/index";
 
 // 校验请求参数是否在黑名单中，如果返回false表示在黑名单中，不继续后续上报操作
@@ -41,11 +42,11 @@ export const validateBugRequestData = (requestData: RequestItemAddBug): boolean 
  * @param params {Object} 包含字段`{ pageUrl: string; errorMessage: string; errorStack: string; json: string }`
  * @return {Promise<void>}
  */
-export const addBug = (params: RequestItemAddBug): void => {
+export const addBug = async (params: RequestItemAddBug): Promise<void> => {
   const requestUrl = `${API_PREFIX}bug/addBug`;
+  const { sdk, fields } = getStore();
 
   // 限制字段长度
-  const { fields } = getStore();
   params.pu = limitStringLength(params.pu, fields.MAX_LENGTH_PAGE_URL);
   params.m = limitStringLength(params.m, fields.MAX_LENGTH_MESSAGE);
   params.u = limitStringLength(params.u, fields.MAX_LENGTH_USER_ID);
@@ -53,9 +54,39 @@ export const addBug = (params: RequestItemAddBug): void => {
     params.so = limitStringLength(params.so, fields.MAX_LENGTH_JSON - params.s.length - params.ty.length);
   }
 
-  const stringifyRequestData = JSON.stringify(params);
-  const isQueued = sendBeacon(requestUrl, stringifyRequestData);
-  if (isQueued) return;
+  // 先尝试同步获取 projectId（用于 sendBeacon）
+  let projectId = getProjectIdSync();
+
+  if (projectId) {
+    // 同步获取成功，立即使用 sendBeacon
+    const requestData: RequestItemAddBug = {
+      ...params,
+      pi: projectId,
+      s: sdk,
+    };
+    const stringifyRequestData = JSON.stringify(requestData);
+    const isQueued = sendBeacon(requestUrl, stringifyRequestData);
+    if (isQueued) return;
+  }
+
+  // 同步获取失败或 sendBeacon 失败，异步获取 projectId 并使用 axiosRequest
+  projectId = await getProjectId();
+  if (!projectId) {
+    // eslint-disable-next-line no-console
+    console.warn("BetterMonitor: Failed to get projectId, skip reporting");
+    return;
+  }
+
+  // 构建完整的请求数据
+  const requestData: RequestItemAddBug = {
+    ...params,
+    pi: projectId,
+    s: sdk,
+  };
+
+  const stringifyRequestData = JSON.stringify(requestData);
+
+  // 使用 fetch/axiosRequest（异步方式）
   axiosRequest(requestUrl, {
     method: "post",
     headers: {
