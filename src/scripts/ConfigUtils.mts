@@ -11,8 +11,8 @@ export async function queryConfigData(): Promise<void> {
       return;
     }
 
-    // 获取 projectId（支持异步）
-    const projectId = await getProjectId();
+    // 获取 projectId
+    const projectId = getProjectId();
     if (!projectId) {
       // eslint-disable-next-line no-console
       console.warn("BetterMonitor: Failed to get projectId, skip querying config");

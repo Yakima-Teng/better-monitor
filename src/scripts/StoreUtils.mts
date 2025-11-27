@@ -5,7 +5,7 @@ import type { Store } from "#types/index";
 const store: Store = {
   sdk: buildVersion,
   debug: false,
-  // 项目id（支持数字或返回 Promise<string> 的函数）
+  // 项目id（支持数字或字符串 token）
   projectId: 0,
   view: true,
   api: false,
@@ -19,9 +19,6 @@ const store: Store = {
   timeLogMap: new Map(),
   projectName: "",
   originList: [],
-  // Token 缓存相关（内部使用）
-  _cachedToken: undefined,
-  _tokenExpireTime: undefined,
   fields: {
     MAX_LENGTH_USER_ID: 32,
     MAX_LENGTH_PAGE_URL: 512,

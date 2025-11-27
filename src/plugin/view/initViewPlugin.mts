@@ -21,15 +21,11 @@ export const initViewPlugin = (): void => {
   const addViewBeforeUnload = (): void => {
     const { sdk: s } = getStore();
     const userId = getUserId();
-    // addView 现在是异步的，但不阻塞页面卸载
     addView({
-      pi: "", // 临时值，addView 内部会异步获取并替换
+      pi: "", // 临时值，addView 内部会获取并替换
       s,
       p: location.href,
       u: userId,
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error("BetterMonitor: Failed to report view:", err);
     });
   };
 
@@ -44,19 +40,15 @@ export const initViewPlugin = (): void => {
   const { history } = window;
   // 劫持pushState
   const oldPushState = history.pushState;
-  history.pushState = async (state: unknown, unused: string, url: string | URL): Promise<void> => {
+  history.pushState = function (state: unknown, unused: string, url: string | URL): void {
     const userId = getUserId();
     const { sdk: s } = getStore();
     oldPushState.call(history, state, unused, url);
-    // addView 现在是异步的
     addView({
-      pi: "", // 临时值，addView 内部会异步获取并替换
+      pi: "", // 临时值，addView 内部会获取并替换
       s,
       p: location.href,
       u: userId,
-    }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error("BetterMonitor: Failed to report view:", err);
     });
   };
 };

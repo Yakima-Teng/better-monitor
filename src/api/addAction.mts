@@ -79,7 +79,7 @@ export const addActions = (delayTime: number): void => {
 /**
  * 上报单条行为日志
  */
-export const addAction = async (params: RequestItemAddAction, directly: boolean): Promise<void> => {
+export const addAction = (params: RequestItemAddAction, directly: boolean): void => {
   const { blackList, queuedActions, sdk, fields } = getStore();
   const { p: payload } = params;
 
@@ -100,8 +100,8 @@ export const addAction = async (params: RequestItemAddAction, directly: boolean)
     return;
   }
 
-  // 获取 projectId（支持异步）
-  const projectId = await getProjectId();
+  // 获取 projectId
+  const projectId = getProjectId();
   if (!projectId) {
     // eslint-disable-next-line no-console
     console.warn("BetterMonitor: Failed to get projectId, skip reporting");

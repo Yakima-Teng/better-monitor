@@ -15,7 +15,7 @@ export const handlerFuncForJsError = (e: ErrorEvent): boolean => {
     const { sdk } = getStore();
 
     const requestData: RequestItemAddBug = {
-      pi: "", // 临时值，addBug 内部会异步获取并替换
+      pi: "", // 临时值，addBug 内部会获取并替换
       s: sdk,
       pu: location.href,
       m: message,
@@ -30,11 +30,7 @@ export const handlerFuncForJsError = (e: ErrorEvent): boolean => {
       return true;
     }
 
-    // addBug 现在是异步的，但不阻塞错误处理
-    addBug(requestData).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error("BetterMonitor: Failed to report error:", err);
-    });
+    addBug(requestData);
     return true;
   } catch (err) {
     // eslint-disable-next-line no-console

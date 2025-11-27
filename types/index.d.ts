@@ -195,8 +195,8 @@ export interface ConfigData {
 export interface Store {
   sdk: string;
   debug: boolean;
-  // projectId 支持数字或返回 Promise<string> 的函数
-  projectId: number | (() => Promise<string>);
+  // projectId 支持数字或字符串 token
+  projectId: number | string;
   projectName: ConfigData["projectName"];
   originList: ConfigData["originList"];
   fields: ConfigData["fields"];
@@ -219,13 +219,10 @@ export interface Store {
   // 记录动作的开始时间
   timeLogMap: Map<string, number>;
   getUserId: () => string;
-  // Token 缓存相关（内部使用）
-  _cachedToken?: string;
-  _tokenExpireTime?: number; // token 过期时间戳（毫秒）
 }
 
 export type ParamsInitStore = {
-  projectId: number | (() => Promise<string>);
+  projectId: number | string;
 } & Pick<Partial<Store>, "debug" | "api" | "view" | "error" | "action" | "statistics" | "blackList"> & {
     getUserId?: (defaultStrategy: () => string) => string;
   };
@@ -254,9 +251,9 @@ export interface ExportObj {
   buildDate: string;
   buildVersion: string;
   init: (settings: ParamsInitStore) => void;
-  addBug: (params: ParamsAddBug) => Promise<void>;
-  addView: (params: ParamsAddView) => Promise<void>;
-  addEvent: (name: string, payload?: object) => Promise<void>;
+  addBug: (params: ParamsAddBug) => void;
+  addView: (params: ParamsAddView) => void;
+  addEvent: (name: string, payload?: object) => void;
   printLog: (...args: unknown[]) => Promise<void>;
   printWarn: (...args: unknown[]) => Promise<void>;
   printError: (...args: unknown[]) => Promise<void>;

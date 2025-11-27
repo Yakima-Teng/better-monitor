@@ -48,7 +48,7 @@ export const addApis = async (): Promise<void> => {
  * @param params {Object} 包含字段`{ pageUrl: string; apiUrl: string; payload: string; response: string; json: string; }`
  * @return {Promise<void>}
  */
-export const addApi = async (params: RequestItemAddApi): Promise<void> => {
+export const addApi = (params: RequestItemAddApi): void => {
   const { blackList, queuedApis, sdk, fields } = getStore();
   const { au: apiUrl } = params;
 
@@ -69,8 +69,8 @@ export const addApi = async (params: RequestItemAddApi): Promise<void> => {
     return;
   }
 
-  // 获取 projectId（支持异步）
-  const projectId = await getProjectId();
+  // 获取 projectId
+  const projectId = getProjectId();
   if (!projectId) {
     // eslint-disable-next-line no-console
     console.warn("BetterMonitor: Failed to get projectId, skip reporting");

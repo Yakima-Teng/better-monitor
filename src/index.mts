@@ -77,13 +77,13 @@ const tryInitSettingAutomatically = () => {
 
 tryInitSettingAutomatically();
 
-async function addBug(params: ParamsAddBug): Promise<void> {
+function addBug(params: ParamsAddBug): void {
   const { sdk: s } = getStore();
   const u = getUserId();
   const { pageUrl: pu, message: m, stack: st, source: so, type: ty } = params;
-  // rawAddBug 内部会异步获取 projectId，这里传递临时值
-  return rawAddBug({
-    pi: "", // 临时值，rawAddBug 内部会异步获取并替换
+  // rawAddBug 内部会获取 projectId，这里传递临时值
+  rawAddBug({
+    pi: "", // 临时值，rawAddBug 内部会获取并替换
     s,
     pu,
     m,
@@ -94,7 +94,7 @@ async function addBug(params: ParamsAddBug): Promise<void> {
     t: Date.now(),
   });
 }
-async function addView(params: ParamsAddView): Promise<void> {
+function addView(params: ParamsAddView): void {
   // TODO
   window.console.log("addView 方法已废弃，后续将不再对外暴露，请勿继续使用该 API。");
   const { sdk: s } = getStore();
@@ -103,9 +103,9 @@ async function addView(params: ParamsAddView): Promise<void> {
   if (!u) {
     u = getUserId();
   }
-  // rawAddView 内部会异步获取 projectId，这里传递临时值
-  return rawAddView({
-    pi: "", // 临时值，rawAddView 内部会异步获取并替换
+  // rawAddView 内部会获取 projectId，这里传递临时值
+  rawAddView({
+    pi: "", // 临时值，rawAddView 内部会获取并替换
     s,
     p,
     u,

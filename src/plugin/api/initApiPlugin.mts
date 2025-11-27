@@ -91,9 +91,8 @@ export const initApiPlugin = () => {
       }
 
       const { sdk } = getStore();
-      // addApi 现在是异步的，但不阻塞请求处理
       addApi({
-        pi: "", // 临时值，addApi 内部会异步获取并替换
+        pi: "", // 临时值，addApi 内部会获取并替换
         s: sdk,
         t: meta.clientTime,
         pu: meta.pageUrl,
@@ -106,9 +105,6 @@ export const initApiPlugin = () => {
         st: meta.status,
         tc: meta.timeConsumed,
         rh: meta.allResponseHeaders,
-      }).catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error("BetterMonitor: Failed to report API:", err);
       });
     });
 
