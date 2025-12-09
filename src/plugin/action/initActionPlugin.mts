@@ -13,7 +13,6 @@ export const initActionPlugin = (): void => {
   };
 
   window.addEventListener("beforeunload", tryAddActions);
-  window.addEventListener("unload", tryAddActions);
 
   const { history } = window;
   // 劫持pushState

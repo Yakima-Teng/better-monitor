@@ -11,7 +11,6 @@ export const initApiPlugin = () => {
   }
 
   window.addEventListener("beforeunload", addApis);
-  window.addEventListener("unload", addApis);
 
   const nativeAjaxOpen = XMLHttpRequest.prototype.open;
   const nativeAjaxSend = XMLHttpRequest.prototype.send;
