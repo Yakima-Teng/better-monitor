@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.13...v0.1.14) (2025-12-09)
+
+
+### Bug Fixes
+
+* **plugin:** permissions policy violation: unload is not allowed in this document ([3f5babe](https://github.com/Yakima-Teng/better-monitor/commit/3f5babebda9c729dd21f868ac48a923e36c06ac8))
+
 ### [0.1.13](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.12...v0.1.13) (2025-11-26)
 
 
