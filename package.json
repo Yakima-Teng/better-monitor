@@ -1,6 +1,6 @@
 {
   "name": "better-monitor",
-  "homepage": "https://www.verybugs.com",
+  "homepage": "https://monitor.verysites.com",
   "version": "0.1.14",
   "description": "JS SDK used to report data to server for better website monitoring",
   "type": "module",
@@ -49,7 +49,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Yakima-Teng/better-monitor.git"
+    "url": "https://github.com/bulls-cows/monitor.git"
   },
   "scripts": {
     "ready": "npm install",
@@ -65,7 +65,10 @@
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "deploy": "git push --follow-tags origin main && node ./scripts/deploy-npm.mts && cross-env NODE_ENV=production MODE=production node ./scripts/deploy.mts",
+    "deploy:tags": "git push --follow-tags origin main",
+    "deploy:npm": "node ./scripts/deploy-npm.mts",
+    "deploy:cdn": "cross-env NODE_ENV=production MODE=production node ./scripts/deploy.mts",
+    "deploy": "node --run deploy:tags && node --run deploy:npm && node --run deploy:cdn",
     "buildAndDeploy": "node --run build && node --run deploy"
   },
   "keywords": [

@@ -30,12 +30,12 @@
 - 🔥 **埋点统计**：支持上报事件埋点查看统计信息
 - 🔥 **性能测量**：提供时间测量功能，方便追踪性能问题
 
-**注意**：该 SDK 需搭配后端服务使用。你可以参考项目文档自行实现后端服务，或者使用我们的[在线服务](https://www.verybugs.com/)（适合**访问量不大**的站点）。
+**注意**：该 SDK 需搭配后端服务使用。你可以参考项目文档自行实现后端服务，或者使用我们的[在线服务](https://monitor.verysites.com/)（适合**访问量不大**的站点）。
 
 ## 相关链接
 
-- [官方网站](https://www.verybugs.com)
-- [API 文档](https://www.verybugs.com/doc.html)
+- [官方网站](https://monitor.verysites.com)
+- [API 文档](https://monitor.verysites.com/doc.html)
 - [GitHub 仓库](https://github.com/Yakima-Teng/better-monitor)
 - [NPM 包](https://www.npmjs.com/package/better-monitor)
 
