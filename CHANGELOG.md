@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://github.com/bulls-cows/monitor/compare/v0.1.14...v0.1.15) (2026-07-08)
+
+
+### Features
+
+* **scripts:** 抽取 npm publish 为独立脚本 deploy-npm.mts ([284ed0f](https://github.com/bulls-cows/monitor/commit/284ed0f977a77de974ce3334c384e01f449b40cb))
+
 ### [0.1.14](https://github.com/Yakima-Teng/better-monitor/compare/v0.1.13...v0.1.14) (2025-12-09)
 
 
