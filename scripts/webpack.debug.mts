@@ -1,9 +1,9 @@
 import webpack from "webpack";
 import { merge } from "webpack-merge";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import common from "#build/webpack.common";
-import { toCamelCase } from "#build/utils";
-import { pkgName } from "#build/constants";
+import common from "#scripts/webpack.common";
+import { toCamelCase } from "#scripts/utils";
+import { pkgName } from "#scripts/constants";
 
 const config: webpack.Configuration = merge(common, {
   mode: "none",

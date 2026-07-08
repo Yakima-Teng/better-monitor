@@ -1,4 +1,4 @@
-import { getStore, getUserId, updateStore as rawUpdateStore } from "#scripts/StoreUtils";
+import { getStore, getUserId, updateStore as rawUpdateStore } from "#utils/StoreUtils";
 import { addBug as rawAddBug } from "#api/addBug";
 import { addView as rawAddView } from "#api/addView";
 import { addEvent } from "#api/addEvent";
@@ -12,14 +12,14 @@ import {
   printWarnDirectly,
   printErrorDirectly,
   logTimeEndDirectly,
-} from "#scripts/LogUtils";
+} from "#utils/LogUtils";
 import { initApiPlugin } from "#plugin/api/initApiPlugin";
 import { initActionPlugin } from "#plugin/action/initActionPlugin";
 import { initErrorPlugin } from "#plugin/error/initErrorPlugin";
 import { initViewPlugin } from "#plugin/view/initViewPlugin";
-import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#scripts/ConstantUtils";
-import { queryConfigData } from "#scripts/ConfigUtils";
-import { generateRobustUserId } from "#scripts/UserUtils";
+import { NODE_ENV, MODE, buildDate, buildVersion, FRONTEND_DOMAIN } from "#utils/ConstantUtils";
+import { queryConfigData } from "#utils/ConfigUtils";
+import { generateRobustUserId } from "#utils/UserUtils";
 import type { ExportObj, ParamsAddBug, ParamsAddView, ParamsInitStore, Store } from "#types/index";
 
 const init = (settings: ParamsInitStore): void => {

@@ -1,5 +1,5 @@
 import { addActions } from "#api/addAction";
-import { getStore } from "#scripts/StoreUtils";
+import { getStore } from "#utils/StoreUtils";
 
 export const initActionPlugin = (): void => {
   const { action } = getStore();

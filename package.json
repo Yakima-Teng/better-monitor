@@ -29,11 +29,11 @@
     }
   },
   "imports": {
-    "#build/*": "./build/*.mts",
+    "#scripts/*": "./scripts/*.mts",
     "#test/*": "./test/*.mts",
     "#api/*": "./src/api/*.mts",
     "#plugin/*": "./src/plugin/*.mts",
-    "#scripts/*": "./src/scripts/*.mts",
+    "#utils/*": "./src/utils/*.mts",
     "#src/*": "./src/*.mts",
     "#root/*": "./*.mts",
     "#types/*": "./types/*.d.ts"
@@ -53,19 +53,19 @@
   },
   "scripts": {
     "ready": "npm install",
-    "prettier": "npx prettier --write ./src ./test ./build ./types ./*.mts ./*.ts",
-    "eslint": "eslint --fix src/**/* test/**/* build/**/* ./*.mts ./*.ts",
+    "prettier": "npx prettier --write ./src ./test ./scripts ./types ./*.mts ./*.ts",
+    "eslint": "eslint --fix src/**/* test/**/* scripts/**/* ./*.mts ./*.ts",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.ts",
     "type:check": "tsc --noEmit --project ./tsconfig.json",
     "lint": "npm run prettier && npm run eslint && npm run test && npm run type:check",
-    "dev": "cross-env NODE_ENV=development MODE=production webpack-dev-server --config ./build/webpack.dev.mts",
-    "build": "cross-env NODE_ENV=production MODE=production webpack --config ./build/webpack.prod.mts",
-    "debug": "cross-env NODE_ENV=production MODE=production webpack --config ./build/webpack.debug.mts",
+    "dev": "cross-env NODE_ENV=development MODE=production webpack-dev-server --config ./scripts/webpack.dev.mts",
+    "build": "cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.prod.mts",
+    "debug": "cross-env NODE_ENV=production MODE=production webpack --config ./scripts/webpack.debug.mts",
     "prepare": "husky",
     "release-major": "standard-version --release-as major",
     "release-minor": "standard-version --release-as minor",
     "release-patch": "standard-version --release-as patch",
-    "deploy": "git push --follow-tags origin main && npm publish --registry=https://registry.npmjs.org/ && cross-env NODE_ENV=production MODE=production node ./build/deploy.mts",
+    "deploy": "git push --follow-tags origin main && npm publish --registry=https://registry.npmjs.org/ && cross-env NODE_ENV=production MODE=production node ./scripts/deploy.mts",
     "buildAndDeploy": "node --run build && node --run deploy"
   },
   "keywords": [

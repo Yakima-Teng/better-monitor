@@ -17,7 +17,7 @@ import {
   QINIU_BUCKET_NAME,
   QINIU_PUBLIC_BUCKET_DOMAIN,
   PATH_DIST,
-} from "#build/constants";
+} from "#scripts/constants";
 
 const CDN_PATH_PREFIX = MODE === "production" ? "verybugs" : `verybugs-${MODE}`;
 async function deployFilesToCDN() {

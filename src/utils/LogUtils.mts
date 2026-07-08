@@ -1,7 +1,7 @@
-import { getStore, getUserId } from "#scripts/StoreUtils";
+import { getStore, getUserId } from "#utils/StoreUtils";
 import { addAction } from "#api/addAction";
-import { toDouble, safeStringify } from "#scripts/StringUtils";
-import { getProjectId } from "#scripts/ProjectIdUtils";
+import { toDouble, safeStringify } from "#utils/StringUtils";
+import { getProjectId } from "#utils/ProjectIdUtils";
 import type { FuncLog, LogLevel, RequestItemAddAction } from "#types/index";
 
 const getLogTime = (date?: Date): string => {

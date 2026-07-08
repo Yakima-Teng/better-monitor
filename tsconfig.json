@@ -11,18 +11,18 @@
     "typeRoots": ["types", "node_modules/@types"],
     // 非相对模块导入的路径映射配置
     "paths": {
-      "#build/*": ["./build/*.mts"],
+      "#scripts/*": ["./scripts/*.mts"],
       "#test/*": ["./test/*.mts"],
       "#api/*": ["./src/api/*.mts"],
       "#plugin/*": ["./src/plugin/*.mts"],
-      "#scripts/*": ["./src/scripts/*.mts"],
+      "#utils/*": ["./src/utils/*.mts"],
       "#src/*": ["./src/*.mts"],
       "#root/*": ["./*.mts"]
     }
   },
   // 编译器默认包含的编译文件，src是源代码文件夹，test是jest测试代码文件夹
   "include": [
-    "build/**/*.mts",
+    "scripts/**/*.mts",
     "src/**/*.mts",
     "test/**/*.mts",
     "types/**/*.d.ts",

@@ -5,9 +5,9 @@ import { merge } from "webpack-merge";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import htmlWebpackInjectAttributesPlugin from "html-webpack-inject-attributes-plugin";
 import { joinPath } from "nsuite";
-import common from "#build/webpack.common";
-import { PATH_PUBLIC, pkgName } from "#build/constants";
-import { toCamelCase } from "#build/utils";
+import common from "#scripts/webpack.common";
+import { PATH_PUBLIC, pkgName } from "#scripts/constants";
+import { toCamelCase } from "#scripts/utils";
 
 const config: webpack.Configuration = merge(common, {
   mode: "development",

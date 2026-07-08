@@ -1,4 +1,4 @@
-import { getStore } from "#scripts/StoreUtils";
+import { getStore } from "#utils/StoreUtils";
 
 /**
  * 获取项目标识（projectId 或 token）

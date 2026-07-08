@@ -1,4 +1,4 @@
-import { getStore } from "#scripts/StoreUtils";
+import { getStore } from "#utils/StoreUtils";
 import { handlerFuncForJsError } from "#plugin/error/modules/handleOnJsError";
 import { handlerFuncForJsUnhandledRejection } from "#plugin/error/modules/handleOnUnhandledRejection";
 

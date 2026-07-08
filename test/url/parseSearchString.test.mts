@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { parseSearchString } from "#scripts/UrlUtils";
+import { parseSearchString } from "#utils/UrlUtils";
 
 describe("解析url中的查询字符串为一个对象", () => {
   test("测试有查询字符串的情况", () => {

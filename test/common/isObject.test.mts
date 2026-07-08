@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { isObject } from "#scripts/TypeUtils";
+import { isObject } from "#utils/TypeUtils";
 
 describe("测试类型判断方法", () => {
   test("判断是否为对象", () => {

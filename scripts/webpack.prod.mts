@@ -2,9 +2,9 @@ import webpack from "webpack";
 import { rmSync } from "node:fs";
 import { merge } from "webpack-merge";
 import TerserPlugin from "terser-webpack-plugin";
-import common from "#build/webpack.common";
-import { toCamelCase } from "#build/utils";
-import { PATH_DIST, pkgName, pkgVersion, buildDate, buildYear } from "#build/constants";
+import common from "#scripts/webpack.common";
+import { toCamelCase } from "#scripts/utils";
+import { PATH_DIST, pkgName, pkgVersion, buildDate, buildYear } from "#scripts/constants";
 
 rmSync(PATH_DIST, { recursive: true, force: true });
 

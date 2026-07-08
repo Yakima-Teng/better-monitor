@@ -1,5 +1,5 @@
 import { addBug, validateBugRequestData } from "#api/addBug";
-import { getStore, getUserId } from "#scripts/StoreUtils";
+import { getStore, getUserId } from "#utils/StoreUtils";
 import type { RequestItemAddBug } from "#types/index";
 
 export const handlerFuncForJsError = (e: ErrorEvent): boolean => {

@@ -1,9 +1,9 @@
 import type { RequestItemAddEvent } from "#types/index";
-import { getStore } from "#scripts/StoreUtils";
-import { limitStringLength } from "#scripts/StringUtils";
-import { API_PREFIX } from "#scripts/ConstantUtils";
-import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
-import { getProjectId } from "#scripts/ProjectIdUtils";
+import { getStore } from "#utils/StoreUtils";
+import { limitStringLength } from "#utils/StringUtils";
+import { API_PREFIX } from "#utils/ConstantUtils";
+import { axiosRequest, sendBeacon } from "#utils/RequestUtils";
+import { getProjectId } from "#utils/ProjectIdUtils";
 
 export const addEvent = (name: string, payload?: object): void => {
   const { sdk, fields } = getStore();

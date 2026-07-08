@@ -1,9 +1,9 @@
-import { getStore } from "#scripts/StoreUtils";
-import { API_PREFIX } from "#scripts/ConstantUtils";
-import { isString } from "#scripts/TypeUtils";
-import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
-import { limitStringLength } from "#scripts/StringUtils";
-import { getProjectId } from "#scripts/ProjectIdUtils";
+import { getStore } from "#utils/StoreUtils";
+import { API_PREFIX } from "#utils/ConstantUtils";
+import { isString } from "#utils/TypeUtils";
+import { axiosRequest, sendBeacon } from "#utils/RequestUtils";
+import { limitStringLength } from "#utils/StringUtils";
+import { getProjectId } from "#utils/ProjectIdUtils";
 import type { RequestItemAddView } from "#types/index";
 
 /**

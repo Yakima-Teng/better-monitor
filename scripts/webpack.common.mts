@@ -2,7 +2,15 @@ import webpack from "webpack";
 import WebpackBar from "webpackbar";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 import { joinPath } from "nsuite";
-import { PATH_SRC, PATH_DIST, pkgName, pkgVersion, buildDate, FRONTEND_DOMAIN, BACKEND_DOMAIN } from "#build/constants";
+import {
+  PATH_SRC,
+  PATH_DIST,
+  pkgName,
+  pkgVersion,
+  buildDate,
+  FRONTEND_DOMAIN,
+  BACKEND_DOMAIN,
+} from "#scripts/constants";
 
 const config: webpack.Configuration = {
   // 定义了入口文件路径

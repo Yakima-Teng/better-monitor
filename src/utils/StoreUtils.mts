@@ -1,5 +1,5 @@
-import { buildVersion } from "#scripts/ConstantUtils";
-import { generateRobustUserId } from "#scripts/UserUtils";
+import { buildVersion } from "#utils/ConstantUtils";
+import { generateRobustUserId } from "#utils/UserUtils";
 import type { Store } from "#types/index";
 
 const store: Store = {

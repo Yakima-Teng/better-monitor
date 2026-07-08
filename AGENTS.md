@@ -8,7 +8,7 @@
 ## 范围
 
 - 本仓库默认语言: TypeScript（.mts / .ts / .d.ts）
-- 允许修改目录: `src/`、`test/`、`build/`、`types/`
+- 允许修改目录: `src/`、`test/`、`scripts/`、`types/`
 - 禁止修改目录: `dist/`、`node_modules/`、`public/`、`attachments/`
 
 ## 改动检查
@@ -48,7 +48,7 @@ monitor/
 │   │   ├── error/              # 错误监控插件（JS 错误 + unhandledrejection）
 │   │   │   └── modules/        # 错误处理子模块
 │   │   └── view/               # 访问监控插件
-│   └── scripts/                # 工具层，公共方法
+│   └── utils/                  # 工具层，公共方法
 │       ├── ConfigUtils.mts     # 配置数据查询
 │       ├── ConstantUtils.mts   # 常量定义（NODE_ENV、域名等）
 │       ├── LogUtils.mts        # 日志打印工具
@@ -62,7 +62,7 @@ monitor/
 ├── test/                       # 测试代码
 │   └── common/                 # 通用工具函数测试
 │   └── url/                    # URL 工具测试
-├── build/                      # 构建配置
+├── scripts/                    # 构建配置与部署脚本
 │   ├── webpack.common.mts      # Webpack 公共配置
 │   ├── webpack.dev.mts         # 开发环境配置
 │   ├── webpack.prod.mts        # 生产环境配置
@@ -87,11 +87,11 @@ monitor/
 
 | 别名 | 实际路径 |
 |------|---------|
-| `#build/*` | `./build/*.mts` |
+| `#scripts/*` | `./scripts/*.mts` |
 | `#test/*` | `./test/*.mts` |
 | `#api/*` | `./src/api/*.mts` |
 | `#plugin/*` | `./src/plugin/*.mts` |
-| `#scripts/*` | `./src/scripts/*.mts` |
+| `#utils/*` | `./src/utils/*.mts` |
 | `#src/*` | `./src/*.mts` |
 | `#root/*` | `./*.mts` |
 | `#types/*` | `./types/*.d.ts` |
@@ -188,7 +188,7 @@ monitor/
 
 - 提交信息遵循 Conventional Commits 规范（commitlint.config.ts 中定义了 type-enum: build, ci, chore, docs, feat, fix, perf, refactor, revert, style, test）
 - 源码文件统一使用 .mts 扩展名（ESM 模块）
-- 使用路径别名导入模块（如 `#scripts/StoreUtils`），不使用相对路径
+- 使用路径别名导入模块（如 `#utils/StoreUtils`），不使用相对路径
 - 代码风格遵循 .editorconfig：缩进 2 空格、换行符 LF、UTF-8 编码、尾部插入空行
 
 ## 关键参考

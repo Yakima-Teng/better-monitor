@@ -1,9 +1,9 @@
-import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
-import { getStore, updateStore } from "#scripts/StoreUtils";
-import { API_PREFIX } from "#scripts/ConstantUtils";
-import { isString } from "#scripts/TypeUtils";
-import { limitStringLength } from "#scripts/StringUtils";
-import { getProjectId } from "#scripts/ProjectIdUtils";
+import { axiosRequest, sendBeacon } from "#utils/RequestUtils";
+import { getStore, updateStore } from "#utils/StoreUtils";
+import { API_PREFIX } from "#utils/ConstantUtils";
+import { isString } from "#utils/TypeUtils";
+import { limitStringLength } from "#utils/StringUtils";
+import { getProjectId } from "#utils/ProjectIdUtils";
 import type { RequestItemAddApi, RequestListData } from "#types/index";
 
 /**

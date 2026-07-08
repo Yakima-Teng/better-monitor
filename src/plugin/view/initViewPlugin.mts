@@ -1,6 +1,6 @@
 import { addView } from "#api/addView";
-import { getStore } from "#scripts/StoreUtils";
-import { getUserId } from "#scripts/StoreUtils";
+import { getStore } from "#utils/StoreUtils";
+import { getUserId } from "#utils/StoreUtils";
 
 /**
  * @apiAnalyze

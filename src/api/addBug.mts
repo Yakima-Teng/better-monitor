@@ -1,9 +1,9 @@
-import { axiosRequest, sendBeacon } from "#scripts/RequestUtils";
-import { getStore } from "#scripts/StoreUtils";
-import { API_PREFIX } from "#scripts/ConstantUtils";
-import { isString } from "#scripts/TypeUtils";
-import { limitStringLength } from "#scripts/StringUtils";
-import { getProjectId } from "#scripts/ProjectIdUtils";
+import { axiosRequest, sendBeacon } from "#utils/RequestUtils";
+import { getStore } from "#utils/StoreUtils";
+import { API_PREFIX } from "#utils/ConstantUtils";
+import { isString } from "#utils/TypeUtils";
+import { limitStringLength } from "#utils/StringUtils";
+import { getProjectId } from "#utils/ProjectIdUtils";
 import type { RequestItemAddBug } from "#types/index";
 
 // 校验请求参数是否在黑名单中，如果返回false表示在黑名单中，不继续后续上报操作
