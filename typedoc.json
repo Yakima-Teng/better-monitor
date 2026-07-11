@@ -1,0 +1,14 @@
+{
+  "entryPoints": ["src/index.mts", "types/index.d.ts"],
+  "out": "docs",
+  "name": "BetterMonitor SDK",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "excludeExternals": false,
+  "cleanOutputDir": true,
+  "tsconfig": "tsconfig.json",
+  "readme": "none",
+  "plugin": []
+}

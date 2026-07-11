@@ -13,6 +13,7 @@ yarn.lock
 coverage
 
 /dist
+/docs
 
 /.env.local
 
