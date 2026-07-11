@@ -69,7 +69,9 @@
     "deploy:npm": "node ./scripts/deploy-npm.mts",
     "deploy:cdn": "cross-env NODE_ENV=production MODE=production node ./scripts/deploy.mts",
     "deploy": "node --run deploy:tags && node --run deploy:npm && node --run deploy:cdn",
-    "docs": "typedoc",
+    "docs:build": "typedoc",
+    "docs:deploy": "node ./scripts/deploy-docs-gh-pages.mts",
+    "docs:buildAndDeploy": "npm run lint && npm run docs:build && npm run docs:deploy",
     "buildAndDeploy": "node --run build && node --run deploy"
   },
   "keywords": [
@@ -113,7 +115,7 @@
     "jest-environment-jsdom": "30.2.0",
     "jiti": "2.6.1",
     "npm-run-all": "4.1.5",
-    "nsuite": "0.0.57",
+    "nsuite": "0.2.5",
     "prettier": "3.6.2",
     "rimraf": "6.0.1",
     "standard-version": "9.5.0",
