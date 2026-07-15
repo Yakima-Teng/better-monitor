@@ -125,4 +125,4 @@ better-monitor 采用完全零依赖设计，带来以下显著优势：
 
 ## 许可证
 
-[MIT](LICENSE)
+[Apache License 2.0](https://github.com/Yakima-Teng/monitor/blob/main/LICENSE)
