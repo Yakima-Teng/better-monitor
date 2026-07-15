@@ -35,8 +35,8 @@
 ## 相关链接
 
 - [官方网站](https://monitor.verysites.com)
-- [API 文档](https://monitor.verysites.com/doc.html)
-- [GitHub 仓库](https://github.com/Yakima-Teng/better-monitor)
+- [API 文档](https://bulls-cows.github.io/monitor/)
+- [GitHub 仓库](https://github.com/bulls-cows/monitor)
 - [NPM 包](https://www.npmjs.com/package/better-monitor)
 
 ## 快速开始
@@ -105,24 +105,6 @@ better-monitor 采用完全零依赖设计，带来以下显著优势：
 - **代码透明**：所有功能都是自主实现，代码完全可控
 - **安全可靠**：避免引入第三方库可能带来的安全风险
 
-## 截图展示
-
-<details>
-<summary>点击展开查看 PV 统计截图</summary>
-<br />
-
-![PV 统计截图](./attachments/screenshot_pv.png)
-
-</details>
-
-<details>
-<summary>点击展开查看 JS 报错日志截图</summary>
-<br />
-
-![JS 报错日志截图](./attachments/screenshot_bug.png)
-
-</details>  
-
 ## 许可证
 
-[Apache License 2.0](https://github.com/Yakima-Teng/monitor/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/bulls-cows/monitor/blob/main/LICENSE)
